@@ -1,0 +1,300 @@
+\documentclass[11pt]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage[margin=1.15in]{geometry}
+\usepackage{booktabs}
+\emergencystretch=2em
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par\pushQED{\qed}\normalfont\topsep6\p@\@plus6\p@\relax\trivlist\item[\hskip\labelsep\upshape #1\@addpunct{.}]\ignorespaces}{\popQED\endtrivlist\@endpefalse}
+\makeatother
+
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\res}{\operatorname{res}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\e}{\mathrm{e}}
+
+\title{Palindromic irreducible polynomials with restricted coefficients}
+\author{[Author]}
+\date{}
+
+\begin{document}
+
+\begin{abstract}
+Let $q$ be an odd prime power and $S\subseteq\F_q$. We count monic self-reciprocal irreducible polynomials of degree $2m$ over $\F_q$ whose middle coefficients lie in $S$, which for $1\in S$ means all coefficients. If the Fourier transform of $S$ satisfies $\sum_{r}|\sum_{a\in S}\psi(ar)|<|S|q^{1/4}$, their number is $(|S|^m/2m)(1+O(e^{-c_0\sqrt m}))$. For every prime $p\ge 17$ this gives about $(p-1)^m/2m$ irreducible palindromic polynomials of degree $2m$ over $\F_p$ without zero coefficients. Under the weaker condition $\sum_r|\sum_{a\in S}\psi(ar)|<|S|q^{1/2}$ the palindromes with coefficients in $S$ have a level of distribution beyond the square root over all moduli, and a linear sieve produces palindromes with at most five irreducible factors. The proof writes palindromes as $t^m h(t+1/t)$, turns irreducibility into a congruence condition on $h$ modulo $u^2-4$ via Meyn's criterion, and runs Porritt's circle method in the Dickson basis.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction and results}
+
+A polynomial $f\in\F_q[t]$ of degree $n$ is self-reciprocal (palindromic) if $t^n f(1/t)=f$. Carlitz counted the self-reciprocal irreducible monic polynomials of degree $2m$ \cite{Carlitz}. Their number $S_q(2m)$ is $q^m/2m+O(q^{m/2}/m)$. Many works count such polynomials with a few prescribed coefficients \cite{Garefalakis,GarefalakisKapetanakis,Gao}. Porritt \cite{Porritt}, following Maynard's work on primes with restricted digits \cite{Maynard}, counted irreducible polynomials all of whose coefficients lie in a large subset of $\F_q$. Ar\'evalo and Lal\'in \cite{ArevaloLalin} extended this to digits in a polynomial base $b(T)$. We combine the two themes.
+
+Throughout, $q$ is odd, $p$ is its characteristic, $\psi(a)=\exp(2\pi i\tr(a)/p)$ and $\chi$ is the quadratic character of $\F_q$. For $S\subseteq\F_q$ put
+\[
+\hat\varphi(r)=\sum_{a\in S}\psi(ar),\qquad A_S=\sum_{r\in\F_q}|\hat\varphi(r)|,\qquad \alpha=\frac{A_S}{q|S|},\qquad \beta=\max_{r\ne0}\frac{|\hat\varphi(r)|}{|S|}.
+\]
+One always has $\alpha\ge 1/|S|$, and $\beta<1$ holds iff $S$ lies in no translate of the kernel of a nonzero $\F_p$-linear form $\F_q\to\F_p$. For $q$ prime this means $|S|\ge2$. Let $\cP_m(S)$ be the set of
+\[
+f=t^{2m}+1+\sum_{i=1}^{m-1}a_i(t^i+t^{2m-i})+a_mt^m,\qquad a_1,\dots,a_m\in S,
+\]
+which is the set of monic self-reciprocal polynomials of degree $2m$ whose middle coefficients lie in $S$. A monic self-reciprocal irreducible polynomial of degree $2m\ge4$ has constant term $1$, so $\cP_m(S)$ contains all of them whose coefficients lie in $S$ when $1\in S$. Let $N_m(S)$ be the number of irreducible $f\in\cP_m(S)$. The expected value of $N_m(S)$ is $(|S|/q)^mS_q(2m)\sim|S|^m/2m$.
+
+\begin{theorem}\label{thm:main}
+Assume $\beta<1$ and $A_S<|S|q^{1/4}$, that is $\alpha<q^{-3/4}$. Then there is $c_0=c_0(q,S)>0$ with
+\[
+N_m(S)=\frac{|S|^m}{2m}\bigl(1+O_{q,S}(e^{-c_0\sqrt m})\bigr).
+\]
+\end{theorem}
+
+For $S=\F_p\setminus\{a_0\}$ one has $A_S=2(p-1)$, so the hypothesis holds iff $p\ge17$. For every proper $S\subsetneq\F_p$ one has $\alpha\ge 2/p$, so no proper subset qualifies for $p\le13$. More generally $\F_q$ minus $s$ points qualifies when $q(1+\sqrt s)-2s<(q-s)q^{1/4}$, by Porritt's bound for $A_S$ \cite[Corollary 1]{Porritt}.
+
+\begin{corollary}\label{cor:nozero}
+For every prime $p\ge17$ the number of irreducible self-reciprocal polynomials of degree $2m$ over $\F_p$ with no zero coefficient is $((p-1)^m/2m)(1+O_p(e^{-c_0\sqrt m}))$.
+\end{corollary}
+
+Under the weaker condition $\alpha<q^{-1/2}$ we obtain level of distribution beyond $1/2$ for the palindromes, in the variable $u=t+1/t$. Let $\cB=\cB_m(S)\subset\F_q[u]$ be the image of $\cP_m(S)$ under $f\mapsto h$, $f=t^mh(t+1/t)$, let $M=(u-2)(u+2)$ and let $\cC$ be the set of residues $\rho$ modulo $M$ with $\chi(\rho(2)\rho(-2))=-1$.
+
+\begin{proposition}\label{prop:level}
+Assume $\beta<1$ and $\alpha<q^{-1/2}$, put $\vartheta=\log(1/\alpha)/\log q\in(1/2,1]$ and let $\varepsilon>0$. For $D\le(\vartheta-\varepsilon)m$ and every $\rho\in\cC$,
+\[
+\sum_{\substack{G\ \mathrm{monic},\ (G,M)=1\\ \deg G\le D}}\Bigl|\#\{h\in\cB:\ h\equiv\rho\ (M),\ G\mid h\}-\frac{|S|^m}{q^2|G|}\Bigr|\ll_{q,S,\varepsilon}|S|^me^{-c_0\sqrt m}.
+\]
+The same holds without the congruence condition modulo $M$, with main term $|S|^m/|G|$ and the sum over all monic $G$.
+\end{proposition}
+
+\begin{corollary}\label{cor:sieve}
+Assume $\beta<1$ and $\alpha<q^{-1/2}$. For all large $m$ there are $\gg_{q,S}|S|^m/m$ polynomials $f\in\cP_m(S)$ with $\Omega(f)\le5$. If moreover $\vartheta>2/3$ there are $\gg|S|^m/m$ with $\Omega(f)\le3$. Here $\Omega$ counts irreducible factors with multiplicity.
+\end{corollary}
+
+For $S=\F_p\setminus\{a_0\}$ one has $\vartheta=\log(p/2)/\log p$, which is $0.569$ and $0.644$ for $p=5,7$ (so $\Omega(f)\le5$) and $0.711$ and $0.730$ for $p=11,13$ (so $\Omega(f)\le3$). The set $\{0,1,2,3,4\}\subset\F_7$ has $\vartheta=0.551$. Over $\F_3$ every two-element set has $\alpha=2/3>3^{-1/2}$, and Corollary \ref{cor:sieve} gives nothing.
+
+\begin{remark}
+The hypothesis $\beta<1$ matters for Theorem \ref{thm:main} only when $q=p^k$ with $k\ge5$, and for Proposition \ref{prop:level} and Corollary \ref{cor:sieve} only when $k\ge3$. If $S$ lies in a translate of the kernel $K$ of a nonzero $\F_p$-linear form, then $|\hat\varphi(r)|=|S|$ for the $p$ values $r$ in the annihilator line of $K$, so $\alpha\ge p/q$. The condition $p/q<q^{-3/4}$ forces $k\ge5$, and $p/q<q^{-1/2}$ forces $k\ge3$. For example $q=27$ and $S=1+\ker(\tr)$, a set of $9$ elements, have $A_S=27$, $\alpha=1/9<27^{-1/2}$ and $\beta=1$. For such sets the box is degenerate. If $S=a+H$ with an $\F_p$-subspace $H$, the Dickson polynomials have coefficients in $\F_p$, so $\cB=h_0+H[u]_{<m}$ for a fixed $h_0$, and for $r$ in the annihilator of $H$ the polynomial obtained from $h$ by applying $\tr(r\,\cdot)$ to each coefficient is the same for all $h\in\cB$. The exponential sum $\hat S_\cB$ of Section \ref{sec:fourier} then has full size $|S|^m$ at every fraction $rA_0/G$ with $A_0,G\in\F_p[u]$, these fractions join the major arcs, and the main term is no longer $|S|^m/2m$. Numerically, for $q=9$ the $\F_3$-lines $S=i\F_3$ and $S=1+i\F_3$ (where $i^2=-1$) give ratios between $0.79$ and $1.42$ to the prediction for $m=9,\dots,12$, while $S=\{0,1,i\}$, of the same size with $\beta<1$, gives $0.99$ to $1.07$. We do not evaluate the main term for such cosets.
+\end{remark}
+
+The method is Porritt's \cite{Porritt}, run on the $u$-side. It needs no bilinear estimates and uses Weil's Riemann hypothesis through Lemma \ref{lem:pollack}. The substitution $u=t+1/t$ makes the sparse set of palindromes a dense box in $\F_q[u]$ with respect to the Dickson basis, and Meyn's criterion (Lemma \ref{lem:meyn}) makes irreducibility a congruence condition modulo $u^2-4$ on primes of this box. Two points differ from \cite{Porritt}. The pointwise bound at small denominators holds with window $2d$ in place of $d$ (Lemma \ref{lem:linf}), and the main terms come from the divisors of $u^2-4$. Hokken and Koukoulopoulos \cite{HokkenKoukoulopoulos} use the same trace polynomial $h$ and related Fourier bounds to prove irreducibility over $\mathbb{Q}$ of random reciprocal polynomials with integer coefficients, a different question.
+
+\section{Substitution and Meyn's criterion}
+
+Let $D_j\in\F_q[u]$ be the Dickson polynomials, $D_0=2$, $D_1=u$, $D_{j+1}=uD_j-D_{j-1}$, so that $D_j(t+t^{-1})=t^j+t^{-j}$. They have coefficients in $\F_p$, and $D_j$ is monic of degree $j$ for $j\ge1$. Put $D'_0=1$ and $D'_j=D_j$ for $j\ge1$. For $f\in\cP_m(S)$ one has $t^{-m}f=D_m(u)+\sum_{i=1}^{m-1}a_iD_{m-i}(u)+a_m$ with $u=t+1/t$, hence $f=t^mh(t+1/t)$ with
+\begin{equation}\label{eq:h}
+h=D_m+\sum_{j=0}^{m-1}b_jD'_j,\qquad b_j=a_{m-j}\in S.
+\end{equation}
+The map $f\mapsto h$ is a bijection from $\cP_m(S)$ onto the Dickson box $\cB$ of all polynomials \eqref{eq:h}, and $|\cB|=|S|^m$.
+
+\begin{lemma}[Meyn \cite{Meyn}]\label{lem:meyn}
+Let $h\in\F_q[u]$ be monic of degree $m\ge1$ and $f=t^mh(t+1/t)$. Then $f$ is irreducible iff $h$ is irreducible and $h(2)h(-2)$ is a non-square in $\F_q$.
+\end{lemma}
+
+\begin{proof}
+We recall the short argument. $f$ is irreducible iff $h$ is irreducible and $X^2-uX+1$ is irreducible over $\F_q[u]/(h)$, that is iff $u^2-4$ is a non-square modulo $h$. For $m=1$ the last condition reads $\chi(h(2)h(-2))=-1$ directly. For $m\ge2$, $h(\pm2)\ne0$, and quadratic reciprocity in $\F_q[u]$ \cite[Theorem 3.3]{Rosen} gives $((u\mp2)/h)=(-1)^{\frac{q-1}{2}m}\chi(h(\pm2))$. The two signs cancel in the product, so $((u^2-4)/h)=\chi(h(2)h(-2))$.
+\end{proof}
+
+In terms of $f$ the condition reads $\chi((-1)^mf(1)f(-1))=-1$. The character $h\mapsto\chi(h(2)h(-2))$ is completely multiplicative on polynomials coprime to $M$, and on a monic irreducible $G\nmid M$ it equals $-1$ iff $G$ is inert in $\F_q[t,t^{-1}]$ over $\F_q[u]$, i.e. iff $t^{\deg G}G(t+1/t)$ is irreducible, and $+1$ iff $t^{\deg G}G(t+1/t)=PP^*$ splits into two reciprocal irreducible factors. By the Chinese remainder theorem $|\cC|=(q-1)^2/2$, and for $m\ge2$
+\begin{equation}\label{eq:Nc}
+N_m(S)=\sum_{\rho\in\cC}N_\rho,\qquad N_\rho=\#\{h\in\cB\ \text{irreducible}:\ h\equiv\rho\ (M)\}.
+\end{equation}
+
+\section{Fourier analysis of the Dickson box}\label{sec:fourier}
+
+Let $\T$ be the set of Laurent series $x=\sum_{i<0}x_iu^i$ over $\F_q$ with its Haar probability measure, $\res(x)=x_{-1}$, $\e(x)=\psi(x_{-1})$ and $|x|=q^k$ for the largest $k$ with $x_k\ne0$. For $x\in\T$ put $s_j(x)=\res(D'_jx)$. Since $D'_j$ is monic of degree $j$, $s_j(x)=x_{-j-1}+\sum_{i<j}\eta_{j,i}x_{-i-1}$ for some $\eta_{j,i}\in\F_p$. Additivity gives
+\[
+\hat S_\cB(x)=\sum_{h\in\cB}\e(hx)=\e(D_mx)\prod_{j=0}^{m-1}\hat\varphi(s_j(x)).
+\]
+
+\begin{lemma}\label{lem:l1}
+For $W\le m$ the function $F_W(x)=\prod_{j<W}|\hat\varphi(s_j(x))|$ depends only on $x_{-1},\dots,x_{-W}$, and $\int_\T F_W=(A_S/q)^W$. In particular $\int_\T|\hat S_\cB|=(A_S/q)^m$.
+\end{lemma}
+
+\begin{proof}
+The map $(x_{-1},\dots,x_{-W})\mapsto(s_0,\dots,s_{W-1})$ is unipotent triangular, hence a bijection of $\F_q^W$, and $\int F_W=q^{-W}\sum_{s\in\F_q^W}\prod_j|\hat\varphi(s_j)|=q^{-W}A_S^W$.
+\end{proof}
+
+Let $Y_D$ be the set of reduced fractions $A/G\in\T$ with $G$ monic of degree at most $D$, including $0=0/1$.
+
+\begin{lemma}\label{lem:farey}
+One has $\sum_{y\in Y_D}|\hat S_\cB(y)|\le|S|^{m-2D}A_S^{2D}$ if $2D\le m$, and $\le q^{2D}(A_S/q)^m$ if $2D\ge m$.
+\end{lemma}
+
+\begin{proof}
+Distinct $y,y'\in Y_D$ satisfy $|y-y'|\ge q^{-2D}$, so the open balls of radius $q^{-2D}$ around them are disjoint. If $2D\le m$, bound $|\hat S_\cB|\le|S|^{m-2D}F_{2D}$. The function $F_{2D}$ is constant on each ball, so $\sum_yF_{2D}(y)\le q^{2D}\int F_{2D}=A_S^{2D}$ by Lemma \ref{lem:l1}. If $2D\ge m$, the function $|\hat S_\cB|$ is constant on balls of radius $q^{-m}$, each of which contains at most $q^{2D-m}$ points of $Y_D$, so the sum is at most $q^{2D-m}q^m\int|\hat S_\cB|$.
+\end{proof}
+
+\begin{lemma}\label{lem:linf}
+Let $y=A/G$ be reduced with $\deg G=d\ge1$. Among any $2d$ consecutive indices $j\in[0,m)$ there is one with $s_j(y)\ne0$. Consequently $|\hat S_\cB(y)|\le|S|^m\beta^{\lfloor m/2d\rfloor}$.
+\end{lemma}
+
+\begin{proof}
+The linear form $\lambda(k)=\res(kA/G)$ on $\F_q[u]$ vanishes on $G\F_q[u]$ and is nonzero, since $\lambda(k)=\res(u^{d-1}/G)=1$ for $k\equiv A^{-1}u^{d-1}$ modulo $G$. Let $R=\F_q[u]/(G)$ and $R'=R[T]/(T^2-uT+1)$, free of rank $2$ over $R$ with trace $\mathrm{Tr}\colon R'\to R$. In $R'$ the element $T$ is a unit, $T(u-T)=1$, and $D_j=T^j+T^{-j}=\mathrm{Tr}(T^j)$ for $j\ge1$. Put $\Lambda=\lambda\circ\mathrm{Tr}$ and $\sigma_j=\Lambda(T^j)$ for $j\in\mathbb{Z}$. Then $\sigma_j=s_j$ for $j\ge1$ and $\sigma_0=2s_0$, so $s_j=0$ iff $\sigma_j=0$ for $j\ge0$. The form $\Lambda$ is nonzero since $\mathrm{Tr}(r/2)=r$. Let $Q$ be the characteristic polynomial of multiplication by $T$ on the $\F_q$-space $R'$ of dimension $2d$. It is monic of degree $2d$ with $Q(0)\ne0$ and $Q(T)=0$, so $\sum_iQ_i\sigma_{j+i}=\Lambda(T^jQ(T))=0$ for all $j\in\mathbb{Z}$. If $\sigma$ vanished at $2d$ consecutive indices, this recurrence, run forwards and backwards, would give $\sigma\equiv0$. The powers $T^j$, $j\in\mathbb{Z}$, span $R'$ over $\F_q$ (as $u=T+T^{-1}$), so $\Lambda=0$, a contradiction. Each $j$ with $s_j(y)\ne0$ contributes a factor at most $\beta|S|$.
+\end{proof}
+
+The window $2d$ is sharp. In all cases computed ($q\le11$, $d\le4$) the longest run of zeros of $s_j(A/G)$ over all reduced $A/G$ equals $2d-1$, whereas in the monomial basis of \cite[Lemma 3]{Porritt} it is $d-1$.
+
+\section{Proof of Theorem \ref{thm:main}}
+
+For $\rho\in\cC$ let $w_\rho(h)=\mathbf 1_\cB(h)\mathbf 1[h\equiv\rho\ (M)]$. Orthogonality on $\F_q[u]/(M)$ gives
+\begin{equation}\label{eq:wc}
+\hat w_\rho(x)=q^{-2}\sum_{b\bmod M}\e(-b\rho/M)\,\hat S_\cB(x+b/M),\qquad |\hat w_\rho(x)|\le q^{-2}\sum_{b\bmod M}|\hat S_\cB(x+b/M)|,
+\end{equation}
+where $b$ runs over the $q^2$ polynomials of degree below $2$. In particular $\int_\T|\hat w_\rho|\le(A_S/q)^m$. Let $\pi(m)$ be the number of monic irreducible polynomials of degree $m$ in $\F_q[u]$.
+
+\begin{lemma}[{Pollack \cite[Lemma 5]{Pollack}, \cite[Lemma 1]{Porritt}}]\label{lem:pollack}
+Every $x\in\T$ can be written uniquely as $x=A/G+\gamma$ with $A/G$ reduced, $\deg A<\deg G\le m/2$ and $|\gamma|<q^{-\deg G-m/2}$, and then
+\[
+\sum_{\deg P=m}\e(Px)=\frac{\mu(G)}{\phi(G)}\pi(m)\e(\gamma u^m)\mathbf 1[|\gamma|<q^{-m}]+E,\qquad|E|\le q^{m-\frac12\lfloor m/2\rfloor},
+\]
+the sum running over monic irreducible $P$.
+\end{lemma}
+
+All $h$ in the support of $w_\rho$ are monic of degree $m$, so $\hat w_\rho(A/G+\gamma)=\e(\gamma u^m)\hat w_\rho(A/G)$ for $|\gamma|<q^{-m}$. As in \cite[Section 4]{Porritt},
+\begin{equation}\label{eq:circle}
+N_\rho=\frac{\pi(m)}{q^m}\sum_{\deg G\le m/2}\frac{\mu(G)}{\phi(G)}\sum_{\substack{A\bmod G\\(A,G)=1}}\overline{\hat w_\rho(A/G)}+O\Bigl(q^{m-\frac12\lfloor m/2\rfloor}\Bigl(\frac{A_S}{q}\Bigr)^m\Bigr).
+\end{equation}
+Since $m-\frac12\lfloor m/2\rfloor\le\frac34m+\frac14$, the error is at most $q^{1/4}|S|^m(q^{3/4}\alpha)^m$.
+
+Moduli dividing $M$. For $G\in\{1,u-2,u+2,M\}$ the inner sum in \eqref{eq:circle} is $\sum_hw_\rho(h)c_G(h)$ with the Ramanujan sum $c_G(h)=\sum_{(A,G)=1}\e(-hA/G)$, and $c_G(h)=c_G(\rho)$ on the support of $w_\rho$. For $G=u\mp2$ one has $\e(hA/G)=\psi(Ah(\pm2))$, and $\rho(\pm2)\ne0$ gives $c_G=-1$. Hence $\sum_{G\mid M}\mu(G)c_G(\rho)/\phi(G)=(1+1/(q-1))^2$. Moreover $\hat w_\rho(0)=q^{-2}\sum_b\e(-b\rho/M)\hat S_\cB(b/M)=q^{-2}|S|^m+O(|S|^m\beta^{\lfloor m/4\rfloor})$ by Lemma \ref{lem:linf}, since $b/M$ has reduced denominator of degree $1$ or $2$ for $b\ne0$. These moduli contribute
+\[
+\frac{\pi(m)}{q^m}\,\frac{|S|^m}{(q-1)^2}\bigl(1+O(q^2\beta^{\lfloor m/4\rfloor})\bigr).
+\]
+
+Small moduli not dividing $M$. Let $G\nmid M$ with $1\le\deg G=d\le U$ and $(A,G)=1$. For every $b$ the point $A/G+b/M$ is nonzero modulo $\F_q[u]$ and its reduced denominator has degree between $1$ and $d+2$. By \eqref{eq:wc} and Lemma \ref{lem:linf}, $|\hat w_\rho(A/G)|\le|S|^m\beta^{\lfloor m/(2d+4)\rfloor}$. With $\pi(m)\le q^m/m$ these moduli contribute at most $(|S|^m/m)\sum_{d\le U}q^d\beta^{\lfloor m/(2d+4)\rfloor}$.
+
+Large moduli. Let $U<d\le m/2$. By \eqref{eq:wc},
+\[
+\sum_{\deg G=d}\ \sum_{(A,G)=1}|\hat w_\rho(A/G)|\le q^{-2}\sum_{b\bmod M}\ \sum_{\deg G=d}\ \sum_{(A,G)=1}|\hat S_\cB(A/G+b/M)|\le\sum_{y\in Y_{d+2}}|\hat S_\cB(y)|,
+\]
+since for each fixed $b$ the map $A/G\mapsto A/G+b/M$ modulo $\F_q[u]$ is injective into $Y_{d+2}$. With $q^d/\phi(G)\le e(1+\log_qd)$ \cite[Lemma 5]{Porritt} and Lemma \ref{lem:farey}, the degree $d$ contributes at most $(|S|^m/m)e(1+\log_qd)(q\alpha)^4(q\alpha^2)^d$ when $2d+4\le m$, using $A_S/|S|=q\alpha$ and $A_S^2/(q|S|^2)=q\alpha^2$, and at most $(|S|^m/m)e(1+\log_qm)q^{m/2+4}\alpha^m$ for each of the at most three remaining $d$.
+
+Assembly. Summing over the $(q-1)^2/2$ classes in $\cC$ and using $\pi(m)=q^m/m+O(q^{m/2}/m)$,
+\[
+N_m(S)=\frac{|S|^m}{2m}\Bigl(1+O\bigl(q^{-m/2}+q^2\beta^{\lfloor m/4\rfloor}+q^2\varepsilon_m\bigr)\Bigr),
+\]
+\[
+\varepsilon_m=\sum_{d\le U}q^d\beta^{\lfloor m/(2d+4)\rfloor}+(q\alpha)^4\sum_{d>U}(1+\log d)(q\alpha^2)^d+m\log m\,q^{4}(q^{1/2}\alpha)^m+m\,q^{1/4}(q^{3/4}\alpha)^m.
+\]
+The hypothesis $\alpha<q^{-3/4}$ gives $q\alpha^2<1$, $q^{1/2}\alpha<1$ and $q^{3/4}\alpha<1$. With $U=\lceil\kappa\sqrt m\rceil$ and $\kappa^2=\log(1/\beta)/(4\log q)$ one has $q^U\beta^{m/(2U+4)}\le q^{-(\kappa+o(1))\sqrt m}$, and all terms of $\varepsilon_m$ are $O(e^{-c_0\sqrt m})$. This proves Theorem \ref{thm:main}, and Corollary \ref{cor:nozero} is the case $S=\F_p\setminus\{0\}$. \qed
+
+\section{Level of distribution}
+
+\begin{proof}[Proof of Proposition \ref{prop:level}]
+Let $G$ be monic, coprime to $M$, of degree at most $D$. Orthogonality modulo $GM$ gives
+\[
+\#\{h\in\cB:\ h\equiv\rho\ (M),\ G\mid h\}=\frac{1}{q^2|G|}\sum_{b\bmod M}\ \sum_{A\bmod G}\e(-b\rho/M)\,\hat S_\cB(A/G+b/M).
+\]
+The term $(A,b)=(0,0)$ is the main term $|S|^m/(q^2|G|)$. For the other terms put $y=A/G+b/M$, a nonzero element of $\T$ modulo $\F_q[u]$ with reduced denominator $H=G'M'$, $G'\mid G$, $M'\mid M$. Given $G$ and $y$, the pair $(A\bmod G,b\bmod M)$ is determined by the Chinese remainder theorem. A fixed $y$ with reduced denominator $H$ therefore occurs for each $G$ divisible by $G'$, with weight $q^{-2}|G|^{-1}$, and $\sum_{G'\mid G,\ \deg G\le D}|G|^{-1}\le(D+1)|G'|^{-1}\le(D+1)q^2|H|^{-1}$. So the left side of the proposition is at most
+\[
+(D+1)\sum_{\substack{H\ne1\\ \deg H\le D+2}}|H|^{-1}\sum_{y\ \text{with denominator}\ H}|\hat S_\cB(y)|\le(D+1)\sum_{d=1}^{D+2}q^{-d}\sum_{\substack{y\in Y_d\\ \text{denominator of degree }d}}|\hat S_\cB(y)|.
+\]
+Lemma \ref{lem:linf} for $d\le U$ and Lemma \ref{lem:farey} for $d>U$ bound this by
+\[
+|S|^m(D+1)\Bigl(\sum_{d\le U}q^d\beta^{\lfloor m/2d\rfloor}+\sum_{U<d\le m/2}(q\alpha^2)^d+\sum_{m/2<d\le D+2}q^{d}\alpha^m\Bigr),
+\]
+and the last sum is at most $2q^{D+2}\alpha^m\le2q^{2-\varepsilon m}$. With $U$ as in Section 4 the claim follows. The version without congruence condition is the same computation without $b$.
+\end{proof}
+
+\section{A linear sieve over $\F_q[u]$ and almost primes}
+
+We transfer the Rosser--Iwaniec linear sieve to $\F_q[u]$ by labelling irreducible polynomials with rational primes of comparable size. Lower-bound sieves over polynomial rings are classical. Cherly \cite{Cherly} proved a Selberg lower-bound sieve in $\F_q[x]$, ordering the irreducibles in the same way as our labels below, and Car \cite{Car} adapted the Jurkat--Richert linear sieve to $\F_p[X]$. The labels give a self-contained route to the beta sieve in the following form \cite[Theorem 11.13]{FI}, whose statement, including the error term, agrees with the restatements in \cite{KLR,BanksFreiberg}. Let $(a_n)$ be a finitely supported sequence of nonnegative reals, $\mathcal Q$ a set of rational primes, $P(z)=\prod_{\ell\in\mathcal Q,\ \ell<z}\ell$, and $g$ multiplicative on squarefree integers with $0\le g(\ell)<1$ for $\ell\in\mathcal Q$, such that
+\begin{equation}\label{eq:dim}
+\prod_{\substack{\ell\in\mathcal Q\\ w\le\ell<z}}(1-g(\ell))^{-1}\le\frac{\log z}{\log w}\Bigl(1+\frac{K}{\log w}\Bigr)\qquad(2\le w<z).
+\end{equation}
+Write $\sum_{n\equiv0\ (\mathrm{mod}\ d)}a_n=Xg(d)+r_d$ for $d\mid P(z)$ and $V(z)=\prod_{\ell\mid P(z)}(1-g(\ell))$. Then for $D\ge z$ and $s=\log D/\log z$,
+\begin{equation}\label{eq:lower}
+\sum_{(n,P(z))=1}a_n\ge XV(z)\bigl(f(s)+O_K((\log D)^{-1/6})\bigr)-\sum_{\substack{d\mid P(z)\\ d<D}}|r_d|,
+\end{equation}
+where $f(s)=2e^\gamma\log(s-1)/s$ for $2\le s\le4$. In particular $f(s)>0$ for $s>2$.
+
+Labels. Order the monic irreducible polynomials of $\F_q[u]$ other than $u\pm2$ by degree (arbitrarily within a degree) and let $\iota$ send each of them, in this order, to the smallest rational prime $\ge q^{\deg P}$ not used before. At most $\sum_{j\le k}\pi_q(j)\ll_qq^k/k$ primes are used up to degree $k$, where $\pi_q(j)$ counts monic irreducibles of degree $j$, so the prime number theorem gives a constant $C_q$ with
+\begin{equation}\label{eq:iota}
+q^{\deg P}\le\iota(P)\le q^{\deg P+C_q}.
+\end{equation}
+Extend $\iota$ multiplicatively to squarefree $G$ coprime to $M$.
+
+\begin{proof}[Proof of Corollary \ref{cor:sieve}]
+Let $\mathcal A$ be the set of $h\in\cB$ with $h\bmod M\in\cC$, and for each $h\in\mathcal A$ let $n(h)=\prod_P\iota(P)^{v_P(h)}$, which is well defined since $u\pm2\nmid h$. Put $a_n=\#\{h\in\mathcal A:\ n(h)=n\}$, $\mathcal Q=\iota(\{P\})$ and $g(\iota(G))=|G|^{-1}$. For squarefree $d=\iota(G)$ one has $d\mid n(h)$ iff $G\mid h$, so $\sum_{d\mid n}a_n=\#\{h\in\mathcal A:\ G\mid h\}$, and Proposition \ref{prop:level}, summed over the $(q-1)^2/2$ classes, gives $X=|S|^m(q-1)^2/(2q^2)$ with
+\[
+\sum_{\substack{G\ \text{squarefree},\ (G,M)=1\\ \deg G\le(\vartheta-\varepsilon)m}}|r_{\iota(G)}|\ll|S|^me^{-c_0\sqrt m}.
+\]
+Condition \eqref{eq:dim} holds with $K=K(q)$. Indeed, by \eqref{eq:iota} the primes $w\le\iota(P)<z$ come from degrees $k\in[a,b]$ with $a=\lceil\log_qw\rceil-C_q$ and $b=\lfloor\log_qz\rfloor$, and $\prod_{\deg P=k}(1-q^{-k})^{-1}\le\exp((1+2q^{-k})/k)$ since there are at most $q^k/k$ such $P$. For $a\ge2$ the inequality $\sum_{a\le k\le b}1/k\le\log(b/(a-1))$ gives the bound $\exp(O_q(q^{-a}))\,b/(a-1)$, which is $(\log z/\log w)(1+O_q(1/\log w))$. For $a\le1$, i.e. $\log_qw\le C_q+1$, the primes with $\iota(P)<q^{C_q+2}$ contribute a bounded factor, which is absorbed into $K$. By Mertens' theorem in $\F_q[u]$, $V(z)\asymp_q1/\log z$.
+
+Take $\log_qD=(\vartheta-\varepsilon)m$. Every $d=\iota(G)<D$ then satisfies $q^{\deg G}\le\iota(G)<D$, hence $\deg G<(\vartheta-\varepsilon)m$, and $z=D^{1/s}$ with $s=2+\delta$. Then \eqref{eq:lower} gives $\gg_{q,S}|S|^m/m$ elements $h\in\mathcal A$ with $(n(h),P(z))=1$. By \eqref{eq:iota} every irreducible factor $P$ of such $h$ has $\deg P\ge\log_qz-C_q=(\vartheta-\varepsilon)m/(2+\delta)-C_q$, so
+\[
+\Omega(h)\le\frac{m}{(\vartheta-\varepsilon)m/(2+\delta)-C_q}=\frac{2+\delta}{\vartheta-\varepsilon}+o(1).
+\]
+Since $\vartheta>1/2$ we may choose $\delta,\varepsilon$ with $(2+\delta)/(\vartheta-\varepsilon)<4$, and then $\Omega(h)\le3$ for large $m$. If $\vartheta>2/3$ we may achieve $(2+\delta)/(\vartheta-\varepsilon)<3$ and $\Omega(h)\le2$.
+
+Parity. The character $\chi(h(2)h(-2))$ equals $-1$ on $\mathcal A$, is completely multiplicative, and on an irreducible $G\nmid M$ equals $-1$ iff $G$ is inert (Section 2). So every $h\in\mathcal A$ has an odd number of inert irreducible factors, counted with multiplicity. Write $h=\prod G_i$ and $f=t^mh(t+1/t)$. An inert $G_i$ contributes one irreducible factor $t^{\deg G_i}G_i(t+1/t)$ to $f$ and a split $G_i$ contributes two. Hence $\Omega(f)=n_1+2n_2$, where $n_1$ is the odd number of inert factors, $n_2$ the number of split factors and $n_1+n_2=\Omega(h)$. For $\Omega(h)\le3$ this leaves $\Omega(f)\in\{1,3,5\}$, and for $\Omega(h)\le2$ it leaves $\Omega(f)\in\{1,3\}$. The map $h\mapsto f$ is injective.
+\end{proof}
+
+\section{Numerical checks}
+
+We counted $N_m(S)$ exhaustively in two independent ways, by the irreducibility of $f$ and by the irreducibility of $h$ together with Lemma \ref{lem:meyn}, using PARI/GP and, independently, FLINT. The two ways agree in every case where both were run (no mismatch). Table \ref{tab:counts} compares the counts with the prediction $|S|^mS_q(2m)/q^m$.
+
+\begin{table}[ht]
+\centering
+\caption{Irreducible palindromes of degree $2m$ with middle coefficients in $S$ against the prediction $|S|^mS_q(2m)/q^m$. Range T means Theorem \ref{thm:main} applies, range E means only Corollary \ref{cor:sieve} applies.}\label{tab:counts}
+\begin{tabular}{llcrrrr}
+\toprule
+$q$ & $S$ & range & $m$ & count & prediction & ratio\\
+\midrule
+17 & $\F_{17}\setminus\{0\}$ & T & 5 & 104748 & 104856.3 & 0.999\\
+17 & $\F_{17}\setminus\{0\}$ & T & 6 & 1399352 & 1398084.6 & 1.001\\
+17 & $\F_{17}\setminus\{1\}$ & T & 6 & 1397966 & 1398084.6 & 1.000\\
+19 & $\F_{19}\setminus\{0\}$ & T & 5 & 189548 & 188955.4 & 1.003\\
+13 & $\F_{13}\setminus\{0\}$ & E & 5 & 24642 & 24882.3 & 0.990\\
+11 & $\F_{11}\setminus\{0\}$ & E & 6 & 83184 & 83327.6 & 0.998\\
+7 & $\F_7\setminus\{0\}$ & E & 8 & 105338 & 104976.0 & 1.003\\
+7 & $\{0,\dots,4\}$ & E & 9 & 109781 & 108506.0 & 1.012\\
+5 & $\F_5\setminus\{0\}$ & E & 10 & 52258 & 52428.7 & 0.997\\
+5 & $\{0,1,2\}$ & none & 12 & 21598 & 22143.3 & 0.975\\
+3 & $\{0,1\}$ & none & 18 & 7017 & 7281.8 & 0.964\\
+\midrule
+3 & $\F_3$ (control) & & 6 & 60 & 60 & 1\\
+9 & $\F_9$ (control) & & 4 & 820 & 820 & 1\\
+9 & $\F_3\subset\F_9$ (control) & & 7 & 0 & 156.2 & 0\\
+9 & $i\F_3$ (control, $\beta=1$) & & 12 & 26844 & 22143.4 & 1.212\\
+9 & $\{0,1,i\}$ (control) & & 12 & 22299 & 22143.4 & 1.007\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The full digit sets reproduce Carlitz's numbers exactly. The set $\F_3\subset\F_9$ gives no irreducible polynomial for $m=2,\dots,8$, for the trivial reason that $f\in\F_3[t]$ has even degree $2m$ and so factors over $\F_9$. The line $i\F_3$ with $\beta=1$ deviates persistently, by factors between $0.79$ and $1.42$ for $m=9,\dots,12$, while $\{0,1,i\}$ of the same size follows the prediction. Prime $h$ in the box are equidistributed over the $(q-1)^2$ unit classes $(h(2),h(-2))$. For thin sets outside both ranges the counts still approach the prediction, slowly for $\{0,1,2\}\subset\F_5$ (ratios $0.88$ to $0.98$ for $m=7,\dots,12$).
+
+\section{Remarks on the method}
+
+The condition $\alpha<q^{-3/4}$ enters only through the error of Lemma \ref{lem:pollack} at denominators of degree about $m/2$. There the error is of size $q^{3m/4}$ while the mass of $|\hat S_\cB|$ on the arcs of that level is the full $L^1$ norm $(A_S/q)^m$, as Lemmas \ref{lem:l1} and \ref{lem:farey} are sharp for boxes whose $L^1$ norm is equidistributed over the levels. Other Farey cuts move the loss between levels without removing it. Primes with $q^{-3/4}\le\alpha<q^{-1/2}$, which include the sets $\F_p\setminus\{a_0\}$ for $5\le p\le13$, would need bilinear information on the Dickson box beyond its $L^1$ norm, in the spirit of Maynard's treatment of many missing digits \cite{Maynard}. We do not know such an estimate for fixed small $q$ in $\F_q[t]$, and the results of \cite{Porritt,ArevaloLalin} have the same square-root range.
+
+The argument does not suggest a route to palindromic primes in base $b$ over the integers. The following comparison is a heuristic, not a theorem. Two ingredients carry the proof above, and both are special to $\F_q[t]$. First, $t\mapsto1/t$ is a ring automorphism, so the substitution $u=t+1/t$ unfolds the palindromes of degree $2m$ into a dense box of polynomials of degree $m$ and turns irreducibility into the inert condition of Lemma \ref{lem:meyn}. Integer digit reversal is not additive or multiplicative because of carries, and integer palindromes below $x$ stay a set of size about $x^{1/2}$ with no comparable unfolding. Second, the minor arcs are controlled pointwise by the Riemann hypothesis. A circle method for integers that uses only a pointwise bound of the strength $x^{3/4}$ for prime exponential sums at denominators near $x^{1/2}$, as the generalized Riemann hypothesis would give, together with the $L^1$ norm of the palindrome exponential sum, cannot succeed. The $L^1$ norm of the exponential sum of any set is at least $1$, so the error term would be at least of order $x^{3/4}$, which exceeds the number $x^{1/2}$ of palindromes. A proof over the integers would therefore need bilinear structure that the present method does not provide.
+
+\begin{thebibliography}{99}
+\bibitem{ArevaloLalin} J. Ar\'evalo and M. Lal\'in, Irreducible polynomials with restricted digits in base $b(T)$, arXiv:2609.25367, 2026.
+\bibitem{BanksFreiberg} W. D. Banks and T. Freiberg, Carmichael numbers and the sieve, arXiv:1506.03497, 2015.
+\bibitem{Car} M. Car, Le th\'eor\`eme de Chen pour $\F_p[X]$, Dissertationes Math. (Rozprawy Mat.), 1984.
+\bibitem{Carlitz} L. Carlitz, Some theorems on irreducible reciprocal polynomials over a finite field, J. Reine Angew. Math. 227 (1967), 212--220.
+\bibitem{Cherly} J. Cherly, A lower bound theorem in $\F_q[x]$, J. Reine Angew. Math. 303/304 (1978), 253--264.
+\bibitem{FI} J. Friedlander and H. Iwaniec, Opera de Cribro, Amer. Math. Soc. Colloq. Publ. 57, 2010.
+\bibitem{Gao} Z. Gao, Improved error bounds for the number of irreducible polynomials and self-reciprocal irreducible monic polynomials with prescribed coefficients over a finite field, arXiv:2109.14154, 2021.
+\bibitem{Garefalakis} T. Garefalakis, Self-reciprocal irreducible polynomials with prescribed coefficients, Finite Fields Appl. 17 (2011), 183--193.
+\bibitem{GarefalakisKapetanakis} T. Garefalakis and G. Kapetanakis, On the Hansen--Mullen conjecture for self-reciprocal irreducible polynomials, Finite Fields Appl. 18 (2012).
+\bibitem{HokkenKoukoulopoulos} T. Hokken and D. Koukoulopoulos, Irreducibility and Galois groups of random reciprocal polynomials of large degree, arXiv:2510.18857, 2025.
+\bibitem{KLR} P.~Kurlberg, S. Lester and L. Rosenzweig, Superscars for arithmetic point scatterers II, arXiv:1910.04262, 2019.
+\bibitem{Maynard} J. Maynard, Primes with restricted digits, Invent. Math. 217 (2019), 127--218.
+\bibitem{Meyn} H. Meyn, On the construction of irreducible self-reciprocal polynomials over finite fields, Appl. Algebra Engrg. Comm. Comput. 1 (1990), 43--53.
+\bibitem{Pollack} P. Pollack, Irreducible polynomials with several prescribed coefficients, Finite Fields Appl. 22 (2013), 70--78.
+\bibitem{Porritt} S. Porritt, Irreducible polynomials over a finite field with restricted coefficients, Canad. Math. Bull. 62 (2019), 429--439.
+\bibitem{Rosen} M. Rosen, Number theory in function fields, Grad. Texts in Math. 210, Springer, 2002.
+\end{thebibliography}
+
+\end{document}

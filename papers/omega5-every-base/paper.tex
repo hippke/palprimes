@@ -1,0 +1,383 @@
+\documentclass[11pt]{amsart}
+
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm,mathtools,mathrsfs}
+\usepackage[margin=1.15in]{geometry}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+% Upright theorem bodies (no italics in running text).
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+
+% Upright proof labels.
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par\pushQED{\qed}\normalfont\topsep6\p@\@plus6\p@\relax\trivlist\item[\hskip\labelsep\upshape#1.]\ignorespaces}{\popQED\endtrivlist\@endpefalse}
+\makeatother
+
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\PP}{\mathscr{P}}
+\newcommand{\sumstar}{\sideset{}{^*}\sum}
+\newcommand{\FS}{\mathcal{S}}
+
+\title{Palindromes with at most five prime factors in every base}
+\author{[Author]}
+\date{}
+
+\begin{document}
+
+\begin{abstract}
+Tuxanidy and Panario proved that, in every base $b\ge2$, the $b$-palindromes are equidistributed in residue classes to moduli up to $x^{1/5-\varepsilon}$ on average, and deduced that infinitely many $b$-palindromes have at most six prime factors. We raise the level of distribution to $x^{1/4-\varepsilon}$ in every base. Hence, in every base $b\ge2$, infinitely many $b$-palindromes have at most five prime factors, all of them at least $x^{1/16-\varepsilon}$. The new ingredient is a mean-square bound over Farey fractions for the exponential sum of a block of palindromic digits whose length exceeds the range of the divisor bound of Tuxanidy and Panario. It saves a power of the excess. The proof combines a rescaled large sieve on the inner digits, where pairs of digits are doubled, with the divisor bound at its break-even point on the outer digits. An exact injectivity lemma for palindromic digit strings computes the collision probabilities that both steps need. The level $1/4$ is the natural limit of methods that bound absolute Fourier sums over Farey fractions for a set of size $x^{1/2}$.
+\end{abstract}
+
+\maketitle
+
+\noindent Draft of 20 November 2026.
+
+\section{Introduction}\label{sec:intro}
+
+\subsection{Background}
+
+A positive integer is a $b$-palindrome if its digits in base $b$ read the same in both directions. Let $\PP_b$ be the set of $b$-palindromes and $\PP_b(x)=\PP_b\cap[1,x]$, so that $\#\PP_b(x)\asymp_b\sqrt{x}$. The conjecture that the number of palindromic primes up to $x$ is of order $\#\PP_b(x)/\log x$ appears in the concluding remarks of Banks, Hart and Sakata \cite{BHS} and of Banks and Shparlinski \cite{BS}. It is out of reach at present. Palindromes are about as sparse as the values of a quadratic polynomial, and the natural intermediate problem is the analogue of Iwaniec's theorem on $n^2+1$ \cite{Iw}, namely to find infinitely many palindromes with a bounded number of prime factors, with the bound as small as possible.
+
+Banks, Hart and Sakata \cite{BHS} showed that the proportion of primes among the $b$-palindromes up to $x$ tends to $0$. Col \cite{Col} obtained the upper bound $\ll_b\#\PP_b(x)/\log x$ of the expected order for the palindromic primes. He also proved a Bombieri--Vinogradov type estimate with a small level depending on $b$ and deduced that infinitely many $b$-palindromes have at most $k_b$ prime factors, with $k_b\sim24\pi b$. Tuxanidy and Panario \cite{TP} raised the level to $1/5$ in every base. With a weighted linear sieve they proved that
+\[
+\#\{n\in\PP_b(x):\Omega(n)\le 6,\ P^-(n)\ge x^{1/21}\}\asymp_b\frac{\#\PP_b(x)}{\log x},
+\]
+where $\Omega(n)$ is the number of prime factors of $n$ counted with multiplicity and $P^-(n)$ is the smallest of them.
+
+Several later works use the equidistribution estimate of \cite{TP} or the underlying Fourier bounds. Johnston and Kerr \cite{JK} proved that there are infinitely many square-free palindromes in every base. Chourasiya and Johnston \cite{CJ} proved that cube-free palindromes exist in every base. Carrillo Santana \cite{CS} derived power-free results from $L^\infty$ and $L^1$ bounds for Fourier transforms. Dartyge, Rivat and Swaenepoel \cite{DRS} proved a Bombieri--Vinogradov theorem for the reversals of primes. Tuxanidy \cite{Tux} established an exponent of distribution $1/16$ for square-free palindromes. We are not aware of an improvement of the level $1/5$ or of the bound $\Omega\le6$ for palindromes.
+
+\subsection{Results}
+
+For $\alpha\in\R$ let $\e(\alpha)=\exp(2\pi i\alpha)$ and
+\[
+\phi_b(\alpha)=\Bigl|\sum_{0\le d<b}\e(\alpha d)\Bigr|.
+\]
+Let $\PP_b^*$ be the set of $b$-palindromes coprime to $b^3-b$, $\PP_b^*(y)=\PP_b^*\cap[1,y]$, and $\PP_b^*(y,a,q)$ the subset of those $n\equiv a\pmod q$.
+
+\begin{theorem}[Level of distribution]\label{thm:level}
+Let $b\ge2$ and $0<\theta<1/4$. Then there is $c=c(b,\theta)>0$ with
+\[
+\sum_{\substack{q\le x^{\theta}\\(q,b^3-b)=1}}\ \sup_{y\le x}\ \max_{a\in\Z}\ \Bigl|\#\PP_b^*(y,a,q)-\frac{\#\PP_b^*(y)}{q}\Bigr|\ll_{b,\theta}\frac{\#\PP_b^*(x)}{\exp(c\sqrt{\log x})}.
+\]
+\end{theorem}
+
+For $\theta<1/5$ this is \cite[Thm.~1.5]{TP}. Combined with the weighted sieve of \cite{TP} it gives the following.
+
+\begin{corollary}[Palindromes with at most five prime factors]\label{cor:five}
+Let $b\ge2$ and $0<\xi<1/16$. Then
+\[
+\#\{n\in\PP_b(x):\Omega(n)\le5,\ P^-(n)\ge x^{\xi}\}\asymp_{b,\xi}\frac{\#\PP_b(x)}{\log x}.
+\]
+In particular, in every base there are infinitely many palindromes with at most five prime factors.
+\end{corollary}
+
+In particular Corollary~\ref{cor:five} improves the condition $P^-(n)\ge x^{1/21}$ in the theorem of Tuxanidy and Panario to $P^-(n)\ge x^{\xi}$ for every $\xi<1/16$.
+
+The new input is a bound for a mean square over Farey fractions. For $L\ge1$ put $c_k=b^k+b^{2L-k}$ for $0\le k<L$, let $\psi_b(t)=(\phi_b(t)/b)^2\in[0,1]$ and
+\[
+\Pi_L(\alpha)=\prod_{0\le k<L}\psi_b(c_k\alpha).
+\]
+Up to the middle and the leading digit, $b^{2L}\Pi_L(\alpha)$ is the square of the absolute value of the exponential sum over the palindromes with $2L+1$ digits. Let
+\[
+g_b=\frac{2b^2+1}{3b^2},\qquad \vartheta_b=\log_b\frac1{g_b}=\log_b\frac{3b^2}{2b^2+1}>0 .
+\]
+
+\begin{theorem}[Farey mean square]\label{thm:V}
+Let $b\ge2$, $0<\kappa<1$, $L\ge 1/(1-\kappa)$ and $Q\in[b^{\kappa L},b^{\kappa L+1}]$. Put $\lambda=b^L/Q$ and
+\[
+\eta=\frac{\vartheta_b}{2}\min\Bigl(\frac{\kappa}{1-\kappa},\,1+\vartheta_b\Bigr).
+\]
+Then, uniformly in $\beta\in\R$,
+\[
+\sum_{\substack{Q\le q\le 2Q\\(q,b)=1}}\ \sumstar_{h\bmod q}\Pi_L\Bigl(\frac hq+\beta\Bigr)\le C_b\,Q\,(2+\tau^*)^{1/2}\lambda^{-\eta},
+\]
+where $C_b=2b^2(2b+4)^{1/2}$ and $\tau^*=\max_{0<|w|<2b^{2L+1}}\#\{q\in[Q,2Q]:q\mid w\}\ll_\varepsilon b^{\varepsilon L}$.
+\end{theorem}
+
+The divisor bound of Tuxanidy and Panario \cite[Lemma~8.2]{TP} gives the same sum $\ll Q\,b^{\varepsilon L}$ (see~\eqref{eq:A3} below), so Theorem~\ref{thm:V} saves the power $\lambda^{\eta}$ of the excess $\lambda=b^L/Q$ of the length of the block over $\log_bQ$. For $\kappa\ge(1+\vartheta_b)/(2+\vartheta_b)$, in particular for $\kappa\ge0.59$, the exponent is $\eta=\vartheta_b(1+\vartheta_b)/2$, which is $0.294$ for $b=2$, $0.211$ for $b=3$ and $0.102$ for $b=10$, and $\eta\sim 0.20/\log b$ as $b\to\infty$.
+
+\subsection{Method}
+
+Tuxanidy and Panario split the product $\Phi_N$ that governs exponential sums over palindromes into blocks of digit positions and apply H\"older's inequality. Every Farey bound they use is sharp only for a block of length at most $\log_bQ$. Gluing such blocks gives the level $1/5$. Optimised H\"older schemes of this kind give levels above $1/5$ for small bases, but in our computations their gain over $1/5$ decays like $1/\log b$. We split $\Phi_N$ instead into a short outer block of length $\log_bQ$, controlled by the $L^2$ lemma of \cite{TP}, and a long inner block of length $\log_bQ/\kappa$. After a twist the inner block becomes the product $\Pi_L$ of a full palindrome, and Theorem~\ref{thm:V} gives a power saving for it. Letting $\kappa\to1$ gives every level below $1/4$.
+
+The proof of Theorem~\ref{thm:V} uses the Cauchy--Schwarz inequality once more, now inside the block. The innermost digits are rescaled by a power of $b$, so that their span is at most a constant times $Q^2$, and the large sieve applies to them with a doubled digit, i.e. to the law of $d+d'$ for two independent digits. The outer digits of the block are paired with the remaining inner digits and bounded by divisor counting exactly at its break-even point, which needs no restriction on the span. Both steps need the collision probability of sums of palindromic digit strings, which Lemma~\ref{lem:inj} computes exactly.
+
+\subsection{Organisation}
+
+Section~\ref{sec:framework} recalls the framework of \cite{TP}. Section~\ref{sec:inj} proves the injectivity lemma and Sect.~\ref{sec:V} proves Theorem~\ref{thm:V}. Section~\ref{sec:average} deduces an average bound for $\Phi_N$ that replaces \cite[Prop.~8.1]{TP}, Sect.~\ref{sec:level} proves Theorem~\ref{thm:level} and Corollary~\ref{cor:five}, and Sect.~\ref{sec:remarks} discusses the limit $1/4$.
+
+\section{Notation and the framework of Tuxanidy and Panario}\label{sec:framework}
+
+Throughout, $b\ge2$ is fixed and implied constants may depend on $b$. We write $\tau(n)$ for the number of divisors, $\sum^*_{h\bmod q}$ for a sum over reduced residues, and $\log_b$ for the logarithm to base $b$. For a $1$-periodic function $F\ge0$ and $Q\ge1$ put
+\[
+\FS_Q(F;\beta)=\sum_{\substack{q\le Q\\(q,b)=1}}\ \sumstar_{h\bmod q}F\Bigl(\frac hq+\beta\Bigr).
+\]
+Distinct reduced fractions with denominators at most $Q$ are $Q^{-2}$-spaced modulo $1$, also after a common shift.
+
+For $N\ge2$ and a set $I\subset[1,N)$ of digit positions let
+\[
+P_I(\alpha)=\prod_{n\in I}\phi_b(\alpha c_n(N)),\qquad c_n(N)=b^n+b^{2N-n},\qquad \Phi_N=P_{[1,N)} .
+\]
+Every palindrome with an even number of digits is divisible by $b+1$, so $\PP_b^*$ consists of palindromes with an odd number $2N+1$ of digits. Such a palindrome is $n_Nb^N+\sum_{0\le j<N}n_jc_j(N)$ with digits $0\le n_j<b$ and $n_0\ne0$. Tuxanidy and Panario \cite[Sect.~6, Sect.~9]{TP} bound the left-hand side of Theorem~\ref{thm:level}, after M\"obius inversion over the divisors of $b^3-b$ and the expansion into additive characters, by
+\begin{equation}\label{eq:SMQk}
+b^2\tau(b^3-b)\sum_{N\le\frac12\log_bx}\ \sum_{M\le N}\ \max_{k\in\Z}S(M,Q,k),
+\qquad
+S(M,Q,k)=\sum_{\substack{q\le Q\\(q,b^3-b)=1}}\frac1q\sum_{1\le h<q}\Phi_M\Bigl(\frac hq+\frac{k}{b^3-b}\Bigr).
+\end{equation}
+Tuxanidy and Panario take the maximum over shifts $k/r$ with $r\mid b^3-b$, which is the same as the maximum over $k/(b^3-b)$, since $k/r=(k(b^3-b)/r)/(b^3-b)$. Col's $L^\infty$ bound \cite[Prop.~6.2]{TP} states that for $q\ge2$ with $(q,h(b^3-b))=1$ and $0\le M\le2N$,
+\begin{equation}\label{eq:Col}
+\prod_{1\le n\le M}\phi_b\Bigl(\Bigl(\frac hq+\frac{k}{b^3-b}\Bigr)c_n(N)\Bigr)\ll b^M\exp\Bigl(-\sigma_\infty\frac{M}{\log q}\Bigr)
+\end{equation}
+uniformly in $h,k,N$, for some $\sigma_\infty=\sigma_\infty(b)>0$. The $L^2$ lemma of \cite{TP} reads as follows.
+
+\begin{lemma}[{\cite[Lemma~8.2]{TP}}]\label{lem:L2}
+For integers $0\le L'<M'<N$, $Q\ge1$, $\beta\in\R$ and every $\varepsilon>0$,
+\[
+\sum_{q\le Q}\sum_{h\bmod q}\prod_{L'<n\le M'}\phi_b^2\Bigl(\Bigl(\frac hq+\beta\Bigr)c_n(N)\Bigr)\ll_\varepsilon\bigl(Q+b^{M'-L'+\varepsilon N}\bigr)Qb^{M'-L'}.
+\]
+\end{lemma}
+
+The equidistribution theorem of \cite{TP} rests on the following average bound.
+
+\begin{proposition}[{\cite[Prop.~8.1]{TP}}]\label{prop:TP81}
+Let $0<\varepsilon\le1/15$ and $1/3\le\delta\le2/5-\varepsilon$. There is $\sigma_1=\sigma_1(b,\varepsilon)>0$ with
+\begin{align}
+\sup_{\beta\in\R}\FS_Q(\Phi_N;\beta)&\ll Q^2b^{N(1-\delta-\sigma_1)}+Q^{1-\sigma_1/\delta}b^N,\label{eq:81a}\\
+\sum_{\substack{2\le q\le Q\\(q,b^3-b)=1}}\ \sumstar_{h\bmod q}\Phi_N\Bigl(\frac hq+\frac{k}{b^3-b}\Bigr)&\ll\Bigl(Q^2b^{N(1-\delta-\sigma_1)}+Q^{1-\sigma_1/\delta}b^N\Bigr)\exp\Bigl(-\sigma_\infty\frac{N}{\log Q}\Bigr),\label{eq:81b}
+\end{align}
+uniformly in $k\in\Z$, $N\ge0$ and $Q\ge1$.
+\end{proposition}
+
+Section~9 of \cite{TP} deduces the level $\delta/2-\varepsilon$ from Proposition~\ref{prop:TP81}. The restriction $\delta\le2/5-\varepsilon$ comes only from the proof of~\eqref{eq:81a} for $Q\ge b^{\delta N}$. We prove~\eqref{eq:81a} and~\eqref{eq:81b} for every $\delta<1/2$ (Proposition~\ref{prop:replace}).
+
+\section{An injectivity lemma for palindromic strings}\label{sec:inj}
+
+\begin{lemma}\label{lem:inj}
+Let $L\ge1$ and let $t_0,\dots,t_{2L}$ be integers with $|t_j|\le 2b-2$ and $t_j=t_{2L-j}$ for all $j$. If $\sum_{j}t_jb^j=0$, then $t_j=0$ for all $j$.
+\end{lemma}
+
+\begin{proof}
+Put $P_j=\sum_{i\le j}t_ib^i$ for $-1\le j\le 2L$. Then $|P_j|\le(2b-2)(b^{j+1}-1)/(b-1)<2b^{j+1}$, and $P_j=-\sum_{i>j}t_ib^i$ is divisible by $b^{j+1}$. Hence $C_j=P_j/b^{j+1}$ is an integer with $|C_j|\le1$, $C_{-1}=C_{2L}=0$ and $t_j=bC_j-C_{j-1}$ for $0\le j\le 2L$. Put $D_j=C_{2L-1-j}$, so that $D_{-1}=0$ and $t_{2L-j}=bD_{j-1}-D_j$. The symmetry $t_j=t_{2L-j}$ becomes
+\[
+bC_j+D_j=bD_{j-1}+C_{j-1}\qquad(0\le j\le 2L).
+\]
+If $C_{j-1}=D_{j-1}=0$, the right-hand side vanishes, and $bC_j+D_j=0$ with $|C_j|,|D_j|\le1$ and $b\ge2$ forces $C_j=D_j=0$. Starting from $C_{-1}=D_{-1}=0$, induction over $j$ gives $C_j=0$ for $0\le j\le 2L$, hence $t=0$.
+\end{proof}
+
+The bound $2b-2$ cannot be raised to $2b-1$ for $b=2$, as the string $(-2,3,1,3,-2)$ with $L=2$ shows.
+
+\begin{corollary}\label{cor:collision}
+Let $L\ge1$, let $K_1,K_2\subset[0,L)$ be disjoint, and let $d_k,d'_k$ $(k\in K_1\cup K_2)$ be independent digits, uniform on $\{0,\dots,b-1\}$. Put
+\[
+Y=\sum_{k\in K_1}(d_k+d'_k)c_k+\sum_{k\in K_2}d_kc_k,\qquad c_k=b^k+b^{2L-k}.
+\]
+If $Y'$ is an independent copy of $Y$, then $\Pr(Y=Y')=(g_b/b)^{\#K_1}\,b^{-\#K_2}$.
+\end{corollary}
+
+\begin{proof}
+The difference $Y-Y'$ equals $\sum_kt_kc_k=\sum_j\tilde t_jb^j$, where $\tilde t_j=\tilde t_{2L-j}=t_j$ for $j<L$, $\tilde t_L=0$, $t_k$ is a difference of two sums of two digits for $k\in K_1$, a difference of two digits for $k\in K_2$, and $t_k=0$ otherwise. All $|\tilde t_j|\le2b-2$, so Lemma~\ref{lem:inj} shows that $Y=Y'$ exactly when $t_k=0$ for every $k$. The events $t_k=0$ are independent. For $k\in K_2$ the probability is $1/b$. For $k\in K_1$ it is $\sum_{s}\Pr(d+d'=s)^2=(2b^2+1)/(3b^3)=g_b/b$.
+\end{proof}
+
+\section{Proof of Theorem~\ref{thm:V}}\label{sec:V}
+
+Write $S(\beta)$ for the left-hand side of Theorem~\ref{thm:V}, and put $\Pi_K(\alpha)=\prod_{k\in K}\psi_b(c_k\alpha)$ for $K\subset[0,L)$, with $c_k=b^k+b^{2L-k}$.
+
+\subsection{The split}
+Let $m=\lceil(1-\kappa)L\rceil\ge1$, so that $(1-\kappa)L\le m<(1-\kappa)L+1$. Let $K_3=[0,m)$ and split the inner block $[m,L)=K_1\sqcup K_2$ with
+\[
+\#K_2=\max\bigl(0,\lceil\kappa L+1-(1+\vartheta_b)m\rceil\bigr).
+\]
+This is at most $L-m$, since $\kappa L+1-(1+\vartheta_b)m\le L-m$ is equivalent to $\kappa L+1\le L+\vartheta_bm$, which follows from $L(1-\kappa)\ge1$. The factors $\psi_b$ are nonnegative, and $\Pi_{[0,L)}=\bigl(\Pi_{K_1}\Pi_{K_2}^{1/2}\bigr)\bigl(\Pi_{K_3}\Pi_{K_2}^{1/2}\bigr)$, so the Cauchy--Schwarz inequality over the pairs $(q,h)$ gives
+\[
+S(\beta)\le A_1^{1/2}A_3^{1/2},\qquad A_1=\sum_{q,h}\Pi_{K_1}^2\Pi_{K_2}\Bigl(\frac hq+\beta\Bigr),\qquad A_3=\sum_{q,h}\Pi_{K_3}^2\Pi_{K_2}\Bigl(\frac hq+\beta\Bigr),
+\]
+with the same range of $(q,h)$ as in $S(\beta)$.
+
+\subsection{The inner digits}
+Let $f_1$ be the law of $Y$ in Corollary~\ref{cor:collision}. Then $\Pi_{K_1}^2\Pi_{K_2}(\alpha)=|\hat f_1(\alpha)|^2$ with $\hat f_1(\alpha)=\sum_yf_1(y)\e(y\alpha)$. Every $c_k$ with $k\ge m$ is divisible by $b^m$, and
+\[
+\frac{Y}{b^m}\le 2(b-1)\sum_{m\le k<L}\bigl(b^{k-m}+b^{2L-k-m}\bigr)=2\bigl(b^{2(L-m)+1}-b^{L-m+1}+b^{L-m}-1\bigr),
+\]
+so $Y/b^m$ is an integer in $[0,2b^{2(L-m)+1})$. Hence $\hat f_1(\alpha)=\tilde f_1(b^m\alpha)$, where $\tilde f_1$ is a trigonometric polynomial with frequencies in $[0,2b^{2(L-m)+1})$ and $\sum|\text{coefficients}|^2=\|f_1\|_2^2$.
+
+For $(q,b)=1$ the map $h\mapsto b^mh$ permutes the reduced residues modulo $q$. So the points $b^m(h/q+\beta)$ with $Q\le q\le 2Q$ are the reduced fractions with these denominators, translated by $b^m\beta$, and they are $(2Q)^{-2}$-spaced. The large sieve inequality \cite[Thm.~7.7]{IK} gives
+\[
+A_1\le\bigl(2b^{2(L-m)+1}+4Q^2\bigr)\|f_1\|_2^2 .
+\]
+Here $L-m\le\kappa L$, so $2b^{2(L-m)+1}\le 2bQ^2$, and $\|f_1\|_2^2=\Pr(Y=Y')=g_b^{\#K_1}b^{-(L-m)}$ by Corollary~\ref{cor:collision}. Finally $L-m\ge\kappa L-1$ and $Q\le b^{\kappa L+1}$ give $b^{-(L-m)}\le b^2/Q$. Therefore
+\begin{equation}\label{eq:A1}
+A_1\le(2b+4)\,b^2\,Q\,g_b^{\#K_1}.
+\end{equation}
+
+\subsection{The outer digits}
+Let $f_3$ be the law of $Z=\sum_{k\in K_3}(d_k+d'_k)c_k+\sum_{k\in K_2}d_kc_k$, so that $\Pi_{K_3}^2\Pi_{K_2}=|\hat f_3|^2$. For every $q$ and every real $\beta$,
+\[
+\sum_{h\bmod q}\Bigl|\hat f_3\Bigl(\frac hq+\beta\Bigr)\Bigr|^2=q\sum_{z\equiv z'\,(q)}f_3(z)f_3(z')\e\bigl((z-z')\beta\bigr)\le q\Pr(Z\equiv Z'\bmod q),
+\]
+where $Z'$ is an independent copy of $Z$, and the sum over reduced residues is at most the sum over all residues. Since $0\le Z\le2(b-1)\sum_{k<L}(b^k+b^{2L-k})=2(b^{2L+1}-b^{L+1}+b^L-1)<2b^{2L+1}$, a nonzero difference $Z-Z'$ has at most $\tau^*$ divisors in $[Q,2Q]$, and
+\begin{equation}\label{eq:A3}
+A_3\le\sum_{Q\le q\le2Q}q\Pr(Z\equiv Z')\le 2Q\bigl((Q+1)\Pr(Z=Z')+\tau^*\bigr).
+\end{equation}
+By Corollary~\ref{cor:collision}, $\Pr(Z=Z')=(g_b/b)^mb^{-\#K_2}=b^{-(1+\vartheta_b)m-\#K_2}\le b^{-\kappa L-1}\le 1/Q$ by the choice of $\#K_2$. Hence $A_3\le2Q(2+\tau^*)$. With $\#K_2=0$ and $\Pi_{K_3}^2$ replaced by $\Pi_{[0,L)}$ the same argument gives the divisor bound $S(\beta)\le 2Q(Q\,b^{-L}+1+\tau^*)\ll Qb^{\varepsilon L}$ mentioned after Theorem~\ref{thm:V}.
+
+\subsection{Conclusion}
+From~\eqref{eq:A1} and~\eqref{eq:A3},
+\[
+S(\beta)\le\bigl(2(2b+4)b^2(2+\tau^*)\bigr)^{1/2}\,Q\,g_b^{\#K_1/2}.
+\]
+If $\#K_2=0$ then $\#K_1=L-m\ge\kappa L-1$. Otherwise $\#K_2\le\kappa L+2-(1+\vartheta_b)m$ and $\#K_1=L-m-\#K_2\ge(1+\vartheta_b)(1-\kappa)L-2$. In both cases $g_b^{\#K_1/2}=b^{-\vartheta_b\#K_1/2}\le b\cdot b^{-\eta(1-\kappa)L}\le b\,\lambda^{-\eta}$, since $\lambda\le b^{(1-\kappa)L}$. This proves Theorem~\ref{thm:V} with $C_b=b\,(2(2b+4)b^2)^{1/2}\le 2b^2(2b+4)^{1/2}$. \qed
+
+\section{The average bound}\label{sec:average}
+
+\begin{lemma}\label{lem:window}
+Let $0<\kappa<1$ and $0<t_1<t_2<\kappa/(1+\kappa)$. For $N$ large and $b^{t_1N}\le R\le b^{t_2N}$,
+\[
+\sup_{\beta\in\R}\ \sum_{\substack{R\le q\le2R\\(q,b)=1}}\ \sumstar_{h\bmod q}\Phi_N\Bigl(\frac hq+\beta\Bigr)\ll_{b,\kappa,t_1,t_2,\varepsilon}R\,b^{N}\,b^{-\eta(1/\kappa-1)t_1N/2+\varepsilon N}
+\]
+for every $\varepsilon>0$, with $\eta=\eta(\kappa)$ as in Theorem~\ref{thm:V}.
+\end{lemma}
+
+\begin{proof}
+Let $v=\lfloor\log_bR\rfloor$ and $L=\lfloor\log_bR/\kappa\rfloor$, so that $R\in[b^{\kappa L},b^{\kappa L+1}]$ and $b^v\le R<b^{v+1}$. For $N$ large, $v+L\le t_2N(1+1/\kappa)+1<N-1$ by the assumption on $t_2$, and $v\ge1$ and $L\ge t_1N/\kappa-1\ge1/(1-\kappa)$, so Lemma~\ref{lem:L2} and Theorem~\ref{thm:V} apply. Put $V=[1,v]$, $U=[N-L,N-1]$ and $A=[1,N)\setminus(V\cup U)$. Bounding $P_A\le b^{\#A}$ and applying the Cauchy--Schwarz inequality,
+\[
+\sum_{q,h}\Phi_N\le b^{\#A}\Bigl(\sum_{q,h}P_V^2\Bigr)^{1/2}\Bigl(\sum_{q,h}P_U^2\Bigr)^{1/2},
+\]
+all sums over $R\le q\le2R$, $(q,b)=1$, reduced $h$, at the point $h/q+\beta$. Lemma~\ref{lem:L2} with $(L',M')=(0,v)$ and positivity give $\sum P_V^2\ll R^2b^{v+\varepsilon N}$. For $n=N-L+k$ with $0\le k<L$ one has $c_n(N)=b^{N-L}(b^k+b^{2L-k})$, so
+\[
+P_U(\alpha)^2=b^{2L}\,\Pi_L\bigl(b^{N-L}\alpha\bigr).
+\]
+The substitution $h\mapsto hb^{N-L}$ permutes the reduced residues modulo $q$, so $\sum P_U^2=b^{2L}S(b^{N-L}\beta)$ in the notation of Sect.~\ref{sec:V}, and Theorem~\ref{thm:V} with $Q=R$ gives $\sum P_U^2\ll b^{2L}Rb^{\varepsilon N}\lambda^{-\eta}$ with $\lambda=b^L/R\ge b^{(1/\kappa-1)\log_bR-2}\ge b^{(1/\kappa-1)t_1N-2}$. Since $\#A=N-1-v-L$ and $b^v\asymp R$,
+\[
+\sum_{q,h}\Phi_N\ll b^{N-v-L}\,R\,b^{v/2}\,b^{L}R^{1/2}\,\lambda^{-\eta/2}b^{\varepsilon N}\ll R\,b^N\lambda^{-\eta/2}b^{\varepsilon N}.
+\]
+\end{proof}
+
+\begin{proposition}\label{prop:replace}
+Let $1/3\le\delta<1/2$. Then~\eqref{eq:81a} and~\eqref{eq:81b} hold for some $\sigma_1=\sigma_1(b,\delta)>0$, uniformly in $k\in\Z$, $N\ge0$ and $Q\ge1$.
+\end{proposition}
+
+\begin{proof}
+Choose $\kappa\in(0,1)$ and $\gamma>0$ with $\delta+3\gamma<\kappa/(1+\kappa)$ and $\delta+3\gamma<1/2$, and let $\eta=\eta(\kappa)$. Constants may depend on $b,\delta,\kappa,\gamma$. It suffices to treat $N$ large.
+
+First let $Q\ge b^{\delta N}$ and write $Q=b^{sN}$. We show $\FS_Q(\Phi_N;\beta)\ll Q^2b^{N(1-\delta-\sigma_1)}$.
+
+If $s\ge\delta+2\gamma$, split $[1,N)$ into two halves $I_1,I_2$ of lengths at most $N/2$. The Cauchy--Schwarz inequality and Lemma~\ref{lem:L2} give $\FS_Q(\Phi_N;\beta)\ll(Q+b^{N/2+\varepsilon N})Qb^{N/2}\ll Q^2b^{N/2+\varepsilon N}+Qb^{N(1+\varepsilon)}$. The first term is $\le Q^2b^{N(1-\delta-\sigma_1)}$ for $\sigma_1+\varepsilon\le1/2-\delta$. The second is $\le Q^2b^{N(1-\delta-\sigma_1)}$ since $s\ge\delta+2\gamma\ge\delta+\sigma_1+\varepsilon$ for $\sigma_1,\varepsilon\le\gamma$.
+
+If $\delta\le s<\delta+2\gamma$, split the sum over $q\le Q$ into dyadic ranges $[R,2R]$. Let $c=\gamma$. For the ranges with $R\le Q^{1-c}$, the bound of the previous paragraph with $Q$ replaced by $2R$ (it holds for every modulus range) gives in total $\ll Q^{2(1-c)}b^{N/2+\varepsilon N}+Q^{1-c}b^{N(1+\varepsilon)}$, and both terms are $\ll Qb^{N(1-c\delta+\varepsilon)}$, using $s<1/2-\gamma$ for the first one. For the ranges with $Q^{1-c}<R\le Q$ we have $b^{(1-c)\delta N}\le R\le b^{(\delta+2\gamma)N}$ with $\delta+2\gamma<\kappa/(1+\kappa)$, and Lemma~\ref{lem:window} with $t_1=(1-c)\delta$ and $t_2=\delta+2\gamma$ gives $\ll Rb^Nb^{-\eta(1/\kappa-1)(1-c)\delta N/2+\varepsilon N}$ for each of them. There are $O(N)$ ranges. With $\varepsilon$ small and $\sigma_2=\min\bigl(c\delta,\eta(1/\kappa-1)(1-c)\delta/2\bigr)/2$ this gives $\FS_Q(\Phi_N;\beta)\ll Qb^{N(1-\sigma_2)}$. Since $Q\ge b^{\delta N}$, this is $\le Q^2b^{N(1-\delta-\sigma_2)}$.
+
+This proves~\eqref{eq:81a} for $Q\ge b^{\delta N}$ with $\sigma_1=\min(\gamma,\sigma_2,(1/2-\delta)/2)$. In this range $N/\log Q\le1/(\delta\log b)$, so the exponential factor in~\eqref{eq:81b} is $\asymp1$, and~\eqref{eq:81b} follows from~\eqref{eq:81a} with $\beta=k/(b^3-b)$ by positivity.
+
+If $Q<b^{\delta N}$, put $M=N-\lfloor\log_bQ/\delta\rfloor$, so that $0<M\le N$ and $b^{-\delta}Q<b^{\delta(N-M)}\le Q$. Split each product at $n=M$. The factors with $M<n<N$ give $\Phi_{N-M}(b^M\alpha)$, since $c_n(N)=b^Mc_{n-M}(N-M)$, and after the substitution $h\mapsto hb^M$ their Farey average is at most $\sup_\beta\FS_Q(\Phi_{N-M};\beta)$. If $N-M$ is bounded, the trivial bound $\FS_Q(\Phi_{N-M};\beta)\le Q^2b^{N-M}\ll Q^{1-\sigma_1/\delta}b^{N-M}$ suffices. Otherwise the first case applies to $\Phi_{N-M}$ since $Q\ge b^{\delta(N-M)}$, and gives $\ll Q^2b^{(N-M)(1-\delta-\sigma_1)}\ll Q^{1-\sigma_1/\delta}b^{N-M}$, since $b^{N-M}\asymp Q^{1/\delta}$. The factors with $n\le M$ are at most $b^M$ in total, which gives~\eqref{eq:81a}. For~\eqref{eq:81b} they are bounded by~\eqref{eq:Col} (with $M-1$ in place of $M$ if $M=N$, since $n=N$ is not a factor of $\Phi_N$), which gives $\ll b^M\exp(-\sigma_\infty M/\log Q)$, and $M=N-\log_bQ/\delta+O(1)$ implies $\exp(-\sigma_\infty M/\log Q)\asymp\exp(-\sigma_\infty N/\log Q)$.
+\end{proof}
+
+\section{Level of distribution and almost primes}\label{sec:level}
+
+\begin{proof}[Proof of Theorem~\ref{thm:level}]
+If $\theta<1/5$ the statement is \cite[Thm.~1.5]{TP}. Otherwise choose $\delta\in(2\theta,1/2)$ and let $\sigma_1$ be as in Proposition~\ref{prop:replace}. We follow \cite[Sect.~9]{TP} with Proposition~\ref{prop:replace} in place of Proposition~\ref{prop:TP81}. In~\eqref{eq:SMQk}, split $S(M,Q,k)$ according to $d=(h,q)$ and the remaining $q$ into dyadic ranges $(R/2,R]$. For one range,~\eqref{eq:81b} gives
+\[
+\frac2R\sum_{\substack{2\le q\le R\\(q,b^3-b)=1}}\ \sumstar_{h\bmod q}\Phi_M\Bigl(\frac hq+\frac{k}{b^3-b}\Bigr)\ll Rb^{(1-\delta)M}+b^M\exp\bigl(-c_1\sqrt M\bigr),
+\]
+where we used $R^{-\sigma_1/\delta}\exp(-\sigma_\infty M/\log R)\le\exp(-c_1\sqrt M)$ for $R\ge2$, with $c_1=c_1(b,\sigma_1,\delta)>0$. Summing over the dyadic ranges and over $d\le Q/2$ gives
+\[
+S(M,Q,k)\ll Qb^{(1-\delta)M}+b^M\exp\bigl(-c_1\sqrt M\bigr)\log^2Q,
+\]
+uniformly in $k$. Summation over $M\le N\le\frac12\log_bx$ in~\eqref{eq:SMQk} bounds the left-hand side of Theorem~\ref{thm:level} with $q\le Q$ by
+\[
+\ll Qx^{(1-\delta)/2}\log x+\sqrt x\exp\bigl(-c_2\sqrt{\log x}\bigr).
+\]
+With $Q=x^{\theta}$ and $\theta<\delta/2$ the first term is $x^{1/2-(\delta/2-\theta)}\log x$. The claim follows from $\#\PP_b^*(x)\asymp\sqrt x$ \cite[Sect.~9]{TP}.
+\end{proof}
+
+We use the sieve lemma of Tuxanidy and Panario in the form of the published version of \cite{TP}.
+
+\begin{lemma}[{\cite[Lemma~11.1]{TP}}]\label{lem:sieve}
+Let $(a_n)$ be nonnegative, $x>2$, $A_d=\sum_{n\le x,\,d\mid n}a_n=Xg(d)+r_d$ with $g$ multiplicative, $0\le g(p)<1$ and $\prod_{u\le p<v}(1-g(p))^{-1}\le K\log v/\log u$ for $2\le u<v\le x$. Let $r\ge2$, $u_r=1+3^{-r}$ and
+\[
+\Delta_r=r+\frac{\log\bigl(\frac34(1+3^{-r})\bigr)}{\log3}.
+\]
+Suppose that for some $\varepsilon>0$ and $D\ge x^{1/\Delta_r+\varepsilon}$
+\[
+\sum_{d\le D}|r_d|\ll\frac{X}{\log^3x}\qquad\text{and}\qquad\sum_{D^{1/4}\le p\le D^{1/u_r}}A_{p^2}\ll\frac{X}{\log^3x}.
+\]
+Then, with $z=D^{1/4}$,
+\[
+\sum_{\substack{n\le x\\P^-(n)\ge z,\ \Omega(n)\le r}}a_n\asymp_{r,\varepsilon,K}X\prod_{p<x}(1-g(p)).
+\]
+\end{lemma}
+
+For $r=5$ one has $\frac34(1+3^{-5})=61/81$, so $\Delta_5=1+\log_361=4.7418786\ldots$ and $1/\Delta_5=0.2108868\ldots<1/4$.
+
+\begin{proof}[Proof of Corollary~\ref{cor:five}]
+Let $0<\xi<1/16$ and choose $\theta$ with $\max(4\xi,1/\Delta_5)<\theta<1/4$ and $\varepsilon>0$ with $\theta-\varepsilon>1/\Delta_5$. Put $D=x^{\theta}$ and $z=D^{1/4}$, and let $x$ be large enough that $z>b^3-b$. Let $a_n=\mathbf 1_{n\in\PP_b^*}$, $X=\#\PP_b^*(x)$ and $g(d)=\mathbf 1_{(d,b^3-b)=1}/d$. Mertens' theorem gives the dimension condition. The remainders $r_d=\#\PP_b^*(x,0,d)-g(d)X$ vanish when $(d,b^3-b)>1$, so Theorem~\ref{thm:level} with $a=0$ and $y=x$ gives $\sum_{d\le D}|r_d|\ll X/\log^3x$. For the sum over $A_{p^2}$, all primes involved satisfy $b^3-b<z\le p\le D^{1/u_5}<D=x^{\theta}$. Proposition~10.1 of \cite{TP} states that $\PP_b^*$ is equidistributed modulo $q^2$ on average over square-free $q\le x^{1/4-\varepsilon_0}$ with $(q,b^3-b)=1$, with a saving of $(\log x)^{-A}$ for every $A$. With $\varepsilon_0=1/4-\theta$ it gives $A_{p^2}=X/p^2+E(p^2)$ with $\sum_p|E(p^2)|\ll X/\log^3x$, and $\sum_{p\ge z}X/p^2\ll X/z$. Hence $\sum_{z\le p\le D^{1/u_5}}A_{p^2}\ll X/\log^3x$. Lemma~\ref{lem:sieve} with $r=5$ gives
+\[
+\#\{n\in\PP_b^*(x):P^-(n)\ge z,\ \Omega(n)\le5\}\asymp X\prod_{p<x}(1-g(p))\asymp\frac{\#\PP_b(x)}{\log x}.
+\]
+Every $n\in\PP_b(x)$ with $P^-(n)\ge z>b^3-b$ lies in $\PP_b^*$, and $z=x^{\theta/4}\ge x^{\xi}$. The upper bound $\ll\#\PP_b(x)/\log x$ for the count with $P^-(n)\ge x^{\xi}$ follows from an upper-bound sieve at any positive level.
+\end{proof}
+
+Greaves' weighted sieve \cite{Gr82} gives $\Omega\le5$ at any level above $0.2050$, which is a second route to Corollary~\ref{cor:five}.
+
+\section{Remarks}\label{sec:remarks}
+
+\subsection{The limit $1/4$}
+Theorem~\ref{thm:level} reaches level $1/4$ and not beyond. The method bounds the absolute sum $\sum_{q\le Q}\sum^*_h|S(h/q)|$, where $S(\alpha)$ is the exponential sum over the palindromes up to $x$, through mean squares. By Parseval the mean square of $|S|$ is $\#\PP_b(x)\asymp x^{1/2}$, so a bound that passes through the Cauchy--Schwarz inequality gives no better than $Q^2x^{1/4}$, i.e. level $1/4$. The bound $\Omega\le4$ needs a level above $1/\Delta_4=0.2667$ with Richert's weights and above about $0.257$ with Greaves' weights. In our numerical experiments ($b=2$ with up to $45$ digits, $b=3$ with up to $29$ digits, prime moduli) the absolute $L^1$ sum is much smaller than its mean-square bound and close to $Q^2\int_0^1|S|$. If this persisted, it would allow a level of about $0.33$ for $b=2$. A proof would need a Farey bound in $L^p$ with $p<2$ for a block of digits longer than $\log_bQ$, or cancellation in the sum over $h$. A bookkeeping of exponents suggests that H\"older combinations of the bounds used here (large sieve or Gallagher's lemma on a block of span at most $Q^2$, divisor counting at break-even, the sup norm) cannot pass $1/4$ for any choice of exponents. The saving per digit pair is governed by $j_b(p)=\log_b\int_0^1\phi_b^p$, and the inequality $j_b(p)>p-1$ for $1\le p<2$ leaves the total saving below what a level above $1/4$ requires. We do not give the details here.
+
+\subsection{Explicit constants}
+All constants in Theorem~\ref{thm:V} are explicit. The bound improves on the divisor bound only when $\lambda^{\eta}$ exceeds $C_b(2+\tau^*)^{1/2}$, i.e. for blocks of length of order $100$ digits or more. The theorems are asymptotic, so this does not matter for them. The inequalities in Sect.~\ref{sec:V} were checked numerically for all moduli in dyadic ranges, $b\in\{2,3,5,10\}$, several $\kappa\in[0.6,0.9]$ and rational and irrational shifts $\beta$, and Lemma~\ref{lem:inj} was checked exhaustively for small $b$ and $L$.
+
+\subsection{Related ideas}
+A split of $\Phi_N$ into an outer block bounded by the $L^2$ lemma of \cite{TP} and an inner block bounded, after a twist, by the large sieve (for square moduli) appears in Tuxanidy's work on square-free palindromes \cite{Tux}. A large sieve applied at an entropy threshold, with doubled digits, is used by Eberhard and Varj\'u \cite{EV} for the Chung--Diaconis--Graham process. The new points here are the exact collision probability of doubled palindromic digits (Lemma~\ref{lem:inj}) and the use of the divisor bound only at break-even, which removes the restriction on the span.
+
+\begin{thebibliography}{99}
+
+\bibitem{BHS}
+W.~D. Banks, D.~N. Hart and M.~Sakata, Almost all palindromes are composite, Math. Res. Lett. 11 (2004), 853--868.
+
+\bibitem{BS}
+W.~D. Banks and I.~E. Shparlinski, Prime divisors of palindromes, Period. Math. Hungar. 51 (2005), 1--10.
+
+\bibitem{CS}
+S.~Carrillo Santana, Powerfree integers and Fourier bounds, preprint, arXiv:2504.08502 (2025).
+
+\bibitem{CJ}
+S.~Chourasiya and D.~R. Johnston, Power-free palindromes and reversed primes, Monatsh. Math. 208 (2025), 369--385.
+
+\bibitem{Col}
+S.~Col, Palindromes dans les progressions arithm\'etiques, Acta Arith. 137 (2009), 1--41.
+
+\bibitem{DRS}
+C.~Dartyge, J.~Rivat and C.~Swaenepoel, Prime numbers with an almost prime reverse, preprint, arXiv:2506.21642 (2025).
+
+\bibitem{EV}
+S.~Eberhard and P.~P. Varj\'u, Mixing time of the Chung--Diaconis--Graham random process, Probab. Theory Related Fields 179 (2021), 317--344.
+
+\bibitem{Gr82}
+G.~Greaves, A weighted sieve of Brun's type, Acta Arith. 40 (1982), 297--332.
+
+\bibitem{IK}
+H.~Iwaniec and E.~Kowalski, Analytic Number Theory, Amer. Math. Soc. Colloq. Publ. 53, American Mathematical Society, Providence, RI, 2004.
+
+\bibitem{Iw}
+H.~Iwaniec, Almost-primes represented by quadratic polynomials, Invent. Math. 47 (1978), 171--188.
+
+\bibitem{JK}
+D.~R. Johnston and B.~Kerr, The infinitude of square-free palindromes, preprint, arXiv:2601.07097 (2026).
+
+\bibitem{TP}
+A.~Tuxanidy and D.~Panario, Infinitude of palindromic almost-prime numbers, Int. Math. Res. Not. IMRN 2024 (2024), no.~18, 12466--12503. arXiv:2307.16637v3.
+
+\bibitem{Tux}
+A.~Tuxanidy, Distribution of square-free palindromes, preprint, arXiv:2603.02549 (2026).
+
+\end{thebibliography}
+
+\end{document}

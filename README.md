@@ -34,6 +34,19 @@ available.
 | **Infinitely many palindromes with at most 5 prime factors (with multiplicity) in every base b ≥ 2** | **proved in Lean** (`Palprimes.infinite_palindromes_Omega_le_five`) |
 | Palindromes have level of distribution 6/25 with weights 3^ω (moduli coprime to b³ − b) | proved in Lean (`Palprimes.level_piStar_weighted`), the paper proof reaches any θ < 1/4 (`notes/PROOF_buniform.md`) |
 | Prime-square divisors of palindromes: Σ_{x^{1/20} ≤ p ≤ x^{23/100}} A_{p²} ≤ X/log³x (Proposition W) | proved in Lean (`Palprimes.squares_piStar`), the paper proof reaches any range up to x^{c}, c < 1/4 (`notes/PROP_W.md`) |
+| Level of distribution 1/4 − ε for palindromes in every base, hence Ω ≤ 5 | paper proof (`papers/omega5-every-base`) |
+| κ-palindromic primes: for every κ < 9/20 and every base there are infinitely many primes whose last ⌊κL/2⌋ digits mirror their first ⌊κL/2⌋ digits (L = number of digits) | paper proof (`papers/kappa-palindromic-9-20`) |
+| The same on GRH for every κ < 2/3, with an asymptotic count | paper proof on GRH (`papers/grh-mirrored-primes`) |
+| Function-field analogue: palindromic irreducible polynomials over F_q with coefficients in a restricted set S, asymptotic count for α_S < q^{−3/4} | paper proof (`papers/function-field`) |
+| Exact counts of palprimes in bases 2 to 16 up to 1.8·10¹⁹ | data (`data/palprime_counts.csv`) |
+
+"Proved in Lean" means machine-checked as described under Verification. "Paper proof" means a written
+proof that has passed independent audits within the project. These proofs have not been peer reviewed.
+
+The GRH note uses the generalized Riemann hypothesis for Dirichlet L-functions. Levent Alpöge has
+released a proof of it as a Lean library ([announcement](https://alpo.ge/remark.pdf)). The Lean and
+Mathlib communities [certified the Lean verification of the Riemann hypothesis](https://leanprover-community.github.io/blog/posts/riemann-hypothesis/),
+and this project treats GRH as a theorem.
 
 The main theorem, as stated in `lean/Palprimes/AlmostPrime/OmegaLeFive.lean`:
 
@@ -83,8 +96,15 @@ lean/                    Lean 4 project (library Palprimes, about 12.6k lines)
   Palprimes/AlmostPrime/     the Ω ≤ 5 theorem
   Audit/                     comparator challenge and solution
   scripts/                   certificate generators, axiom check
-notes/                   the mathematics: proofs, sieve route, plan, audit
-numerics/                Python checks used to design the sieve and audit Proposition W
+papers/                  paper drafts (TeX and PDF, or Markdown)
+  omega5-every-base/         Palindromes with at most five prime factors in every base
+  kappa-palindromic-9-20/    κ-palindromic primes for κ < 9/20 (Heath-Brown–Iwaniec method)
+  grh-mirrored-primes/       Primes with mirrored digits on GRH (κ < 2/3)
+  function-field/            Palindromic irreducible polynomials with restricted coefficients
+notes/                   the mathematics behind the Lean proof: proofs, sieve route, plan, audit
+data/                    exact palprime counts (base, digits, palindromes, palprimes)
+numerics/                Python checks used to design the sieve and audit Proposition W,
+                         and the C programs that produced the counts
 ```
 
 `lean/Palprimes/Sieve/Certificate.lean` is generated. To regenerate it, run

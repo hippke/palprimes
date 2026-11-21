@@ -1,0 +1,452 @@
+\documentclass[11pt]{amsart}
+
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[margin=1.15in]{geometry}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+% Upright theorem bodies and upright proof labels.
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{definition}[theorem]{Definition}
+
+\numberwithin{equation}{section}
+
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par\pushQED{\qed}\normalfont\topsep6\p@\@plus6\p@\relax\trivlist\item[\hskip\labelsep\upshape#1.]\ignorespaces}{\popQED\endtrivlist\@endpefalse}
+\makeatother
+
+\newcommand{\rev}{\operatorname{rev}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\Main}{\mathrm{Main}}
+\newcommand{\re}{\operatorname{Re}}
+
+\title{Primes with mirrored digits on the generalized Riemann hypothesis}
+\author{[Author]}
+\date{}
+
+\begin{document}
+
+\begin{abstract}
+Fix a base $b\ge2$ and $0<\kappa<1$. An integer with $L$ digits in base $b$ is $\kappa$-palindromic if its last $\lfloor\kappa L/2\rfloor$ digits are its first $\lfloor\kappa L/2\rfloor$ digits in reverse order. Assuming the generalized Riemann hypothesis we prove an asymptotic formula with a power saving for the number of $\kappa$-palindromic primes with $L$ digits for every $\kappa<2/3$ and every base, and the expected count in every single top block for $\kappa<1/2$. The proof is a mean square of Selberg type over top blocks combined with Parseval over residue classes, and it uses nothing about the digit reversal beyond the fact that it lands in the reduced residues. The same estimate shows that for every $\kappa<1$ almost all multiplicative twists of the mirror condition carry the expected number of primes. Beyond $2/3$ we give an exact criterion as a signed sum over characters and zeros, and we show that for full palindromes no bound on absolute values of its terms can succeed. We end with a discussion of why $2/3$ is the limit of the method.
+\end{abstract}
+
+\maketitle
+
+\noindent Draft of 21 November 2026. Throughout the note we assume the generalized Riemann hypothesis (GRH) in the form that every non-trivial zero of every Dirichlet $L$-function, including $\zeta(s)$, has real part $1/2$. Every statement below that involves zeros of $L$-functions is conditional on GRH, and no other unproved hypothesis is used.
+
+\section{Introduction}
+
+\subsection{Statement}
+Fix $b\ge2$ and $0<\kappa<1$. For $L\ge1$ put $x=b^L$, $k=\lfloor\kappa L/2\rfloor$, $q=b^k$, $Y=b^{L-k}=x/q$ and $X=b^{L-2k}=Y/q$. Let $\cT$ be the set of integers $t$ with $b^{k-1}\le t<b^k$ (the top blocks) and let $\rev_k(t)$ be the integer whose $k$ digits are those of $t$ in reverse order, leading zeros allowed. The set of $\kappa$-palindromic integers with $L$ digits is
+\[
+A_\kappa(L)=\{t\,b^{L-k}+m\,b^k+\rev_k(t)\mid t\in\cT,\ 0\le m<X\},\qquad \#A_\kappa(L)=(b-1)b^{L-k-1}.
+\]
+The last digit of $\rev_k(t)$ is the leading digit $d(t)$ of $t$. We call $t$ admissible if $\gcd(d(t),b)=1$ and write $\cT^*$ for the set of admissible top blocks, so $\#\cT^*=\varphi(b)b^{k-1}=\varphi(q)$. A top block that is not admissible contains no prime once $L\ge3$.
+
+\begin{theorem}\label{thm:main}
+Let $b\ge2$ and $0<\kappa<2/3$, and put $\eta=(2/3-\kappa)/9$. Then
+\[
+\sum_{n\in A_\kappa(L)}\Lambda(n)=b^{L-k}\bigl(1+O_{b,\kappa}(x^{-\eta})\bigr),
+\]
+\[
+\#\{p\in A_\kappa(L)\}=\bigl(1+O_{b,\kappa}(x^{-\eta}+q^{-1})\bigr)\sum_{t\in\cT^*}\frac{Y}{\varphi(q)\log(tY)}=\frac{b}{b-1}\,\frac{\#A_\kappa(L)}{\log x}\bigl(1+O(L^{-1})\bigr).
+\]
+Moreover all but $O_{b,\kappa}(q^{1-\eta})$ admissible top blocks $t$ contain $(Y/(\varphi(q)\log(tY)))(1+O(x^{-\eta}+q^{-1}))$ primes of $A_\kappa(L)$.
+\end{theorem}
+
+The factor $b/(b-1)$ is the product of the proportion $\varphi(b)/(b-1)$ of admissible leading digits and the factor $b/\varphi(b)$ for coprimality with $b$. The free middle block has $X\ge x^{1/3}$ values, so no further local factor appears.
+
+\begin{theorem}\label{thm:block}
+Let $b\ge2$, $0<\kappa<1/2$ and $\eta=(1/2-\kappa)/8$. Then for every $t\in\cT$ and every $a$ with $(a,q)=1$
+\[
+\sum_{\substack{tY\le n<(t+1)Y\\ n\equiv a\ (\mathrm{mod}\ q)}}\Lambda(n)=\frac{Y}{\varphi(q)}\bigl(1+O_{b,\kappa}(x^{-\eta})\bigr).
+\]
+In particular every admissible top block contains its expected number of $\kappa$-palindromic primes.
+\end{theorem}
+
+For a unit $c$ modulo $q$ let $A^{(c)}_\kappa(L)$ be the set of integers $n$ with $L$ digits, admissible top block $t=\lfloor n/Y\rfloor$ and $n\equiv c\,\rev_k(t)\pmod q$. These sets partition the integers with $L$ digits, admissible top block and $(n,b)=1$, and $A^{(1)}_\kappa(L)$ is $A_\kappa(L)$ without its non-admissible blocks, which contain no primes.
+
+\begin{theorem}\label{thm:twists}
+Let $b\ge2$, $0<\kappa<1$ and $\varepsilon=(1-\kappa)/10$. All but $O_{b,\kappa}(\varphi(q)x^{-(1-\kappa)/2}L^3)$ units $c$ modulo $q$ satisfy
+\[
+\sum_{n\in A^{(c)}_\kappa(L)}\Lambda(n)=b^{L-k}\bigl(1+O(x^{-\varepsilon})\bigr).
+\]
+The same holds with $\rev_k(t)$ replaced by any map $t\mapsto a_t$ from $\cT^*$ to the units modulo $q$.
+\end{theorem}
+
+Theorem~\ref{thm:twists} is the analogue, for the one-parameter family of twists, of the range of the theorem of Barban, Davenport and Halberstam \cite{DH66} for almost all residue classes, while Theorem~\ref{thm:main} corresponds to the range of GRH for a single progression. It gives nothing for the single twist $c=1$, and it adds to Theorem~\ref{thm:main} only for $2/3\le\kappa<1$.
+
+\subsection{Relation to known results}
+Without any hypothesis, Thorner and Zaman \cite[Cor.~3.2]{TZ} give an asymptotic formula for primes with prescribed leading and trailing digits whenever at most $(5/12-\varepsilon)L$ digits are prescribed, uniformly in the digits, which gives the asymptotic of Theorem~\ref{thm:main} for $\kappa<5/12$. Harman \cite{Har06} remarks that $0.472L$ digits in two blocks at the two ends can be prescribed for bases that are powers of an odd prime. The method of Theorem~\ref{thm:main} is a hybrid of Selberg's mean square for primes in short intervals on the Riemann hypothesis \cite{Sel43} with Parseval over the residues modulo $q$. We have not found Theorem~\ref{thm:main} or Theorem~\ref{thm:twists} in the literature, but the analytic input is standard, and we present it as such.
+
+\subsection{\texorpdfstring{The range beyond $2/3$}{The range beyond 2/3}}
+Section~\ref{sec:criterion} gives an exact identity that expresses the error term for $\kappa<1$, and for full palindromes $\kappa=1$, as a signed sum over the characters modulo $b^k$ and their zeros of explicit coefficients built from the reversal (Propositions~\ref{prop:identity} and~\ref{prop:pal}). Proposition~\ref{prop:N} shows that for full palindromes the sum of the absolute values of these terms is larger than the main term by a factor $\gg\log x/b^2$, for every injective coupling. A proof beyond the method of this note therefore has to use the signs of the terms, that is, cancellation among the zeros. Section~\ref{sec:limits} explains why $2/3$ is the limit of the method and which natural strengthenings do not help.
+
+\subsection{Organisation}
+Section~\ref{sec:setup} sets up blocks and standard facts. Section~\ref{sec:explicit} gives smooth weights and the explicit formula. Section~\ref{sec:blocks} proves Theorem~\ref{thm:block}, Section~\ref{sec:meansquare} the mean square, Section~\ref{sec:main} Theorem~\ref{thm:main} and Section~\ref{sec:twists} Theorem~\ref{thm:twists}. Sections~\ref{sec:criterion} and~\ref{sec:limits} treat the range beyond $2/3$.
+
+\section{Blocks and standard facts}\label{sec:setup}
+
+\begin{lemma}\label{lem:blocks}
+Let $2k\le L$. For $t\in\cT$ put $B_t=\{n\mid tY\le n<(t+1)Y,\ n\equiv\rev_k(t)\bmod q\}$. Then $A_\kappa(L)$ is the disjoint union of the $B_t$, each $B_t$ has $X$ elements and $x/b\le tY<(t+1)Y\le x$. The map $\rev_k$ is a bijection from $\cT^*$ onto the reduced residues modulo $q$. If $t\notin\cT^*$ and $L\ge3$, then $B_t$ contains no prime, and the sum of $\Lambda(n)$ over all $n\in B_t$ with $t\notin\cT^*$ is at most $2\omega(b)\log b$. Finally $\sum_{t\in\cT^*}Y/\varphi(q)=b^{L-k}=(b/(b-1))\#A_\kappa(L)$.
+\end{lemma}
+
+\begin{proof}
+Since $L-k\ge k$, $q$ divides $Y$, so every $n\in[tY,(t+1)Y)$ with $n\equiv r\bmod q$, $0\le r<q$, is uniquely $tY+mq+r$ with $0\le m<X$. With $r=\rev_k(t)$ this is the parametrisation of $A_\kappa(L)$. Reversing digit strings maps the strings with leading digit $d$ bijectively onto the strings with last digit $d$, and a residue is a unit modulo $q$ exactly when its last digit is prime to $b$. If $t\notin\cT^*$ then every $n\in B_t$ has $\gcd(n,b)=\gcd(d(t),b)>1$, so a prime $n$ would divide $b$, which is impossible for $n\ge b^{L-1}>b$. Prime powers $p^m$ with $p\mid b$ in $[x/b,x)$ number at most $\log b/\log p+1$ for each $p$, each with $\Lambda=\log p$. Finally $\#\cT^*\,Y/\varphi(q)=Y$ since $\#\cT^*=\varphi(q)$.
+\end{proof}
+
+We use the following standard facts.
+
+\begin{itemize}
+\item[(F1)] Zero counting \cite[Ch.~15, 16]{Dav}. For a primitive character $\chi^*$ modulo $q^*$ (with $q^*=1$ for $\zeta$) and $\tau\in\mathbb R$ the number of non-trivial zeros $\rho=\beta+i\gamma$ of $L(s,\chi^*)$ with $|\gamma-\tau|\le1$ is at most $C_0\log(q^*(|\tau|+2))$, with an absolute constant $C_0$. Hence the number with $|\gamma|\le T$ is at most $C_0(T+1)\log(q^*(T+2))$.
+\item[(F2)] Smooth explicit formula \cite[\S5.5]{IK}. Let $g\in C_c^\infty((1,\infty))$ and $\hat g(s)=\int_0^\infty g(y)y^{s-1}\,dy$. For $\chi^*$ primitive modulo $q^*$,
+\[
+\sum_n\Lambda(n)\chi^*(n)g(n)=\mathbf 1_{q^*=1}\hat g(1)-\sum_\rho\hat g(\rho)-\sum_{\rho\ \mathrm{trivial}}\hat g(\rho),
+\]
+where the first sum runs over the non-trivial zeros with multiplicity and the trivial zeros are $-\mathfrak a-2m$, $m\ge0$, for $q^*>1$ with $\chi^*(-1)=(-1)^{\mathfrak a}$, and $-2m$, $m\ge1$, for $\zeta$. This form follows from Mellin inversion, $\sum_n\Lambda(n)\chi^*(n)g(n)=(2\pi i)^{-1}\int_{(2)}(-L'/L)(s,\chi^*)\hat g(s)\,ds$, on moving the line of integration to $\re s=-A$ with $A\to\infty$ through $\frac12+\mathbb Z$, so that the line keeps distance $\frac12$ from the trivial zeros. On such lines and on suitable horizontal segments $|L'/L(s,\chi^*)|\ll\log^2(q^*(|s|+2))$ \cite[Ch.~17, 19]{Dav}, while two integrations by parts give $|\hat g(\sigma+it)|\ll_gy_0^{\sigma}(1+|t|)^{-2}$ for $\sigma\le-1$ with $y_0=\min\operatorname{supp}g>1$, so the shifted integral tends to $0$ and the residues give the formula.
+\item[(F3)] Gallagher's inequality \cite[Lemma~1]{Gal70}. For $f\in C^1[t-1/2,t+1/2]$ one has $|f(t)|\le\int_{t-1/2}^{t+1/2}|f|+\frac12\int_{t-1/2}^{t+1/2}|f'|$.
+\item[(F4)] Parseval on $(\mathbb Z/q\mathbb Z)^\times$. For complex $c_\chi$ indexed by the characters modulo $q$,
+\[
+\sum_{(a,q)=1}\Bigl|\sum_\chi c_\chi\bar\chi(a)\Bigr|^2=\varphi(q)\sum_\chi|c_\chi|^2.
+\]
+\end{itemize}
+
+\section{Smooth weights and the explicit formula}\label{sec:explicit}
+
+\subsection{Weights}
+Fix $\delta\in(0,1/4]$. There are smooth $W^+,W^-$ with values in $[0,1]$ such that $W^-\le\mathbf 1_{[0,1)}\le W^+$, $\operatorname{supp}W^+\subset[-\delta,1+\delta]$, $\operatorname{supp}W^-\subset[0,1]$, $1-\delta\le\int W^-\le1\le\int W^+\le1+\delta$, each $W^\pm$ is monotone on its two transition intervals and constant elsewhere, so $\int|W^{\pm\prime}|=2$, and $|W^{\pm(j)}|\le C_j\delta^{-j}$ with absolute constants $C_j\ge1$. One may take the convolution of the indicator of $[-\delta/2,1+\delta/2]$, respectively $[\delta/2,1-\delta/2]$, with a fixed smooth bump of mass $1$ scaled to $[-\delta/2,\delta/2]$.
+
+Below $W$ denotes $W^+$ or $W^-$. For real $u$ put $g_u(y)=W(y/Y-u)$. For a character $\chi$ modulo $q$ define
+\[
+F_\chi(u)=\sum_n\Lambda(n)\chi(n)W(n/Y-u)-\mathbf 1_{\chi=\chi_0}\,Y\!\int W,
+\]
+and for $t\in\cT$ and $(a,q)=1$
+\[
+E_W(t,a)=\sum_{n\equiv a\,(q)}\Lambda(n)W(n/Y-t)-\frac{Y\int W}{\varphi(q)}=\frac1{\varphi(q)}\sum_\chi\bar\chi(a)F_\chi(t).
+\tag{3.1}
+\]
+Since $\Lambda\ge0$, for every $t$ and $a$
+\[
+\sum_{n\equiv a}\Lambda(n)W^-(n/Y-t)\le\sum_{\substack{tY\le n<(t+1)Y\\ n\equiv a}}\Lambda(n)\le\sum_{n\equiv a}\Lambda(n)W^+(n/Y-t).
+\tag{3.2}
+\]
+
+\subsection{Parameters}
+Fix $\varepsilon\in(0,1/10]$ and put $\delta=x^{-\varepsilon}$, $T=q\,x^{3\varepsilon}$ and $J=[q/b-1/2,q+1/2]$. We take $L$ so large that $k\ge2$, $q\ge4b$ and $x^\varepsilon\ge4$. For $u\in J$ the support of $g_u$ lies in $[(u-\delta)Y,(u+1+\delta)Y]\subset[x/(2b),2x]$. Implied constants depend only on $b$, $\varepsilon$ and $\kappa$.
+
+\subsection{Explicit formula}
+
+\begin{lemma}\label{lem:explicit}
+Let $\chi$ modulo $q$ be induced by the primitive $\chi^*$ modulo $q^*$ and $u\in J$. Then
+\[
+F_\chi(u)=-\sum_\rho\hat g_u(\rho)+R_\chi(u),\qquad F_\chi'(u)=-\sum_\rho\hat h_u(\rho)+R'_\chi(u),
+\]
+where $h_u(y)=-W'(y/Y-u)$ and $\rho$ runs over the non-trivial zeros of $L(s,\chi^*)$. Here $R_\chi=R^{\mathrm{pp}}_\chi+R^{\mathrm{tr}}_\chi$ with $|R^{\mathrm{pp}}_\chi(u)|\le2\log b$, and $R^{\mathrm{pp}}_\chi(u)=0$ unless the support of $g_u$ contains a power of a prime dividing $b$, and $|R^{\mathrm{tr}}_\chi(u)|\le4b/q$. Moreover $|R'_\chi(u)|\le2C_1\delta^{-1}\log b+4$.
+\end{lemma}
+
+\begin{proof}
+The sums with $\chi$ and with $\chi^*$ differ only at powers $p^m$ of primes $p\mid q$ with $p\nmid q^*$. The endpoints of the support of $g_u$ have ratio at most $2$, so each such $p$ has at most two powers there, which gives $R^{\mathrm{pp}}$. For $\chi=\chi_0$ the term $\hat g_u(1)=Y\int W$ of (F2) cancels the main term. The trivial zeros give at most $\sum_{j\ge0}\int g_u(y)y^{-j-1}dy\le2(1+2\delta)Y/((u-\delta)Y)\le4b/q$. For the derivative, $F'_\chi(u)=-\sum_n\Lambda(n)\chi(n)W'(n/Y-u)$, and the same argument applies to $h_u$, for which $\hat h_u(1)=0$ and $|h_u|\le C_1\delta^{-1}$, $\int|h_u|=2Y$.
+\end{proof}
+
+\begin{lemma}\label{lem:mellin}
+Let $G\in\{W,-W'\}$, $\iota=0$ for $G=W$ and $\iota=1$ for $G=-W'$, $g(y)=G(y/Y-u)$ with $u\in J$, and $\rho=1/2+i\gamma$. Then $|\hat g(\rho)|\le2C_1(2b)^{1/2}\delta^{-\iota}Yx^{-1/2}$, and for every $j\ge1$, with $C'_j$ depending on $j$ and $b$,
+\[
+|\hat g(\rho)|\le C'_j\,\delta^{-\iota}\,Yx^{-1/2}\Bigl(\frac{3q}{\delta|\gamma|}\Bigr)^{j}.
+\]
+\end{lemma}
+
+\begin{proof}
+The first bound is $\int|g(y)|y^{-1/2}dy\le\sup|G|\,(1+2\delta)Y(x/(2b))^{-1/2}$. For the second integrate by parts $j$ times, $\hat g(s)=(-1)^j(s(s+1)\cdots(s+j-1))^{-1}\int g^{(j)}(y)y^{s+j-1}dy$, and use $|s(s+1)\cdots(s+j-1)|\ge|\gamma|^j$, $g^{(j)}(y)=Y^{-j}G^{(j)}(y/Y-u)$, $|G^{(j)}|\le C_{j+\iota}\delta^{-j-\iota}$, support of length at most $(1+2\delta)Y$ and $y\le3x$ on it, and $x/Y=q$.
+\end{proof}
+
+\subsection{Truncation}
+Put $Z_\chi(u)=-\sum_{|\gamma|\le T}\hat g_u(\rho)$ and $Z_{1,\chi}(u)=-\sum_{|\gamma|\le T}\hat h_u(\rho)$. By (F1), dyadic shells give $\sum_{|\gamma|>T}|\gamma|^{-j}\ll T^{1-j}\log(qT)$. With Lemma~\ref{lem:mellin} and $j=\lceil4/\varepsilon\rceil$ the tail is
+\[
+\sum_{|\gamma|>T}|\hat g_u(\rho)|\ll\delta^{-1}Yx^{-1/2}\,T\log(qT)\Bigl(\frac{3q}{\delta T}\Bigr)^{j}\ll x^{1/2+4\varepsilon}L\,(3x^{-2\varepsilon})^{j}\ll x^{-4},
+\]
+using $3q/(\delta T)=3x^{-2\varepsilon}$ and $\delta^{-1}Yx^{-1/2}T=x^{1/2+4\varepsilon}$. The same holds for $\hat h_u$. Hence for $u\in J$
+\[
+F_\chi(u)=Z_\chi(u)+R_\chi(u)+O(x^{-4}),\qquad F'_\chi(u)=Z_{1,\chi}(u)+R'_\chi(u)+O(x^{-4}).
+\tag{3.3}
+\]
+
+\section{Bounds for single blocks}\label{sec:blocks}
+
+\begin{proof}[Proof of Theorem~\ref{thm:block}]
+Take $\varepsilon=(1/2-\kappa)/8$. By (3.3), Lemma~\ref{lem:mellin} and (F1), for every $\chi$ and $u\in J$
+\[
+|F_\chi(u)|\le\sum_{|\gamma|\le T}|\hat g_u(\rho)|+O(1)\ll T\log(qT)\,Yx^{-1/2}\ll x^{1/2+3\varepsilon}L.
+\]
+By (3.1), $|E_W(t,a)|\le\max_\chi|F_\chi(t)|$. The main term $Y\int W/\varphi(q)$ is $\gg_b x/q^2\ge x^{1-\kappa}$, so the relative error is $\ll x^{\kappa-1/2+3\varepsilon}L=x^{-5(1/2-\kappa)/8}L$. With (3.2) and $\int W^\pm=1+O(x^{-\varepsilon})$ this gives the theorem with $\eta=\varepsilon$. For the count of primes, prime powers $p^m$ with $m\ge2$ in an interval of length $Y$ below $x$ number $O(Yx^{-1/2}+L)$, which is a relative $O(qLx^{-1/2})$, and $\log p=\log(tY)+O(1/t)$ for $p\in[tY,(t+1)Y)$.
+\end{proof}
+
+\begin{remark}\label{rem:block}
+The classical form $\psi(y;q,a)=y/\varphi(q)+O(y^{1/2}\log^2y)$ \cite[Ch.~20]{Dav} gives the same statement. In both forms the error $x^{1/2+o(1)}$ per block has to be smaller than the main term $x/q^2$, which is $q^2<x^{1/2}$, or $\kappa<1/2$. Each pair of a block and a residue sees the zeros of all $\varphi(q)$ characters up to height about $q$, and a bound for a single pair cannot exploit cancellation between different pairs.
+\end{remark}
+
+\section{A mean square over blocks and residues}\label{sec:meansquare}
+
+\begin{proposition}\label{prop:meansquare}
+Let $0<\kappa<1$, $\varepsilon\in(0,1/10]$, $\delta$ and $T$ as in Section~\ref{sec:explicit}, and $W\in\{W^+,W^-\}$. Then
+\[
+V_W:=\sum_{t\in\cT}\ \sum_{(a,q)=1}|E_W(t,a)|^2\ll_{b,\varepsilon}x^{1+3\varepsilon}L^3.
+\]
+\end{proposition}
+
+The proof is Parseval over the residues followed, for each character separately, by a mean square of Selberg type for the zeros of one $L$-function sampled at the block positions.
+
+\begin{proof}
+Step 1, Parseval over residues. By (3.1) and (F4), for every $t$,
+\[
+\sum_{(a,q)=1}|E_W(t,a)|^2=\frac1{\varphi(q)}\sum_\chi|F_\chi(t)|^2.
+\tag{5.1}
+\]
+This identity is exact. It is the only place where the sum over all residues enters.
+
+Step 2, sampling. The unit intervals around the integers of $\cT$ are disjoint and lie in $J$. Applying (F3) to $f=|F_\chi|^2$, with $|f'|\le2|F_\chi||F'_\chi|$, and Cauchy--Schwarz gives
+\[
+\sum_{t\in\cT}|F_\chi(t)|^2\le\int_J|F_\chi|^2+\Bigl(\int_J|F_\chi|^2\Bigr)^{1/2}\Bigl(\int_J|F'_\chi|^2\Bigr)^{1/2}.
+\tag{5.2}
+\]
+
+Step 3, smoothing. On GRH every zero in $Z_\chi$ is $1/2+i\gamma$, so
+\[
+Z_\chi(u)=-\int W(y/Y-u)\,G_T(y)\,dy,\qquad G_T(y)=y^{-1/2}\sum_{|\gamma|\le T}y^{i\gamma},
+\]
+the sum running over the non-trivial zeros of $L(s,\chi^*)$ with multiplicity. Cauchy--Schwarz with the weight $W\ge0$ gives $|Z_\chi(u)|^2\le(1+2\delta)Y\int W(y/Y-u)|G_T(y)|^2dy$, and integration over $u\in J$ with $\int W(y/Y-u)\,du\le1+2\delta$ gives
+\[
+\int_J|Z_\chi|^2\le(1+2\delta)^2\,Y\int_{x/(2b)}^{2x}|G_T(y)|^2\,dy.
+\]
+In the same way, with the weight $|W'|$ and $\int|W'|=2$, $\int_J|Z_{1,\chi}|^2\le4Y\int_{x/(2b)}^{2x}|G_T(y)|^2dy$.
+
+Step 4, mean value over the zeros. With $y=e^s$ one has $|G_T(y)|^2dy=|\sum_\gamma e^{i\gamma s}|^2ds$ on an interval of length $\ell=\log(4b)$, so
+\[
+\int_{x/(2b)}^{2x}|G_T(y)|^2dy\le\sum_{|\gamma|,|\gamma'|\le T}\min\bigl(\ell,2/|\gamma-\gamma'|\bigr).
+\]
+Fix $\gamma$ and $n\ge0$. The $\gamma'$ with $n\le|\gamma-\gamma'|<n+1$ lie in the two unit windows centred at $\tau=\gamma\pm(n+1/2)$. A window with $|\tau|>T+1$ contains no $\gamma'$ with $|\gamma'|\le T$, and a window with $|\tau|\le T+1$ contains at most $C_0\log(q(T+3))$ of them by (F1). Hence the inner sum is at most $2C_0\log(q(T+3))(\ell+2+2\log(2T+1))$, and with the bound $C_0(T+1)\log(q(T+2))$ for the number of $\gamma$,
+\[
+\int_{x/(2b)}^{2x}|G_T(y)|^2dy\ll_bT\,L^3.
+\tag{5.3}
+\]
+
+Conclusion. Steps 3 and 4 give $\int_J|Z_\chi|^2+\int_J|Z_{1,\chi}|^2\ll YTL^3$. By (3.3) and Lemma~\ref{lem:explicit}, $\int_J|R_\chi|^2\ll_b1$ (the term $R^{\mathrm{pp}}$ is supported on $O_b(1)$ unit intervals) and $\int_J|R'_\chi|^2\ll q\,x^{2\varepsilon}$, which is far below $YTL^3=x^{1+3\varepsilon}L^3$. So (5.2) gives $\sum_t|F_\chi(t)|^2\ll x^{1+3\varepsilon}L^3$ for every $\chi$ modulo $q$, uniformly. Inserting this into (5.1) and summing over $t$, the factor $\varphi(q)^{-1}$ cancels the number of characters.
+\end{proof}
+
+\begin{remark}\label{rem:size}
+If the zeros of different characters, and of one character at different heights, are treated as uncorrelated, then $\sum_{(a,q)=1}|E(t,a)|^2\approx Y(\log q^2-c)$ for each $t$. The $\varphi(q)$ characters each have $\asymp q\log q$ zeros up to height about $q$, beyond which the block integral of $y^{i\gamma}$ decays, each zero contributes about $X=x/q^2$, and (5.1) supplies the factor $\varphi(q)^{-1}$. In this heuristic model Proposition~\ref{prop:meansquare} is sharp up to $x^{3\varepsilon}L^3$ and each pair has square-root cancellation. No lower bound for $V$ is proved here. Numerically, for $b=2$ with $L\le36$ and $b=3$ with $L\le22$, the normalised variance $\nu=V/(\#\cT\,Y)$ (sharp blocks, weight $\log n$) satisfies $\nu=\log q^2-c$ with $c=2.42\pm0.1$, independent of $L$, for $k\ge6$ and $X\ge b^2$ (at $k=5$ values up to $2.59$ occur). For smaller $k$ the formula is not accurate, and for $X\le b$ the value moves to that of the random model. A random model in which each $n$ prime to $b$ is chosen with probability $(b/\varphi(b))/\log n$ gives $\nu\approx\log x-c_b$, independent of $q$, with $c_b=b/\varphi(b)+\mathbb E\log(x/n)$, that is $c_2\approx2.31$ and $c_3\approx1.95$. The constant $c$ agrees with $\gamma_0+\log2\pi=2.415$, the constant of Montgomery and Soundararajan for short intervals \cite{MS}. This is an observation and is not used.
+\end{remark}
+
+\section{Proof of the main theorem}\label{sec:main}
+
+Take $\varepsilon=(2/3-\kappa)/8$, so $\delta=x^{-\varepsilon}$. For $W=W^\pm$ put $S_W=\sum_{t\in\cT^*}\sum_{n\equiv\rev_k(t)}\Lambda(n)W(n/Y-t)$. By (3.2) and Lemma~\ref{lem:blocks},
+\[
+S_{W^-}\le\sum_{n\in A_\kappa(L)}\Lambda(n)\le S_{W^+}+2\omega(b)\log b.
+\]
+For $t\in\cT^*$ the residue $\rev_k(t)$ is a unit, so $S_W=b^{L-k}\int W+\sum_{t\in\cT^*}E_W(t,\rev_kt)$. Cauchy--Schwarz over $t$, positivity and Proposition~\ref{prop:meansquare} give
+\[
+\Bigl|\sum_{t\in\cT^*}E_W(t,\rev_kt)\Bigr|\le(\#\cT^*)^{1/2}\Bigl(\sum_{t\in\cT}\sum_{(a,q)=1}|E_W(t,a)|^2\Bigr)^{1/2}\ll q^{1/2}x^{1/2+3\varepsilon/2}L^{3/2}.
+\tag{6.1}
+\]
+Relative to $b^{L-k}=x/q$ this is $q^{3/2}x^{-1/2+3\varepsilon/2}L^{3/2}\le x^{3\kappa/4-1/2+3\varepsilon/2}L^{3/2}$, since $q\le x^{\kappa/2}$. The exponent is $-\frac34(\frac23-\kappa)+\frac3{16}(\frac23-\kappa)=-\frac9{16}(\frac23-\kappa)$. With $\int W^\pm=1+O(x^{-\varepsilon})$ and $\eta<\min(\varepsilon,\frac9{16}(\frac23-\kappa))$ the first formula follows.
+
+For the count of primes, primes $p\in B_t$ have $\log p=\log(tY)+O(1/t)$. The same argument with the positive weights $c_t=1/\log(tY)$ on the blocks,
+\[
+\Bigl|\sum_tc_tE_W(t,\rev_kt)\Bigr|\le\Bigl(\sum_tc_t^2\Bigr)^{1/2}\Bigl(\sum_t|E_W(t,\rev_kt)|^2\Bigr)^{1/2},
+\]
+changes (6.1) by a factor $L^{-1}$. Prime powers $p^m$ with $m\ge2$ in $[x/b,x)$ contribute $O(x^{1/2}L)$, which is $O(x^{-1/6})$ relative to $x/q\ge x^{2/3}$, and the error $O(1/t)$ in $\log p$ costs a relative $O(1/(qL))$. This gives the middle expression, and the last one follows from $\log(tY)=\log x+O(\log b)$ and Lemma~\ref{lem:blocks}.
+
+For the individual blocks, let $t\in\cT^*$ with $|\sum_{n\in B_t}\Lambda(n)-Y/\varphi(q)|>3\delta Y/\varphi(q)$. By (3.2) and $1-\delta\le\int W^-\le1\le\int W^+\le1+\delta$ one of $|E_{W^\pm}(t,\rev_kt)|$ exceeds $\delta Y/\varphi(q)$. By Chebyshev and Proposition~\ref{prop:meansquare} the number of such $t$ is $\ll x^{1+3\varepsilon}L^3\delta^{-2}(\varphi(q)/Y)^2\ll x^{5\varepsilon-1}q^4L^3$. Relative to $q$ this is $x^{5\varepsilon+3\kappa/2-1}L^3=x^{-\frac78(\frac23-\kappa)}L^3\le q^{-\frac74(\frac23-\kappa)/\kappa}L^3$, using $x\ge q^{2/\kappa}$, which is at most $q^{-\eta}$ for large $L$. The passage to prime counts is as above. \qed
+
+\begin{remark}\label{rem:coupling}
+The proof uses the reversal only through the fact that $\rev_k(t)$ is a unit for $t\in\cT^*$. The same asymptotic holds for every union of the sets $[tY,(t+1)Y)\cap(a_t+q\mathbb Z)$, $t\in\cT^*$, with any map $t\mapsto a_t$ into the units modulo $q$, whenever $3k\le(1-\varepsilon')L$ for a fixed $\varepsilon'>0$.
+\end{remark}
+
+\section{Twisted sets}\label{sec:twists}
+
+\begin{proof}[Proof of Theorem~\ref{thm:twists}]
+Let $t\mapsto a_t$ be any map from $\cT^*$ to the units modulo $q$, for example $a_t=\rev_k(t)$, and put
+\[
+N(c)=\sum_{t\in\cT^*}\ \sum_{\substack{tY\le n<(t+1)Y\\ n\equiv ca_t}}\Lambda(n),\qquad N_W(c)=\sum_{t\in\cT^*}\ \sum_{n\equiv ca_t}\Lambda(n)W(n/Y-t).
+\] Proposition~\ref{prop:meansquare} holds for every $\kappa<1$, since its proof uses only $2k\le L$ and $q\ge4b$. Take $\varepsilon=(1-\kappa)/10$ and $\delta=x^{-\varepsilon}$.
+
+First, $N_W(c)-b^{L-k}\int W=\sum_{t\in\cT^*}E_W(t,ca_t)$ exactly, by Lemma~\ref{lem:blocks}. Second, by Cauchy--Schwarz over $t$ and since $c\mapsto ca_t$ is a bijection of the units for every fixed $t$,
+\[
+\sum_{(c,q)=1}\Bigl(N_W(c)-b^{L-k}\!\int W\Bigr)^2\le\#\cT^*\sum_{t\in\cT^*}\sum_{(c,q)=1}|E_W(t,ca_t)|^2\le q\,V_W\ll q\,x^{1+3\varepsilon}L^3.
+\]
+Third, by (3.2), $N_{W^-}(c)\le N(c)\le N_{W^+}(c)$ for every $c$, and $1-\delta\le\int W^-\le1\le\int W^+\le1+\delta$. So $|N(c)-b^{L-k}|>3\delta b^{L-k}$ forces $|N_{W^\pm}(c)-b^{L-k}\int W^\pm|>\delta b^{L-k}$ for one of the signs, and by Chebyshev the number of such $c$ is $\ll\delta^{-2}q^3x^{-1+3\varepsilon}L^3$. Divided by $\varphi(q)\gg q$ and with $q^2\le x^\kappa$ this is $\ll x^{\kappa-1+5\varepsilon}L^3=x^{-(1-\kappa)/2}L^3$.
+\end{proof}
+
+\begin{remark}
+The sum of $N(c)$ over all units $c$ is the $\Lambda$-mass of the integers with $L$ digits and admissible top block, so $b^{L-k}$ is also the mean of $N(c)$ up to a relative $O(x^{-1/2+\varepsilon})$. In the data ($b=2$, $L\le27$, $b=3$, $L\le17$, all units $c$) the deviations of $N(c)$ are of Gaussian size after the known local factors of the twists $c=\pm1$ and of a few further structured $c$, and the inequality of the second step is lossy by a factor of order $q$, as the averaging suggests.
+\end{remark}
+
+\section{\texorpdfstring{An exact criterion beyond $2/3$}{An exact criterion beyond 2/3}}\label{sec:criterion}
+
+\subsection{\texorpdfstring{The block identity for $\kappa<1$}{The block identity for kappa < 1}}
+Let $t\mapsto a_t$ be a map from $\cT^*$ to the units modulo $q$ and $W\in\{W^+,W^-\}$ with $\delta=x^{-\varepsilon}$. For a zero $\rho$ of $L(s,\chi^*)$ put
+\[
+\hat K_W(\chi,\rho)=\frac1{\varphi(q)}\sum_{t\in\cT^*}\bar\chi(a_t)\,q^{1-\rho}\int W(v)(t+v)^{\rho-1}\,dv.
+\]
+For $|\gamma|$ small compared with $t/\delta$ the integral is $t^{\rho-1}\int W(v)e^{i\gamma v/t}dv$ plus an additive error $O(t^{-1/2}(1+|\gamma|/t)/t)$, so $\hat K_W$ is the mean over $t$ of $\bar\chi(a_t)(t/q)^{-1/2+i\gamma}$ with a block weight. It depends on $k$ and $W$ but not on $L$.
+
+\begin{proposition}\label{prop:identity}
+Let $0<\kappa<1$ and $\Psi_W=\sum_{t\in\cT^*}\sum_{n\equiv a_t}\Lambda(n)W(n/Y-t)$. Then
+\[
+\Psi_W=Y\!\int W-Y\sum_{\chi\bmod q}\ \sum_{\rho,\ |\gamma|\le T}x^{\rho-1}\hat K_W(\chi,\rho)+O_b(1).
+\]
+\end{proposition}
+
+\begin{proof}
+By (3.1),
+\[
+\Psi_W=Y\!\int W+\frac1{\varphi(q)}\sum_\chi\sum_{t\in\cT^*}\bar\chi(a_t)F_\chi(t).
+\]
+By (3.3), $F_\chi(t)=-\sum_{|\gamma|\le T}\hat g_t(\rho)+R_\chi(t)+O(x^{-4})$, and $\hat g_t(\rho)=Y^\rho\int W(v)(t+v)^{\rho-1}dv=Y\,x^{\rho-1}q^{1-\rho}\int W(v)(t+v)^{\rho-1}dv$, which gives the zero term. By Lemma~\ref{lem:explicit}, $\sum_t|R_\chi(t)|\le2\log b\cdot O_b(1)+\#\cT^*\cdot4b/q\ll_b1$ for every $\chi$, so the remainders contribute $O_b(1)$ after the average over $\chi$.
+\end{proof}
+
+\begin{corollary}\label{cor:criterion}
+Let $0<\kappa<1$ and $a_t=\rev_k(t)$. Then $\sum_{n\in A_\kappa(L)}\Lambda(n)\sim b^{L-k}$ if and only if
+\[
+\sum_{\chi\bmod q}\ \sum_{\rho,\ |\gamma|\le T}x^{i\gamma}\hat K_W(\chi,\rho)=o(x^{1/2})\qquad\text{for }W=W^+\text{ and }W=W^-.
+\]
+\end{corollary}
+
+\begin{proof}
+On GRH $x^{\rho-1}=x^{-1/2}x^{i\gamma}$. If both sums are $o(x^{1/2})$, then $\Psi_{W^\pm}=Y(1+o(1))$ and the sandwich (3.2) gives the asymptotic. Conversely, $\Psi_{W^+}-\Psi_{W^-}$ is at most the $\Lambda$-mass of the classes $a_t$ in transition strips of length $\delta Y$ at the ends of the blocks. A strip contains at most $\delta Y/q+1$ points of the class $a_t$, each with $\Lambda\le\log x$, so the $\varphi(q)$ blocks give $\Psi_{W^\pm}=\sum_{A_\kappa(L)}\Lambda+O((\delta Y+q)\log x)=\sum_{A_\kappa(L)}\Lambda+o(Y)$, since $q\log x=o(Y)$ for $\kappa<1$, and the asymptotic gives $o(x^{1/2})$ for both sums.
+\end{proof}
+
+\begin{remark}\label{rem:parsevalK}
+Theorem~\ref{thm:main} can be read off Corollary~\ref{cor:criterion} directly. If $a_t$ is injective, Parseval in $\chi$ gives $\sum_\chi|\hat K_W(\chi,\rho)|^2\le4b$ for every $\rho$, and $\sum_\chi|\partial_\gamma\hat K_W(\chi,\rho)|^2\le4b(\log b+1)^2$. Zero counting and Cauchy--Schwarz over the $\asymp\varphi(q)T$ unit cells $(\chi,[n,n+1))$ then bound the sum of $|\hat K_W|$ over the zeros by $q^{3/2}x^{3\varepsilon}L$, which is $o(x^{1/2})$ when $q^3<x^{1-O(\varepsilon)}$.
+\end{remark}
+
+\subsection{Full palindromes}
+Let $L=2k+1$, so that the palindromes $P_b(L)$ with $L$ digits are $A_1(L)$, and put $Y=bq$, $n_0(t)=tY+\rev_k(t)$ and $a_t=\rev_k(t)$. The palindromes with top block $t\in\cT^*$ are $n_0(t)+jq$, $0\le j\le b-1$, with middle digit $j$. For odd $b$ every palindrome satisfies $n\equiv j\bmod 2$, since $n$ is twice the sum of its outer digits plus $j$, so only odd middle digits can give primes. Let $B$ be a smooth non-negative bump of mass $1$ supported on $[-1/4,1/4]$, and $B_1$ the same on $[-1/2,1/2]$. Put
+\[
+g=\mathbf 1_{[-1/2,\,b-1/2]}*B,\quad I_g=b,\quad Q=q,\quad c_t=a_t\qquad(b\text{ even}),
+\]
+\[
+g=\mathbf 1_{[0,\,b-1]}*B_1,\quad I_g=b-1,\quad Q=2q,\quad c_t\equiv n_0(t)+q\bmod 2q\qquad(b\text{ odd}).
+\]
+For $b$ even, $g(j)=1$ for $0\le j\le b-1$ and $g(-1)=g(b)=0$. For $b$ odd, $g(j)=1$ for odd $j$ with $1\le j\le b-2$ and $g(-1)=g(b)=0$, and the class $c_t$ modulo $2q$ consists of the $n_0(t)+jq$ with $j$ odd. In both cases the weight $g((n-n_0(t))/q)$ is exactly $1$ on the palindromes of the block that can be prime and $0$ on the other points of the class. Put $\Main_b=b^{k+1}$ for even $b$ and $\Main_b=(b-1)b^k$ for odd $b$, and
+\[
+K_1(\chi,\rho)=\frac{x^{1/2}}{I_g\,\varphi(Q)}\sum_{t\in\cT^*}\bar\chi(c_t)\int g(v)\bigl(n_0(t)+qv\bigr)^{\rho-1}dv\qquad(\chi\bmod Q).
+\]
+
+\begin{proposition}\label{prop:pal}
+Fix $\varepsilon\in(0,1/10]$ and put $T=bq\,x^{\varepsilon}$. Then
+\[
+\sum_{n\in P_b(L)}\Lambda(n)=\Main_b\Bigl(1-x^{-1/2}\sum_{\chi\bmod Q}\ \sum_{\rho,\ |\gamma|\le T}K_1(\chi,\rho)\Bigr)+O(\log x).
+\]
+In particular $\sum_{n\in P_b(L)}\Lambda(n)\sim\Main_b$ if and only if
+\[
+\mathrm{H}(1)\qquad\sum_{\chi\bmod Q}\ \sum_{\rho,\ |\gamma|\le T}K_1(\chi,\rho)=o(x^{1/2}).
+\]
+\end{proposition}
+
+\begin{proof}
+By the exactness of $g$, $\sum_{n\in P_b(L)}\Lambda(n)=\sum_{t\in\cT^*}\sum_{n\equiv c_t\,(Q)}\Lambda(n)g((n-n_0(t))/q)$, up to the non-admissible blocks of Lemma~\ref{lem:blocks}. Orthogonality modulo $Q$, the passage to primitive characters (which changes the sums only at powers of primes dividing $Q$, of which $O_b(1)$ lie in $[x/(2b),2x]$, each in the support of at most two weights), and (F2) give the main term $\varphi(Q)^{-1}\#\cT^*\,qI_g=qI_g=\Main_b$ and the zero term $-\varphi(Q)^{-1}\sum_\chi\sum_\rho\sum_t\bar\chi(c_t)\,q\int g(v)(n_0+qv)^{\rho-1}dv$, which is $-\Main_b\,x^{-1/2}\sum_\chi\sum_\rho K_1(\chi,\rho)$. The bump has fixed width, so $A$ integrations by parts bound the integral by $\ll_A x^{-1/2}(bq/|\gamma|)^A$, and the zeros with $|\gamma|>T$ contribute $O(x^{-10})$. Trivial zeros contribute $O(1)$ in total.
+\end{proof}
+
+For odd $b$ what matters is the mass $I_g=b-1$ of the weight. Since $q$ is odd, the characters modulo $2q$ come from those modulo $q$ with the same primitive characters, and $c_t\equiv a_t\bmod q$, so the identity of Proposition~\ref{prop:pal} is the identity for the class $a_t$ modulo $q$ with the same weight, up to powers of $2$. That weight is also exact on the class modulo $q$, since its values $g(0)=g(b-1)=\frac12$ sit on even integers. Write $\Main_q=b^{k+1}=qb$ for the main term of the class $a_t$ modulo $q$ with the weight of mass $b$ used for even $b$. For odd $b$ this weight gives the main term $\Main_q$, while the true main term is $(b-1)b^k$, and the difference $-b^k=-\Main_q/b$ then sits in the zeros of height about $\pi n_0/q$. The class modulo $2q$ makes this visible. The function $\sum_{n\in P_b(L)}\Lambda(n)$ counts primes up to prime powers. Cilleruelo, Luca and Shparlinski \cite{CLS} prove that the number of palindromic perfect $k$-th powers with $L$ digits is $O_b(\#P_b(L)^{1/k})$, so palindromic prime squares are $O(\#P_b(L)^{1/2})=o(\#P_b(L)/L)$, and higher powers number at most $x^{1/3}$, so $\mathrm{H}(1)$ is also equivalent to the asymptotic $\#\{p\in P_b(L)\}\sim\Main_b/\log x$.
+
+\subsection{Failure of absolute values}
+
+\begin{lemma}\label{lem:window}
+There is an absolute constant $C$ with the following property. Let $\chi^*$ be primitive modulo $q^*\ge1$ and $3\le\tau<\tau'\le\tau+1$. The number $N$ of zeros of $L(s,\chi^*)$ with $\tau<\gamma\le\tau'$, counted with weight $\frac12$ at ordinates equal to $\tau$ or $\tau'$, satisfies
+\[
+\Bigl|N-\frac{\tau'-\tau}{2\pi}\log\frac{q^*\tau}{2\pi}\Bigr|\le C\,\frac{\log(q^*(\tau+2))}{\log\log(q^*(\tau+3))}+C\,\frac{\tau'-\tau}{\tau}.
+\]
+\end{lemma}
+
+\begin{proof}
+Let $\xi(s)=(q^*/\pi)^{(s+\mathfrak a)/2}\Gamma((s+\mathfrak a)/2)L(s,\chi^*)$, multiplied by $s(s-1)$ if $q^*=1$. It is entire, its zeros in $\tau<\operatorname{Im}s\le\tau'$ are the non-trivial zeros of $L(s,\chi^*)$ there, and $\xi(s)=\epsilon\,\overline{\xi(1-\bar s)}$ with $|\epsilon|=1$ by the functional equation. Suppose first that $\tau,\tau'$ are not ordinates and apply the argument principle to the rectangle with vertices $2+i\tau,2+i\tau',-1+i\tau',-1+i\tau$. The map $s\mapsto1-\bar s$ reflects the left half of the boundary onto the right half at the same heights with reversed orientation, so by the functional equation the left half contributes the same variation of $\arg\xi$ as the right half. Hence $\pi N$ is the variation of $\arg\xi$ along $\frac12+i\tau\to2+i\tau\to2+i\tau'\to\frac12+i\tau'$. The factor $(q^*/\pi)^{(s+\mathfrak a)/2}\Gamma((s+\mathfrak a)/2)$ contributes
+\[
+\int_\tau^{\tau'}\Bigl(\tfrac12\log\frac{q^*}\pi+\tfrac12\re\psi\bigl(\tfrac{1/2+\mathfrak a+iu}2\bigr)\Bigr)du=\frac{\tau'-\tau}2\log\frac{q^*\tau}{2\pi}+O\Bigl(\frac{\tau'-\tau}\tau\Bigr),
+\]
+by Stirling's formula $\re\psi(w)=\log|w|+O(1/|w|)$, the factor $s(s-1)$ contributes $O((\tau'-\tau)/\tau)$, and $L(s,\chi^*)$ contributes $\pi(S(\tau',\chi^*)-S(\tau,\chi^*))$, where $\pi S(t,\chi^*)=\arg L(\frac12+it,\chi^*)$ is defined by continuous variation from $+\infty+it$. On GRH the theorem of Carneiro, Chandee and Milinovich on $S(t,\pi)$ \cite[Theorem~5]{CCM}, applied to $L(s,\chi^*)$ (degree $1$, $\vartheta=0$, analytic conductor $\asymp q^*(|t|+1)$, implied constants universal, see also their first example in \S6), gives $|S(t,\chi^*)|\ll\log(q^*(t+2))/\log\log(q^*(t+3))$ uniformly in $q^*$, including $q^*=1$. Ordinates at the endpoints follow by the usual limit.
+\end{proof}
+
+
+\begin{proposition}\label{prop:N}
+Let $b$ be even, $L=2k+1$ and let $t\mapsto a_t$ be any injective map from $\cT^*$ into the units modulo $q$, with $K_1$ defined as above with $\bar\chi(a_t)$ and with $n_0(t)=tY+\rev_k(t)$ unchanged. For $L\ge L_0(b)$,
+\[
+\Sigma_1:=\sum_{\chi\bmod q}\ \sum_{\rho,\ |\gamma|\le T}|K_1(\chi,\rho)|\ \ge\ \frac{q\log q}{17\,b^{3/2}}=\frac{\log q}{17\,b^2}\,x^{1/2}.
+\]
+The same holds for odd $b$ with the characters modulo $2q$, where the support of $g$ has length $b$ and the phase bound becomes $1+O(1/q)$.
+\end{proposition}
+
+So the sum of the absolute values of the terms of $\mathrm H(1)$ exceeds $x^{1/2}$ by a factor $\gg\log x/b^2$. Any proof of $\mathrm H(1)$ has to use cancellation among the terms $K_1(\chi,\rho)$, that is, the joint signs of the zeros.
+
+\begin{proof}
+Write $K_1(\chi,\gamma)$ for $\rho=1/2+i\gamma$ and $\tilde K(\chi,\gamma)=x^{-i\gamma}K_1(\chi,\gamma)$, so $|\tilde K|=|K_1|$, and $\tilde K(\chi,\gamma)=\sum_t\bar\chi(a_t)\tilde c_t(\gamma)$ with
+\[
+\tilde c_t(\gamma)=\frac{x^{1/2}}{I_g\varphi(q)}\int g(v)\,(n_0+qv)^{-1/2}\Bigl(\frac{n_0+qv}{x}\Bigr)^{i\gamma}dv.
+\]
+On the support of $g$, which lies in $(-3/4,b-1/4)$, one has $(x/b)(1-1/q)\le n_0+qv<x(1+1/q)$, since $q^2=x/b<n_0<x$.
+
+Size. $|\tilde c_t|\le b^{1/2}(1+1/q)/\varphi(q)$, so $|K_1|\le b^{1/2}(1+1/q)$, and $|\partial_\gamma\tilde c_t|\le(\log b+1)b^{1/2}(1+1/q)/\varphi(q)$.
+
+Parseval. Since the $a_t$ are distinct units, (F4) gives $\sum_\chi|\tilde K(\chi,\gamma)|^2=\varphi(q)\sum_t|\tilde c_t(\gamma)|^2\le2b$ and $\sum_\chi|\partial_\gamma\tilde K|^2\le2b(\log b+1)^2$. For $|\gamma|\le q/b$ the phase $\gamma\log(1+qv/n_0)$ varies over the support of $g$ by at most $(q/b)\,q(b-\frac12)/(n_0-\frac34q)\le(1-\frac1{2b})(1-\frac1q)^{-1}\le1$, using $n_0>q^2$ and $q\ge4b$. A non-negative weight times $e^{i\phi}$ with $\phi$ in an interval of length $1$ has an integral of modulus at least $\cos(1/2)$ times the integral of the weight. So $|\int g(v)(n_0+qv)^{-1/2+i\gamma}dv|\ge\cos(\frac12)\,I_g\,x^{-1/2}(1+1/q)^{-1/2}\ge0.87\,I_gx^{-1/2}$ for large $L$, hence $|\tilde c_t|\ge0.87/\varphi(q)$ and $\sum_\chi|\tilde K(\chi,\gamma)|^2\ge0.75$.
+
+Zero counting in short windows. Let $h=(\log\log q)^{-1/2}$ and cut $[q^{1/2},q/b]$ into windows $I$ of length $h$ (the last one possibly shorter, which is harmless). For $\tau\ge q^{1/2}$ one has $\frac12\log q-2\le\log(q^*\tau/2\pi)\le2\log q$ for every $\chi$, including $\chi_0$ with $q^*=1$. By Lemma~\ref{lem:window} the error terms there are $O(\log q/\log\log q)=o(h\log q)$, so every window contains $N_I(\chi)$ zeros with $(h/4\pi)\log q\,(1-o(1))\le N_I(\chi)\le(h/\pi)\log q\,(1+o(1))$, uniformly in $\chi$.
+
+Lower bound. For $\gamma\in I$, $|\tilde K(\gamma)|^2\ge h^{-1}\int_I|\tilde K|^2-2\int_I|\tilde K||\partial_\gamma\tilde K|$ (average $f(\gamma)=f(u)+\int_u^\gamma f'$ over $u\in I$). Summing over the zeros in $I$, over $\chi$ and over the windows,
+\[
+\Sigma_2:=\sum_\chi\sum_{q^{1/2}\le\gamma\le q/b}|K_1|^2\ge\frac{\log q}{4\pi}(1-o(1))\int\sum_\chi|\tilde K|^2-\frac{2h\log q}{\pi}(1+o(1))\int\sum_\chi|\tilde K||\partial_\gamma\tilde K|,
+\]
+both integrals over $[q^{1/2},q/b]$. The first integrand is at least $0.75$, the second at most $2b(\log b+1)$ by Cauchy--Schwarz, and $h\to0$. So $\Sigma_2\ge(0.75/4\pi)(1-o(1))(q/b)\log q\ge q\log q/(16.9\,b)$ for $L\ge L_0(b)$. Finally $\Sigma_1\ge\Sigma_2/\max|K_1|\ge\Sigma_2\,b^{-1/2}(1+1/q)^{-1}$, and $x^{1/2}=b^{1/2}q$. The terms $o(1)$ are of size $(\log\log q)^{-1/2}b\log b$, so $L_0(b)$ is very large. This is irrelevant for the qualitative conclusion.
+\end{proof}
+
+\begin{remark}
+The proof uses only Parseval, that is injectivity of the coupling, and zero counting. Restricting to $|\gamma|\ge q^{1/2}$ is needed. At lower heights the characters of small conductor, for which the window count above is not available, can carry almost all of the mass $\sum_\chi|K_1|^2$ for the reversal. For $\kappa<1$ the same argument (not written out) gives the analogous lower bound $\Sigma_1\gg q\log q$, which is below $x^{1/2}$, so absolute values are not excluded there by this argument, but they would require the mass of $\hat K_W$ to concentrate on a small part of the family, and the upper bound $q^{3/2}$ of Remark~\ref{rem:parsevalK} is attained by a flat distribution. Numerically the sum of $|\hat K_W|$ over the zeros grows like $q^{3/2}$ for the reversal, for random bijections and for the identity coupling alike.
+\end{remark}
+
+\section{Limits of the method}\label{sec:limits}
+
+\subsection{\texorpdfstring{The exponent $2/3$}{The exponent 2/3}}
+Write $V$ for the variance over all $q\varphi(q)$ pairs $(t,a)$ and $M=x/q$ for the main term of the coupled sum. Proposition~\ref{prop:meansquare} gives $V\le x^{1+o(1)}$, and in the heuristic model and numerically this is the true size (Remark~\ref{rem:size}), although no lower bound for $V$ is proved here. The only link between the coupled sum and $V$ is
+\[
+\Bigl|\sum_tE(t,\rev_kt)\Bigr|^2\le\#\cT^*\sum_t|E(t,\rev_kt)|^2\le\#\cT^*\sum_t\sum_a|E(t,a)|^2=q^{1+o(1)}V.
+\]
+The second inequality keeps one residue per block and pays for all $\varphi(q)$ of them. The method therefore needs $qV<M^2$, that is $q^3<x$, or $\kappa<2/3$. In terms of a single pair, the variance is of the size of the mean $X$ times a logarithm, and controlling the $q$ coupled pairs through all $q^2$ pairs is affordable only while $qX<X^2$. Parseval enters twice, over the residues in (5.1), as an exact identity, and as the mean value (5.3) over the zeros of one $L$-function in the variable $\log y$. GRH enters through $|y^{\rho-1}|=y^{-1/2}$.
+
+\subsection{No use of the reversal}
+By Remark~\ref{rem:coupling} the bound $2/3$ holds for every unit-valued coupling. The identity coupling, which gives the $\kappa$-repetitive integers whose last $k$ digits repeat the first $k$ digits, and random bijections reach the same exponent, and in the numerical data the coupled pairs $(t,\rev_kt)$ are typical among all pairs. The method is blind to the reversal, and Theorem~\ref{thm:twists} shows that it cannot distinguish the twist $c=1$ from almost all others.
+
+\subsection{Sup bounds for the coupled sums}
+A uniform bound $|\hat K_W(\chi,\rho)|\ll q^{-\delta'}x^{o(1)}$ (or $\ll\operatorname{cond}(\chi)^{-\delta'}$) bounds the zero sum of Corollary~\ref{cor:criterion} by $q^{2-\delta'}x^{o(1)}$ and gives $\kappa<1/(2-\delta')$. Parseval at a fixed height forces $\sup_\chi|\hat K_W|\ge q^{-1/2+o(1)}$, so $\delta'\le1/2$ and the range never exceeds $2/3$, which Theorem~\ref{thm:main} reaches without any saving in the sup norm. On GRH a power saving in the sup norm of the coupled sums is therefore useless. The relevant quantity is the signed sum.
+
+\subsection{The decoupled hypothesis and decompositions}
+For a fixed weight $W$ put
+\[
+S_\chi=\sum_{t\in\cT^*}\bar\chi(a_t)\sum_n\Lambda(n)\chi(n)W(n/Y-t).
+\]
+Then $\Psi_W=\varphi(q)^{-1}\sum_\chi S_\chi$, and the hypothesis
+\[
+\mathrm H_\chi(\kappa)\qquad\frac1{\varphi(q)}\sum_{\chi\ne\chi_0}|S_\chi|=o(Y)
+\]
+implies the asymptotic without any hypothesis on zeros, by the triangle inequality and the prime number theorem for the principal character. The hypothesis depends on the chosen weight, and the smooth form and the form with sharp blocks are two different statements. In a random model $\varphi(q)^{-1}\sum_\chi|S_\chi|/Y\asymp(\log x/X)^{1/2}$, so $\mathrm H_\chi(\kappa)$ is plausible for every $\kappa<1$, while for full palindromes it fails in the random model and in numerical data. On GRH it asks for cancellation inside the zero sum of a typical single character.
+
+The sums $S_\chi$ are prime sums of the digital functions $n\mapsto\chi(n)\bar\chi(a_{\lfloor n/Y\rfloor})$, and the natural approach is a combinatorial decomposition of $\Lambda$. None of the routes of this kind that we examined reaches beyond $2/3$, for the following reasons. Type~I sums are controlled on average over $\chi$ for lengths up to $x^{1-\kappa}$, and this is sharp for absolute values over the outer variable. Cauchy--Schwarz in a Type~II sum has a diagonal of size $MN^{1/2}$ for variables of sizes $M$ and $N$, so it needs $\min(M,N)\le x^{1-\kappa}$, and balanced products are covered only for $\kappa\le1/2$. Type~II estimates with arbitrary coefficients are false. The coefficients $\alpha_m=\bar\chi_1(m)m^{-i\gamma}$ and $\beta_n=\bar\chi_1(n)n^{-i\gamma}$, with $\chi_1$ of conductor $b$ (or $4$ for $b=2$), make the bilinear sums of the size of their trivial bound for a positive proportion of $\chi$, exactly at the large values of the coupled sums $\hat K_W$. With $\beta=\Lambda$ the Type~II quantity after Cauchy--Schwarz is the mean square form of $\mathrm H_\chi$ for primes of a smaller size with the same modulus, so the reduction is circular. Finally, bounds that integrate $|\hat K_W|$ against absolute values of Dirichlet polynomials in the Mellin variable give exactly the exponent $2/3$. These statements come from unaudited computations accompanying this note. Proofs were written for the Type~I bound, the diagonal floor and the adversarial coefficients but have not been checked independently, the circularity and the Mellin cap are sketches, and nothing in this paragraph is used elsewhere. In our view a proof beyond $2/3$ has to treat the signed count $\sum_t E(t,\rev_kt)$ itself, or the signed zero sum of Corollary~\ref{cor:criterion}, with a genuinely new input on the reversal.
+
+\begin{thebibliography}{99}
+\bibitem{CCM} E.~Carneiro, V.~Chandee and M.~B.~Milinovich, A note on the zeros of zeta and $L$-functions, Math. Z. \textbf{281} (2015), 315--332, arXiv:1503.00955 (theorem numbering as in the arXiv version).
+\bibitem{CLS} J.~Cilleruelo, F.~Luca and I.~E.~Shparlinski, Power values of palindromes, J. Comb. Number Theory \textbf{1} (2009), no.~2, 101--107.
+\bibitem{Dav} H.~Davenport, Multiplicative number theory, 3rd ed., revised by H.~L.~Montgomery, Grad. Texts in Math. \textbf{74}, Springer, 2000.
+\bibitem{DH66} H.~Davenport and H.~Halberstam, Primes in arithmetic progressions, Michigan Math. J. \textbf{13} (1966), 485--489.
+\bibitem{Gal70} P.~X.~Gallagher, A large sieve density estimate near $\sigma=1$, Invent. Math. \textbf{11} (1970), 329--339.
+\bibitem{Har06} G.~Harman, Primes with preassigned digits, Acta Arith. \textbf{125} (2006), 179--185.
+\bibitem{IK} H.~Iwaniec and E.~Kowalski, Analytic number theory, Amer. Math. Soc. Colloq. Publ. \textbf{53}, Amer. Math. Soc., 2004.
+\bibitem{MS} H.~L.~Montgomery and K.~Soundararajan, Primes in short intervals, Comm. Math. Phys. \textbf{252} (2004), 589--617.
+\bibitem{Sel43} A.~Selberg, On the normal density of primes in small intervals, and the difference between consecutive primes, Arch. Math. Naturvid. \textbf{47} (1943), 87--105.
+\bibitem{TZ} J.~Thorner and A.~Zaman, Refinements to the prime number theorem for arithmetic progressions, Math. Z. \textbf{306} (2024), no.~3, Paper No.~54, arXiv:2108.10878.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,30 @@
+lemma3 even+odd lengths: done
+b=3 M=10 P=30 V=3 K1=1 K2=2 K3=1  N1=2313
+ ||f1||^2 0.0260631 vs Lemma3 0.0260631; ||f3||^2 0.0260631 vs 0.0260631; ||fV||^2 0.037037 vs 0.037037
+ Fourier vs residue at p=31: 25.0466 vs 25.0466
+ A1 = 374.24 <= collision bound 844.94 <= LS bound 4923.01   P^3||f1||^2 = 703.7
+ A3 = 374.24, diag sum p^2 ||f3||^2 = 374.2; SV = 531.815, diag 531.8, 4P^2 = 3600
+lemma3 even+odd lengths: done
+b=2 M=16 P=40 V=5 K1=2 K2=4 K3=2  N1=8560
+ ||f1||^2 0.00878906 vs Lemma3 0.00878906; ||f3||^2 0.00878906 vs 0.00878906; ||fV||^2 0.03125 vs 0.03125
+ Fourier vs residue at p=41: 14.7744 vs 14.7744
+ A1 = 323.877 <= collision bound 1490.34 <= LS bound 5901.33   P^3||f1||^2 = 562.5
+ A3 = 323.877, diag sum p^2 ||f3||^2 = 323.9; SV = 1151.56, diag 1152, 4P^2 = 6400
+lemma3 even+odd lengths: done
+b=3 M=12 P=60 V=4 K1=2 K2=2 K3=2  N1=21537
+ ||f1||^2 0.00611357 vs Lemma3 0.00611357; ||f3||^2 0.00611357 vs 0.00611357; ||fV||^2 0.0123457 vs 0.0123457
+ Fourier vs residue at p=61: 23.0287 vs 23.0287
+ A1 = 651.013 <= collision bound 3457.64 <= LS bound 12555.2   P^3||f1||^2 = 1321
+ A3 = 659.445, diag sum p^2 ||f3||^2 = 647.7; SV = 1341.47, diag 1308, 4P^2 = 14400
+lemma3 even+odd lengths: done
+b=5 M=8 P=40 V=2 K1=1 K2=2 K3=1  N1=80225
+ ||f1||^2 0.00544 vs Lemma3 0.00544; ||f3||^2 0.00544 vs 0.00544; ||fV||^2 0.04 vs 0.04
+ Fourier vs residue at p=41: 12.7853 vs 12.7853
+ A1 = 209.791 <= collision bound 8704.81 <= LS bound 20806.4   P^3||f1||^2 = 348.2
+ A3 = 203.857, diag sum p^2 ||f3||^2 = 200.5; SV = 1474, diag 1474, 4P^2 = 6400
+lemma3 even+odd lengths: done
+b=2 M=20 P=100 V=7 K1=3 K2=4 K3=2  N1=34544
+ ||f1||^2 0.0032959 vs Lemma3 0.0032959; ||f3||^2 0.00878906 vs 0.00878906; ||fV||^2 0.0078125 vs 0.0078125
+ Fourier vs residue at p=101: 33.6215 vs 33.6215
+ A1 = 1646.99 <= collision bound 4740.96 <= LS bound 23183.4   P^3||f1||^2 = 3296
+ A3 = 4404.1, diag sum p^2 ||f3||^2 = 4388; SV = 3900.54, diag 3901, 4P^2 = 40000

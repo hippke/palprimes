@@ -1,0 +1,6 @@
+.lake/
+lean/.lake/
+lean/scratch/
+__pycache__/
+*.pkl
+*.olean

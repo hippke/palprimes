@@ -1,0 +1,11 @@
+palprimes
+Copyright 2026 the palprimes authors. Licensed under the Apache License, Version 2.0.
+
+This repository contains code ported from PrimeNumberTheoremAnd
+(https://github.com/AlexKontorovich/PrimeNumberTheoremAnd, commit a4fb698, Apache License 2.0):
+  - lean/Palprimes/Sieve/Vendor/Mertens.lean   (from IEANTN/Mertens.lean and EulerMascheroniBounds.lean)
+  - lean/Palprimes/Sieve/Vendor/Selberg.lean   (from Mathlib/NumberTheory/Sieve/{AuxResults,Basic,Selberg}.lean,
+                                                original author Arend Mellendijk)
+The ported files were adapted to Lean/Mathlib v4.37.0-rc1 and pruned to the results used here.
+
+The Lean code depends on Mathlib (https://github.com/leanprover-community/mathlib4, Apache License 2.0).

@@ -1,0 +1,18 @@
+/astro/palindromic-primes/lean/plan/sieve_feasibility.py:32: IntegrationWarning: The occurrence of roundoff error is detected, which prevents 
+  the requested tolerance from being achieved.  The error may be 
+  underestimated.
+  val, _ = quad(lambda u: (1-u/be)*FF((th-u)/al)/u, al, be, limit=200)
+maxe=2 theta=0.249 c0=0.0 JR: W/XV=-0.1623 params=(np.float64(0.1245), np.float64(0.16766666666666666), 0.01789247989654541)
+maxe=2 theta=0.249 c0=0.0 crude: W/XV=-0.1637 params=(np.float64(0.1245), np.float64(0.16766666666666666), 0.01789247989654541)
+maxe=2 theta=0.249 c0=0.1245 JR: W/XV=-0.1623 params=(np.float64(0.1245), np.float64(0.16766666666666666), 0.01789247989654541)
+maxe=2 theta=0.249 c0=0.1245 crude: W/XV=-0.1637 params=(np.float64(0.1245), np.float64(0.16766666666666666), 0.01789247989654541)
+maxe=2 theta=0.249 c0=0.15 JR: W/XV=-0.1623 params=(np.float64(0.1245), np.float64(0.16766666666666666), 0.01789247989654541)
+maxe=2 theta=0.249 c0=0.15 crude: W/XV=-0.1637 params=(np.float64(0.1245), np.float64(0.16766666666666666), 0.01789247989654541)
+maxe=2 theta=0.249 c0=0.1667 JR: W/XV=+0.0955 params=(np.float64(0.06225), np.float64(0.23806888888888889), 1.1999700665473938)
+maxe=2 theta=0.249 c0=0.1667 crude: W/XV=+0.0402 params=(np.float64(0.06225), np.float64(0.23806888888888889), 1.1999700665473938)
+maxe=2 theta=0.249 c0=0.155 JR: W/XV=-0.1623 params=(np.float64(0.1245), np.float64(0.16766666666666666), 0.01789247989654541)
+maxe=2 theta=0.249 c0=0.155 crude: W/XV=-0.1637 params=(np.float64(0.1245), np.float64(0.16766666666666666), 0.01789247989654541)
+maxe=2 theta=0.249 c0=0.16 JR: W/XV=-0.1623 params=(np.float64(0.1245), np.float64(0.16766666666666666), 0.01789247989654541)
+maxe=2 theta=0.249 c0=0.16 crude: W/XV=-0.1637 params=(np.float64(0.1245), np.float64(0.16766666666666666), 0.01789247989654541)
+maxe=2 theta=0.249 c0=0.163 JR: W/XV=-0.1623 params=(np.float64(0.1245), np.float64(0.16766666666666666), 0.01789247989654541)
+maxe=2 theta=0.249 c0=0.163 crude: W/XV=-0.1637 params=(np.float64(0.1245), np.float64(0.16766666666666666), 0.01789247989654541)

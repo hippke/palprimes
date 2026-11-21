@@ -1,0 +1,6 @@
+{
+  "challenge_module": "Audit.Challenge",
+  "solution_module": "Audit.Solution",
+  "theorem_names": ["palindromes_omega_le_five"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}

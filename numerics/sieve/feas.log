@@ -1,0 +1,7 @@
+check JR: f(4)=0.9784 (2e^g ln3/4=0.9784), F(3)=1.1874; crude Fc(2)=1.7811 Fc(3)=1.2796 Fc(6)=1.0120 fc1(4)=0.9491 fc1(3)=0.7715
+theta=0.2109 c0=1.0 JR: W/XV=-inf params=()
+theta=0.2109 c0=1.0 crude: W/XV=-inf params=()
+theta=0.2109 c0=0.129 JR: W/XV=-inf params=()
+theta=0.2109 c0=0.129 crude: W/XV=-inf params=()
+theta=0.2109 c0=0.125 JR: W/XV=-inf params=()
+theta=0.2109 c0=0.125 crude: W/XV=-inf params=()

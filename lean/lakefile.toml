@@ -1,0 +1,24 @@
+name = "palprimes"
+version = "0.1.0"
+keywords = ["math"]
+defaultTargets = ["Palprimes"]
+
+[leanOptions]
+pp.unicode.fun = true # pretty-prints `fun a ↦ b`
+autoImplicit = false
+relaxedAutoImplicit = false
+weak.linter.mathlibStandardSet = true
+weak.linter.style.header = false
+maxSynthPendingDepth = 3
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.37.0-rc1"
+
+[[lean_lib]]
+name = "Palprimes"
+
+[[lean_lib]]
+name = "Audit"
+roots = ["Audit.Challenge", "Audit.Solution"]

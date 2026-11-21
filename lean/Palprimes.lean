@@ -21,4 +21,6 @@ import Palprimes.Sieve.Numerics
 import Palprimes.Sieve.Certificate
 import Palprimes.Sieve.Weighted
 import Palprimes.AlmostPrime.OmegaLeFive
+import Palprimes.Sieve.WeightedCount
+import Palprimes.AlmostPrime.OmegaLeFiveCount
 import Palprimes.Statements

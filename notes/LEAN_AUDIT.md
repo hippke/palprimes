@@ -37,3 +37,12 @@ A `leanchecker --help` call caused the OOM kill of the app. leanchecker treats `
   matches `Audit/Challenge.lean`, the axioms are whitelisted, and all six kernels accept (Lean default,
   Lean paranoid, nanoda, lean4lean, con-ron, con-leche).
 - `scripts/gen_cert.py` and `scripts/gen_lean.py` regenerate `Sieve/Certificate.lean` byte for byte.
+
+## Strengthening (counting form and large prime factors)
+New theorems `many_palindromes_Omega_le_five` (at least #Π*_b(2N)/(40 log x) palindromes with Ω ≤ 5 and all
+prime factors ≥ x^{1/20}) and `infinite_palindromes_Omega_le_five_large_factors` (infinitely many palindromes
+n with Ω(n) ≤ 5 and all prime factors ≥ n^{1/20}). Checks after adding them:
+- `scripts/axioms.lean`: standard axioms only for all four headline theorems.
+- `leanchecker` on each of the 28 modules: all accepted.
+- `lake comparator --paranoid` with three theorems in `Audit/Challenge.lean` (Mathlib definitions only, Π*_b written out):
+  **accepted**, sandboxed, statements match, axioms whitelisted, all six kernels accept.

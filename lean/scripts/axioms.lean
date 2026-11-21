@@ -3,3 +3,5 @@ import Palprimes
 `Classical.choice`, `Quot.sound` (no `sorryAx`, no `Lean.ofReduceBool`). -/
 #print axioms Palprimes.infinite_palindromes_Omega_le_five
 #print axioms Palprimes.almostPalprimesInfinite_five
+#print axioms Palprimes.many_palindromes_Omega_le_five
+#print axioms Palprimes.infinite_palindromes_Omega_le_five_large_factors

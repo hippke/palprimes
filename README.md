@@ -32,6 +32,7 @@ available.
 |---|---|
 | Infinitely many palindromic primes in every base | open (the goal; `Palprimes.PalprimesInfinite b` in `lean/Palprimes/Statements.lean`) |
 | **Infinitely many palindromes with at most 5 prime factors (with multiplicity) in every base b ≥ 2** | **proved in Lean** (`Palprimes.infinite_palindromes_Omega_le_five`) |
+| Stronger form: infinitely many palindromes n with Ω(n) ≤ 5 and every prime factor ≥ n^{1/20}. Among the palindromes with 2N + 1 digits coprime to b³ − b, at least a proportion 1/(40 log x), x = b^{2N+1}, are of this kind | proved in Lean (`Palprimes.infinite_palindromes_Omega_le_five_large_factors`, `Palprimes.many_palindromes_Omega_le_five`) |
 | Palindromes have level of distribution 6/25 with weights 3^ω (moduli coprime to b³ − b) | proved in Lean (`Palprimes.level_piStar_weighted`), the paper proof reaches any θ < 1/4 (`notes/PROOF_buniform.md`) |
 | Prime-square divisors of palindromes: Σ_{x^{1/20} ≤ p ≤ x^{23/100}} A_{p²} ≤ X/log³x (Proposition W) | proved in Lean (`Palprimes.squares_piStar`), the paper proof reaches any range up to x^{c}, c < 1/4 (`notes/PROP_W.md`) |
 | Level of distribution 1/4 − ε for palindromes in every base, hence Ω ≤ 5 | paper proof (`papers/omega5-every-base`) |
@@ -58,6 +59,22 @@ theorem infinite_palindromes_Omega_le_five (b : ℕ) (hb : 2 ≤ b) :
 Here `IsPalindrome b n` means `(Nat.digits b n).reverse = Nat.digits b n`, and Mathlib's
 `Nat.IsAtMostAlmostPrime 5 n` means `n ≠ 0 ∧ Ω n ≤ 5`.
 
+The stronger forms, in `lean/Palprimes/AlmostPrime/OmegaLeFiveCount.lean`:
+
+```lean
+theorem infinite_palindromes_Omega_le_five_large_factors (b : ℕ) (hb : 2 ≤ b) :
+    {n : ℕ | IsPalindrome b n ∧ Nat.IsAtMostAlmostPrime 5 n ∧
+      ∀ p ∈ n.primeFactors, (n : ℝ) ^ ((1 : ℝ) / 20) ≤ (p : ℝ)}.Infinite
+
+theorem many_palindromes_Omega_le_five (b : ℕ) (hb : 2 ≤ b) :
+    ∃ N₀, ∀ N ≥ N₀,
+      1 / 40 * ((#(piStar b N) : ℝ) / Real.log ((b : ℝ) ^ (2 * N + 1))) ≤
+        (#((piStar b N).filter (fun n => Nat.IsAtMostAlmostPrime 5 n ∧
+          ∀ p ∈ n.primeFactors, ((b : ℝ) ^ (2 * N + 1)) ^ ((1 : ℝ) / 20) ≤ (p : ℝ))) : ℝ)
+```
+
+`piStar b N` is the set of base-b palindromes with exactly 2N + 1 digits that are coprime to b³ − b.
+
 ## Verification
 
 The proof uses only the standard axioms `propext`, `Classical.choice` and `Quot.sound`. It has no
@@ -65,7 +82,7 @@ The proof uses only the standard axioms `propext`, `Classical.choice` and `Quot.
 
 - **Kernel replay:** `leanchecker` on every module.
 - **Comparator:** `lake comparator --paranoid` against `lean/Audit/Challenge.lean`, which states the
-  theorem with Mathlib definitions only. Six kernels accept it: Lean, Lean paranoid, nanoda,
+  three theorems with Mathlib definitions only. Six kernels accept them: Lean, Lean paranoid, nanoda,
   lean4lean, con-ron and con-leche.
 
 To reproduce, with Lean and Mathlib v4.37.0-rc1:
@@ -85,7 +102,7 @@ modules in parallel, each loading Mathlib, and needs a lot of memory.
 ## Layout
 
 ```
-lean/                    Lean 4 project (library Palprimes, about 12.6k lines)
+lean/                    Lean 4 project (library Palprimes, about 13k lines)
   Palprimes/Defs.lean        palindromes, Π*_b, exponential-sum notation
   Palprimes/Statements.lean  target statements (definitions only)
   Palprimes/Digits/          digit API, Lemma 3 (injectivity), counting Π*_b
@@ -93,7 +110,7 @@ lean/                    Lean 4 project (library Palprimes, about 12.6k lines)
   Palprimes/Level/           divisor bound, level of distribution
   Palprimes/Squares/         Proposition W
   Palprimes/Sieve/           Mertens and Selberg (vendored from PNT+), weighted sieve, certificate
-  Palprimes/AlmostPrime/     the Ω ≤ 5 theorem
+  Palprimes/AlmostPrime/     the Ω ≤ 5 theorems (existence, count, large prime factors)
   Audit/                     comparator challenge and solution
   scripts/                   certificate generators, axiom check
 papers/                  paper drafts (TeX and PDF, or Markdown)

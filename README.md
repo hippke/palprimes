@@ -1,8 +1,30 @@
 # palprimes
 
 The aim of the project is to prove that **there are infinitely many palindromic primes in every
-base b ≥ 2**. This repository collects the results on the way there, with machine-checked proofs in
-Lean 4 where available.
+base b ≥ 2**.
+
+## What is a palprime?
+
+A *palindrome* is a number that reads the same forwards and backwards, like 121 or 7337.
+A *prime* is a number greater than 1 that can only be divided evenly by 1 and by itself, like 2, 3, 5,
+7, 11 or 13. A *palindromic prime*, or *palprime* for short, is a number that is both.
+
+- The first palprimes are 2, 3, 5, 7, 11, 101, 131, 151, 181, 191, 313, 353, 373, 383, …
+- 13 is a prime but not a palindrome (backwards it reads 31).
+- 12321 is a palindrome but not a prime (it is 111 × 111).
+- Apart from 11, every palprime has an odd number of digits. Every palindrome with an even number of
+  digits, such as 1221 or 345543, is divisible by 11.
+
+The same idea works in any base. In base 2 (binary), numbers are written with the digits 0 and 1:
+
+- 5 is 101 in binary, 7 is 111, 17 is 10001 and 31 is 11111, so all four are binary palprimes.
+- 11 is 1011 in binary, which is not a palindrome, so 11 is a palprime in base 10 but not in base 2.
+
+Palprimes become rarer as the numbers grow. Whether they go on forever is still an open question
+in every base.
+
+This repository collects the results on the way there, with machine-checked proofs in Lean 4 where
+available.
 
 ## Results
 

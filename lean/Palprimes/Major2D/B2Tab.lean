@@ -1,0 +1,11 @@
+import Palprimes.Major2D.B2Tab00
+import Palprimes.Major2D.B2Tab01
+import Palprimes.Major2D.B2Tab02
+import Palprimes.Major2D.B2Tab03
+import Palprimes.Major2D.B2Tab04
+import Palprimes.Major2D.B2Tab05
+import Palprimes.Major2D.B2Tab06
+import Palprimes.Major2D.B2Tab07
+import Palprimes.Major2D.B2Tab08
+import Palprimes.Major2D.B2Tab09
+import Palprimes.Major2D.B2Tab10

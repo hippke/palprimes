@@ -1,6 +1,6 @@
 {
   "challenge_module": "Audit.Challenge",
   "solution_module": "Audit.Solution",
-  "theorem_names": ["palindromes_omega_le_five", "palindromes_omega_le_five_large_factors", "palindromes_omega_le_five_count"],
+  "theorem_names": ["palindromes_omega_le_five", "palindromes_omega_le_five_large_factors", "palindromes_omega_le_five_count", "palindromes_omega_le_four"],
   "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
 }

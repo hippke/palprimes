@@ -26,3 +26,9 @@ theorem palindromes_omega_le_five_count : ∀ b : ℕ, 2 ≤ b → ∃ N₀ : �
         (fun n => Nat.IsAtMostAlmostPrime 5 n ∧
           ∀ p ∈ n.primeFactors, ((b : ℝ) ^ (2 * N + 1)) ^ ((1 : ℝ) / 20) ≤ (p : ℝ))) : ℝ) :=
   sorry
+
+/-- In every base `b ≥ 2` there are infinitely many `n` whose base-`b` digit list is a palindrome
+and which have at most four prime factors counted with multiplicity (`n ≠ 0 ∧ Ω n ≤ 4`). -/
+theorem palindromes_omega_le_four : ∀ b : ℕ, 2 ≤ b →
+    {n : ℕ | (Nat.digits b n).reverse = Nat.digits b n ∧ Nat.IsAtMostAlmostPrime 4 n}.Infinite :=
+  sorry

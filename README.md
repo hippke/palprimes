@@ -31,7 +31,8 @@ available.
 | Result | Status |
 |---|---|
 | Infinitely many palindromic primes in every base | open (the goal; `Palprimes.PalprimesInfinite b` in `lean/Palprimes/Statements.lean`) |
-| **Infinitely many palindromes with at most 5 prime factors (with multiplicity) in every base b ≥ 2** | **proved in Lean** (`Palprimes.infinite_palindromes_Omega_le_five`) |
+| **Infinitely many palindromes with at most 4 prime factors (with multiplicity) in every base b ≥ 2** | **proved in Lean** (`Palprimes.MT.infinite_palindromes_Omega_le_four`) |
+| Infinitely many palindromes with at most 5 prime factors (with multiplicity) in every base b ≥ 2 | proved in Lean (`Palprimes.infinite_palindromes_Omega_le_five`) |
 | Stronger form: infinitely many palindromes n with Ω(n) ≤ 5 and every prime factor ≥ n^{1/20}. Among the palindromes with 2N + 1 digits coprime to b³ − b, at least a proportion 1/(40 log x), x = b^{2N+1}, are of this kind | proved in Lean (`Palprimes.infinite_palindromes_Omega_le_five_large_factors`, `Palprimes.many_palindromes_Omega_le_five`) |
 | Palindromes have level of distribution 6/25 with weights 3^ω (moduli coprime to b³ − b) | proved in Lean (`Palprimes.level_piStar_weighted`), the paper proof reaches any θ < 1/4 (`notes/PROOF_buniform.md`) |
 | Prime-square divisors of palindromes: Σ_{x^{1/20} ≤ p ≤ x^{23/100}} A_{p²} ≤ X/log³x (Proposition W) | proved in Lean (`Palprimes.squares_piStar`), the paper proof reaches any range up to x^{c}, c < 1/4 (`notes/PROP_W.md`) |
@@ -49,15 +50,31 @@ released a proof of it as a Lean library ([announcement](https://alpo.ge/remark.
 Mathlib communities [certified the Lean verification of the Riemann hypothesis](https://leanprover-community.github.io/blog/posts/riemann-hypothesis/),
 and this project treats GRH as a theorem.
 
-The main theorem, as stated in `lean/Palprimes/AlmostPrime/OmegaLeFive.lean`:
+The main theorem, as stated in `lean/Palprimes/Omega4/Final.lean`:
+
+```lean
+theorem infinite_palindromes_Omega_le_four (b : ℕ) (hb : 2 ≤ b) :
+    {n : ℕ | IsPalindrome b n ∧ Nat.IsAtMostAlmostPrime 4 n}.Infinite
+```
+
+Here `IsPalindrome b n` means `(Nat.digits b n).reverse = Nat.digits b n`, and Mathlib's
+`Nat.IsAtMostAlmostPrime 4 n` means `n ≠ 0 ∧ Ω n ≤ 4`. GRH is not used.
+
+The proof combines Greaves' weighted sieve (Acta Arith. 40 (1982), Theorem 1) with a level of
+distribution θ = 0.2608 for palindromes in every base. The level comes from L¹ bounds for the digit
+exponential sums (TL¹), obtained from trigonometric majorants: an explicit Fejér family for b ≥ 10,
+and computer-found majorants for b = 2 to 9, whose inequalities are checked by the Lean kernel
+(`decide +kernel`, no `native_decide`). The other ingredients are Greaves' Lemma 4.2 (the
+Rosser–Iwaniec linear sieve asymptotic, `Palprimes/E1/`), the main-term limit and its positivity
+(`Palprimes/MainTerm/`), and Proposition W for prime squares up to x^{0.2499}.
+
+The Ω ≤ 5 theorem, in `lean/Palprimes/AlmostPrime/OmegaLeFive.lean`, has a shorter proof (Richert
+weights and level 6/25):
 
 ```lean
 theorem infinite_palindromes_Omega_le_five (b : ℕ) (hb : 2 ≤ b) :
     {n : ℕ | IsPalindrome b n ∧ Nat.IsAtMostAlmostPrime 5 n}.Infinite
 ```
-
-Here `IsPalindrome b n` means `(Nat.digits b n).reverse = Nat.digits b n`, and Mathlib's
-`Nat.IsAtMostAlmostPrime 5 n` means `n ≠ 0 ∧ Ω n ≤ 5`.
 
 The stronger forms, in `lean/Palprimes/AlmostPrime/OmegaLeFiveCount.lean`:
 
@@ -80,10 +97,13 @@ theorem many_palindromes_Omega_le_five (b : ℕ) (hb : 2 ≤ b) :
 The proof uses only the standard axioms `propext`, `Classical.choice` and `Quot.sound`. It has no
 `sorry`, no `native_decide` and no custom axioms. It passed the following checks (`notes/LEAN_AUDIT.md`):
 
-- **Kernel replay:** `leanchecker` on every module.
+- **Kernel replay:** `leanchecker` on every module, and `leanchecker --fresh Palprimes.Omega4.Final`
+  (the whole closure, Mathlib included, replayed from an empty environment).
 - **Comparator:** `lake comparator --paranoid` against `lean/Audit/Challenge.lean`, which states the
-  three theorems with Mathlib definitions only. Six kernels accept them: Lean, Lean paranoid, nanoda,
-  lean4lean, con-ron and con-leche.
+  four theorems with Mathlib definitions only. Five kernels accept all four: Lean, Lean paranoid,
+  nanoda, lean4lean and con-leche. con-ron accepts the Ω ≤ 5 theorems but runs out of memory (over
+  40 GB) on four `decide +kernel` certificates of the Ω ≤ 4 proof, comparisons of powers with up to
+  about 45 million bits, so it gives no verdict on the Ω ≤ 4 theorem.
 
 To reproduce, with Lean and Mathlib v4.37.0-rc1:
 
@@ -95,6 +115,12 @@ lake env lean scripts/axioms.lean
 lake build Audit && lake comparator --config Audit/comparator.json --paranoid
 ```
 
+The Ω ≤ 4 proof is large (about 39k lines in total, 244 modules). The kernel check of the base-2 and
+base-3 majorant certificates (`Palprimes/Major2D/`) takes about 1.5 hours on one core, and the
+comparator about 3 hours for its first kernel (Lean paranoid). Build `Palprimes/Major2D/` with few
+parallel jobs, since a certificate module can need up to about 12 GB of memory. `lake build` overflows its stack for import depth
+≥ 22; the library is at depth 20.
+
 Run `leanchecker` with explicit module names only, for example
 `lake env leanchecker Palprimes.AlmostPrime.OmegaLeFive`. Without a module name it checks all
 modules in parallel, each loading Mathlib, and needs a lot of memory.
@@ -102,7 +128,7 @@ modules in parallel, each loading Mathlib, and needs a lot of memory.
 ## Layout
 
 ```
-lean/                    Lean 4 project (library Palprimes, about 13k lines)
+lean/                    Lean 4 project (library Palprimes, about 39k lines)
   Palprimes/Defs.lean        palindromes, Π*_b, exponential-sum notation
   Palprimes/Statements.lean  target statements (definitions only)
   Palprimes/Digits/          digit API, Lemma 3 (injectivity), counting Π*_b
@@ -111,8 +137,16 @@ lean/                    Lean 4 project (library Palprimes, about 13k lines)
   Palprimes/Squares/         Proposition W
   Palprimes/Sieve/           Mertens and Selberg (vendored from PNT+), weighted sieve, certificate
   Palprimes/AlmostPrime/     the Ω ≤ 5 theorems (existence, count, large prime factors)
+  Palprimes/Greaves/         Greaves 1982: Brun's identity for the weighted Rosser sum, Lemmas 3.1-3.3
+  Palprimes/E1/              Greaves' Lemma 4.2 (Rosser-Iwaniec linear sieve asymptotic)
+  Palprimes/MainTerm/        Greaves' main term, its limit and positivity
+  Palprimes/TL1/             block majorants, TL¹ criterion, level of distribution θ = 0.2608
+  Palprimes/Major/           TL¹ for b ≥ 10 (Fejér family)
+  Palprimes/Major1D/         TL¹ for b = 4 to 9 (kernel-checked 1D majorants, generated data)
+  Palprimes/Major2D/         TL¹ for b = 2, 3 (kernel-checked 2D block majorants, generated data)
+  Palprimes/Omega4/          the Ω ≤ 4 theorem (assembly)
   Audit/                     comparator challenge and solution
-  scripts/                   certificate generators, axiom check
+  scripts/                   certificate generators (omega4/: the Ω ≤ 4 majorants), axiom check
 papers/                  paper drafts (TeX and PDF, or Markdown)
   omega5-every-base/         Palindromes with at most five prime factors in every base
   kappa-palindromic-9-20/    κ-palindromic primes for κ < 9/20 (Heath-Brown–Iwaniec method)
@@ -125,7 +159,9 @@ numerics/                Python checks used to design the sieve and audit Propos
 ```
 
 `lean/Palprimes/Sieve/Certificate.lean` is generated. To regenerate it, run
-`python3 scripts/gen_cert.py && python3 scripts/gen_lean.py` in `lean/`.
+`python3 scripts/gen_cert.py && python3 scripts/gen_lean.py` in `lean/`. The majorant certificates of
+`Palprimes/Major1D/` and `Palprimes/Major2D/` are generated by `lean/scripts/omega4/regen.sh`
+(details in `lean/scripts/omega4/README.md`); the output is identical byte for byte.
 
 ## Credits and license
 

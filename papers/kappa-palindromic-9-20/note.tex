@@ -1,0 +1,300 @@
+\documentclass[11pt]{amsart}
+
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[margin=1.15in]{geometry}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+% Upright theorem bodies (no italics in running text).
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+
+% Upright proof labels.
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par\pushQED{\qed}\normalfont\topsep6\p@\@plus6\p@\relax\trivlist\item[\hskip\labelsep\upshape#1.]\ignorespaces}{\popQED\endtrivlist\@endpefalse}
+\makeatother
+
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\rev}{\operatorname{rev}}
+\newcommand{\cond}{\operatorname{cond}}
+\newcommand{\rad}{\operatorname{rad}}
+
+\title{Primes with mirrored leading and trailing digits}
+\author{[Author]}
+\date{}
+
+\begin{document}
+
+\begin{abstract}
+Let $b\ge2$ and $0<\kappa<1$. Call an integer with $L$ digits in base $b$ $\kappa$-palindromic if its first $\lfloor\kappa L/2\rfloor$ digits, read backwards, are its last $\lfloor\kappa L/2\rfloor$ digits. We give a complete proof that for every $\kappa<9/20$ and every base the number of $\kappa$-palindromic primes with $L$ digits is $\gg\#A_\kappa(L)/L$, where $A_\kappa(L)$ is the set of $\kappa$-palindromic integers with $L$ digits. Fixing the leading and trailing $k$ digits of an integer fixes a short interval and a residue class modulo $b^k$, and the mirror condition couples the two. We treat each top block separately and prove a lower bound for primes in one short interval intersected with one residue class modulo $b^k$. This is a hybrid version of the theorem of Heath-Brown and Iwaniec on primes in short intervals. The new inputs are a power saving for short character sums twisted by $n^{it}$ to moduli $b^k$ in every base, including composite bases with unbalanced conductors, and a transcription of their argument with a smooth weight and a smooth partition, so that all heights stay inside a hybrid family of conductor-height $x^{1+o(1)}/X$.
+\end{abstract}
+
+\maketitle
+
+\noindent Draft of 20 November 2026.
+
+\section{Introduction}
+
+\subsection{Statement}
+Fix a base $b\ge2$. For $L\ge1$ and $0<\kappa<1$ put $k=\lfloor\kappa L/2\rfloor$. An integer $n$ with $b^{L-1}\le n<b^L$ is $\kappa$-palindromic if
+\[
+n=t\,b^{L-k}+m\,b^k+\rev_k(t),\qquad b^{k-1}\le t<b^k,\quad 0\le m<b^{L-2k},
+\]
+where $\rev_k(t)$ is the integer whose $k$ digits are those of $t$ in reverse order. We call $t$ the top block of $n$. Let $A_\kappa(L)$ be the set of these integers, so $\#A_\kappa(L)=(b-1)b^{L-k-1}$. The last digit of $n$ is the leading digit $d$ of $t$, so $(n,b)=(d,b)$ for every $n$ with top block $t$. We call $t$ admissible if $(d,b)=1$. There are $\varphi(b)b^{k-1}$ admissible top blocks.
+
+\begin{theorem}\label{thm:main}
+Let $b\ge2$ and $0<\kappa<9/20$. There are $c=c(b,\kappa)>0$ and $L_0=L_0(b,\kappa)$ such that for $L\ge L_0$ every admissible top block $t$ satisfies
+\[
+\#\{p\ \text{prime}\mid p\in A_\kappa(L),\ \lfloor p/b^{L-k}\rfloor=t\}\ \ge\ c\,\frac{b}{\varphi(b)}\,\frac{b^{L-2k}}{L\log b}.
+\]
+In particular $A_\kappa(L)$ contains $\gg_{b,\kappa}\#A_\kappa(L)/L$ primes. Top blocks that are not admissible contain no prime larger than $b$.
+\end{theorem}
+
+The bound is a lower bound of the expected order, not an asymptotic formula.
+
+\subsection{Relation to known results}
+For $\kappa<5/12$ Theorem~\ref{thm:main} holds with an asymptotic formula. This follows from the corollary on prescribed leading and trailing digits of Thorner and Zaman \cite[Cor.~3.2]{TZ}, which allows any split of at most $(5/12-\varepsilon)$ times the number of digits between leading and trailing positions, with an error uniform in the prescribed digits. A second moment over pairs of a top block and a residue class, with the hybrid zero-density estimates of Ingham and Huxley, gives the asymptotic for almost all such pairs and hence the count for $\kappa<4/9$ (unpublished computation in the same project, not used here). For bases $g=p^c$ with $p$ an odd prime, Harman \cite[p.~180]{Har06} remarks that the work of Gallagher \cite{Gal} together with the techniques of \cite{Har05} makes it possible to preassign $0.472$ times the number of digits, provided they form two continuous blocks at the start and at the end. Since every top block of a $\kappa$-palindromic number is such a preassignment, this claim covers $\kappa<0.472$ for odd prime-power bases, which is stronger than Theorem~\ref{thm:main} there. No proof of that remark is written out in \cite{Har06}, and we have not checked it. The contribution of the present note is a complete proof for every base $b\ge2$, including $b=2$ and all composite bases, at the exponent $9/20$. As far as we know, the range $5/12\le\kappa<9/20$ is new for $b=2$ and for bases that are not powers of an odd prime.
+
+Our argument is a hybrid version of Heath-Brown and Iwaniec \cite{HBI}, close in spirit to the route indicated by Harman \cite{Har06}, who proved $\pi(x)-\pi(x-x^\Theta)\gg x^\Theta/\log x$ for $\Theta>11/20$. Kumchev \cite{Kum} proved lower bounds for primes in short intervals and arithmetic progressions on average over the moduli. Here the modulus $b^k$ is a single modulus, so averages over moduli do not apply. The sum over top blocks is an average over residues and positions of one modulus. Without further information on the coupling $n\equiv\rev_k(t)$ this average gives nothing beyond the pointwise bound for each block (Remark~\ref{rem:average}).
+
+\subsection{Method}
+Each top block is an interval of length $b^{L-k}$ intersected with the class $\rev_k(t)$ modulo $q=b^k$. It contains $X\approx x^{1-\kappa}$ integers, where $x=b^L$. The Perron formula for such a set involves characters $\chi$ modulo $q$ at heights $|t|\le x^{1+o(1)}/(qX)$, a hybrid family whose conductor-height is at most $x^{1+o(1)}/X$. This is exactly the height $T=x^{1+2\eta}y^{-1}$ of Heath-Brown and Iwaniec with $y=X$. Their method uses $T$ only through mean-value theorems, large-value estimates, fourth moments, zero-density estimates, a zero-free region and a van der Corput estimate for short smooth sums. Each of these has a version for the hybrid family. The van der Corput step becomes a bound for $\sum\chi(n)n^{-it}$ with $\chi$ modulo $b^k$, which we prove from the method of Postnikov as developed by Iwaniec and by Banks and Shparlinski. Two points need care. Per-character truncations would lose a factor $q$, and we avoid them by a smooth minorant of the block, whose Mellin transform is negligible beyond height $x^{1+\varepsilon}/(qX)$. The inner Perron integral of Heath-Brown and Iwaniec in their treatment of $\Sigma_4$ would evaluate $L$-functions at heights up to $T/q+P$, and we replace it by a smooth dyadic partition. Theorem~\ref{thm:main} then follows by tiling each block into pieces with $\Theta$ slightly above $11/20$.
+
+\subsection{Organisation}
+Section~\ref{sec:reduction} reduces Theorem~\ref{thm:main} to a statement for one weighted interval in one residue class. Section~\ref{sec:tools} lists the hybrid tools and their sources. Section~\ref{sec:I5} proves the character sum bound. Section~\ref{sec:hbi} transcribes the argument of Heath-Brown and Iwaniec, and Section~\ref{sec:num} gives the numerology. Section~\ref{sec:limits} discusses the limits of the method.
+
+\section{Reduction to one weighted block}\label{sec:reduction}
+
+\subsection{Blocks and tiling}
+Let $t$ be admissible, $q=b^k$, $a=\rev_k(t)$, $Y=b^{L-k}$ and $x=b^L$. Then $(a,b)=1$, the block is $\{n\in[tY,(t+1)Y)\mid n\equiv a\bmod q\}$, and it has $X_t=Y/q=b^{L-2k}=x^{1-\kappa+O(1/L)}$ elements. Moreover $x/b\le tY<(t+1)Y\le x$.
+
+First fix $\Theta_1\in(11/20,\min(0.555,1-\kappa))$, which is possible since $\kappa<9/20$. Then fix $\eta,\delta>0$ so small that $2\eta<\Theta_1-11/20$, $12\eta<\Theta_1-1/2$ and $\eta+2\delta<1-\kappa-\Theta_1$. Put $X'=\lfloor x^{\Theta_1}\rfloor$ and cut $[tY,(t+1)Y)$ into $\lfloor X_t/X'\rfloor$ disjoint intervals of length $qX'$ and a remainder. Then $q^2X'=x^{\kappa+\Theta_1+O(1/L)}\le x^{1-\eta-2\delta}$. Theorem~\ref{thm:block} below, applied to each interval, gives $\ge c_1X'(b/\varphi(b))/\log x$ primes in each piece, uniformly in the piece. Summing over the pieces gives $\ge(c_1/2)X_t(b/\varphi(b))/\log x$ primes in the block, and summing over the $\varphi(b)b^{k-1}$ admissible blocks gives $\gg b^{L-k}/L\asymp\#A_\kappa(L)/L$. This proves Theorem~\ref{thm:main} from Theorem~\ref{thm:block}.
+
+\subsection{The weighted set}
+Let $x$ be large, $q=b^k$, $(a,b)=1$, $x'\in[x/b,x]$, $X=x^\Theta$ and $I=(x'-qX,x']$. Let $w$ be smooth with $0\le w\le1$, supported in $I$, equal to $1$ on $(x'-qX+\delta qX,x'-\delta qX]$, with $w^{(j)}\ll_j(\delta qX)^{-j}$. Define $a_n=w(n)\mathbf 1_{n\equiv a\,(q)}\mathbf 1_{(n,b)=1}$ and $|\cA_d|=\sum_{d\mid n}a_n$. Put $X_w=q^{-1}\int w$, so that $(1-2\delta)X\le X_w\le X$. For $(d,b)=1$ the total variation of $w$ is $2$, hence [O]
+\[
+|\cA_d|=\frac{X_w}{d}+r(\cA,d),\qquad|r(\cA,d)|\le2,
+\]
+and $|\cA_d|=0$ if $(d,b)>1$. The sifting density is $g(p)=1/p$ for $p\nmid b$ and $g(p)=0$ for $p\mid b$. Every $n$ in the support exceeds $x^{1/2}$, so the number of primes in $I$ congruent to $a$ modulo $q$ is at least $S(\cA,x^{1/2})$.
+
+\begin{theorem}\label{thm:block}
+Let $11/20<\Theta<0.555$, let $\eta,\delta>0$ be small and fixed, and assume $q^2X\le x^{1-\eta-2\delta}$. Then
+\[
+S(\cA,x^{1/2})\ \ge\ \bigl(C(\Theta)-c\eta-c\delta-o(1)\bigr)\frac{b}{\varphi(b)}\frac{X}{\log x}
+\]
+uniformly in $q=b^k$ with $k\ge k_0(b)$, in $a$ and in $x'$. Here $C(\Theta)$ is the constant of Heath-Brown and Iwaniec, and $C(\Theta)>0$ on $(11/20,0.555)$ (Section~\ref{sec:num}).
+\end{theorem}
+
+The condition $k\ge k_0(b)$ excludes exceptional zeros (Lemma~\ref{lem:tools}(T8)).
+
+\subsection{Mellin transform of the weight}
+Let $\hat w(s)=\int_0^\infty w(u)u^{s-1}\,du$. Integration by parts gives [O], for $-1\le\sigma\le2$ and $j\ge0$,
+\[
+|\hat w(\sigma+it)|\ll_j qX\,x^{\sigma-1}\Bigl(\frac{x}{\delta qX(1+|t|)}\Bigr)^{j}.
+\]
+So $\hat w(s)\ll_A x^{-A}$ for $|t|\ge T_w=x^{1+\varepsilon}/(\delta qX)$. Let $T=x^{1+2\eta}/X$. Then $qT_w\le T$ for $\varepsilon<2\eta$. For coefficients $c_n$ supported on $(n,b)=1$,
+\[
+\sum_n c_nw(n)\mathbf 1_{n\equiv a\,(q)}=\frac1{\varphi(q)}\sum_{\chi\bmod q}\bar\chi(a)\frac1{2\pi i}\int_{(\sigma_0)}C_\chi(s)\hat w(s)\,ds,\qquad C_\chi(s)=\sum_nc_n\chi(n)n^{-s},
+\]
+exactly, with $\sigma_0=1+1/\log x$. Contour shifts therefore have no horizontal error terms, and all integrals and zero sums may be restricted to $|t|\le T_w$, $|\gamma|\le T_w$ at the cost of $O(x^{-A})$. For $\chi$ induced by a primitive $\chi^*$ we use the explicit formula for smooth weights [M]
+\[
+\sum_n\Lambda(n)\chi(n)w(n)=\mathbf 1_{\chi=\chi_0}\hat w(1)-\sum_\rho\hat w(\rho)+O(\log q\log x),
+\]
+where $\rho$ runs over the non-trivial zeros of $L(s,\chi^*)$.
+
+\subsection{Dictionary}
+We use the parameters of Heath-Brown and Iwaniec \cite[p.~51]{HBI}, namely $11/20<\Theta<5/9$, $0<2\eta<\Theta-11/20$, $T=x^{1+2\eta}/X$, $z=T^{16/5}x^{-1}$ and $D=x^{2-2\eta}T^{-12/5}$. The hybrid family is
+\[
+\cF=\{(\chi,t)\mid\chi\bmod q,\ |t|\le T/q\}.
+\]
+Its points have conductor-height $\cond(\chi)(1+|t|)\le2T$, and its large-sieve constant is $\asymp T+N$ for polynomials of length $N$. Their $y$ corresponds to $X_wb/\varphi(b)$ in main terms and to $X_w$ in remainders.
+
+\begin{remark}\label{rem:average}
+Averaging over top blocks gives no advantage by itself. The sum over $t$ is a sum over residues and positions for the single modulus $q$, so averages over moduli (Bombieri--Vinogradov type, Kumchev) do not apply. Writing the signed sum over $t$ through characters gives the coupled sums $\sum_t\bar\chi(\rev_kt)t^{\rho-1}$, and bounding them trivially gives back the pointwise condition for each block.
+\end{remark}
+
+\section{Hybrid tools and sources}\label{sec:tools}
+
+We mark sources as follows. [P] means a statement read in the primary source. [S] means a statement known to us only through a secondary source, which is named. [M] means a standard result quoted from memory. [O] means proved here.
+
+\begin{lemma}\label{lem:tools}
+The following hold for well-spaced points $(\chi_r,t_r)\in\cF$, that is $|t_r-t_s|\ge1$ whenever $\chi_r=\chi_s$.
+\begin{itemize}
+\item[(T1)] Mean value. $\sum_r|\sum_{m\sim M}a_m\chi_r(m)m^{-it_r}|^2\ll(M+T)\log x\sum|a_m|^2$. [M] (single-modulus hybrid large sieve of Gallagher, used by \cite{HBI} in the form of Montgomery \cite[Thm.~7.3]{Mon} [S, via \cite{HBI}])
+\item[(T2)] Large values. If $|\sum_{m\sim M}a_m\chi_r(m)m^{-it_r}|\ge V$ with $|a_m|\le1$ at $R$ points, then $R\ll(M^2V^{-2}+TM^4V^{-6})(\log x)^c$ for every $M\ge1$. [O] (the single-modulus statement is quoted from Huxley \cite{Hux} by Chen \cite[\S1]{Chen} [S], in a setting with $M\ge T^{3/4}$)
+\item[(T3)] Fourth moments. $\sum_{\chi\bmod q}\int_{|t|\le3T/q}|L(1/2+it,\chi)|^4\,dt\ll T\log^4x$, and the same for $L'$. [M] (Montgomery \cite[Thm.~10.1]{Mon}, or the approximate functional equation for $L^2$ and (T1))
+\item[(T4)] Short smooth sums. Lemma~\ref{lem:I5}. [O]
+\item[(T5)] Zero density. For $N(\sigma,\tau)=\sum_{\chi\bmod q}N(\sigma,\tau,\chi)$ one has $N(\sigma,\tau)\ll(q\tau)^{3(1-\sigma)/(2-\sigma)}x^{o(1)}$ on $[1/2,3/4]$ [S, via \cite[\S1]{Chen}, Ingham type], $N(\sigma,\tau)\ll(q\tau)^{3(1-\sigma)/(3\sigma-1)}x^{o(1)}$ on $[3/4,4/5]$ [S, via \cite[\S1]{Chen}, Huxley], and $N(\sigma,\tau)\ll(q^2\tau^2)^{(1+\varepsilon)(1-\sigma)}$ on $[4/5,1]$ [S, via Pintz \cite[eq.~(2.6)]{Pin}, Jutila].
+\item[(T6)] Mean values at zeros. $\sum_{\beta\ge\sigma,|\gamma|\le\tau}|M(\rho,\chi)|^2\ll M^{1-2\sigma}(M+\min(q\tau,(q\tau)^{1/2}N(\sigma,\tau)))\log^2x$, with the Halász--Montgomery off-diagonal terms bounded through $|L(iu,\psi)|\ll(\cond\psi(1+|u|))^{1/2}\log$. [S, via Montgomery \cite[Thms.~7.3, 8.2]{Mon} through \cite{HBI}, hybrid form [M]]
+\item[(T7)] Vaughan's identity \cite[Lemma~3]{HBI}. [P]
+\item[(T8)] Zero-free region. $L(s,\chi)\ne0$ for $\sigma\ge1-c/(\log\rad(b)+(\log q(|t|+2))^{3/4}(\log^+\log q(|t|+2))^{3/4})$, by Iwaniec \cite{Iw74} [S, via Thorner--Zaman \cite[\S4]{TZ}]. Real characters modulo $b^k$ have conductor dividing $8\rad(b)$, so there is no exceptional zero for $k\ge k_0(b)$.
+\item[(T9)] Brun--Titchmarsh. $\pi(J;q,c)\le2|J|/(\varphi(q)\log(|J|/q))$ for intervals $J$ with $|J|>q$. [M] (Montgomery--Vaughan)
+\end{itemize}
+\end{lemma}
+
+\begin{proof}[Proof of (T2)]
+Let $A_r=\sum_{m\sim M}a_m\chi_r(m)m^{-it_r}$. Duality with the majorant $\e^{2(1-m/M)}$ gives $R'^2V^2\le\e^2M\sum_{r,s}|K_{rs}|$ for any $R'$ of the points, where $K_{rs}=\sum_m\chi_r\bar\chi_s(m)m^{-i(t_r-t_s)}\e^{-m/M}$. Mellin inversion and a shift to $\operatorname{Re}s=0$ give $|K_{rs}|\ll(\cond(\chi_r\bar\chi_s)(1+|t_r-t_s|))^{1/2}\log x$, plus a pole term $\ll M(1+|t_r-t_s|)^{1/2}\e^{-\pi|t_r-t_s|/2}$ when $\chi_r=\chi_s$, which adds $O(R'M)$. Fix $Y_0\ge1$, let $b^{j_0}\le Y_0<b^{j_0+1}$ (or $j_0=k$ if $Y_0\ge q$) and $T_0=Y_0/b^{j_0}$. A box is a coset of the group of characters of conductor dividing $b^{j_0}$ times a $t$-interval of length $T_0$. Inside a box $|K_{rs}|\ll Y_0^{1/2}\log x$, and $\cF$ is covered by $\ll T/Y_0+1$ boxes since $q\le T$. In one box $R'(V^2-cMY_0^{1/2}\log x)\ll M^2$, and $Y_0=V^4/(4c^2M^2\log^2x)$ gives $R'\ll M^2V^{-2}$. Summing over the boxes gives the claim. If this $Y_0$ is less than $1$, (T1) gives the claim directly.
+\end{proof}
+
+\section{Short character sums to moduli $b^k$}\label{sec:I5}
+
+\begin{lemma}\label{lem:I5}
+Fix $b\ge2$ and $c_0\in(0,1/2)$. There is $\delta_1=\delta_1(b,c_0)>0$ with the following property. Let $q=b^k\le x^{1/2}$, $\chi\bmod q$, $t\in\mathbb R$ with $\cond(\chi)(1+|t|)\le x^{1/2+3\eta}$, $N\in[x^{c_0},x]$ and $N<M\le2N$. Unless $\chi$ is principal and $|t|\le N^{\delta_1}$,
+\[
+\Bigl|\sum_{N<n\le M}\chi(n)n^{-it}\Bigr|\ll_{b,c_0}N^{1-\delta_1}.
+\]
+\end{lemma}
+
+\begin{proof}
+Let $\chi^*$ modulo $q^*$ be primitive and induce $\chi$, and put $Q_h=q^*(1+|t|)$. Inclusion--exclusion over $d\mid\rad(b)$ reduces the sum to at most $2^{\omega(b)}$ sums of the same type for $\chi^*$ over intervals of length $\gg N/b$.
+
+Period case. If $\chi^*\ne1$ and $Q_h\le N^{1-3\delta}$, split into complete periods of length $q^*$. Each period contributes $\sum\chi^*(n)(n^{-it}-n_0^{-it})\le q^*\cdot|t|q^*/N$, so the sum is $\le2Q_h+q^*\le3N^{1-3\delta}$.
+
+Principal case. If $\chi^*=1$ and $|t|\ge N^{\delta_1}$, the Kusmin--Landau inequality gives $\ll N/|t|$ for $|t|\le\pi N$, and the bound of Vinogradov and Korobov gives $N^{1-c/\varrho^2}$ with $\varrho=\log|t|/\log N\le1/c_0$ otherwise [M].
+
+Small conductor. If $\chi^*\ne1$, $Q_h>N^{1-3\delta}$ and $q^*\le N^{1/2}$, then $1+|t|\ge N^{1/2-3\delta}$. Writing $n=a'+q^*m$ reduces the sum to $q^*$ sums $\sum_m(m+a'/q^*)^{-it}$ of length $\gg N^{1/2}$. These are $\ll N/(q^*|t|)$ by Kusmin--Landau when $|t|\le\pi N/q^*$, and $\ll(N/q^*)^{1-c/\varrho'^2}$ with $\varrho'\le2/c_0$ otherwise, by the $k$-th derivative test uniform in the shift [M].
+
+Large conductor. Let $q^*>N^{1/2}$, let $p_*^{e_*}$ be the largest prime-power factor of $q^*$, so $p_*^{e_*}\ge q^{*1/\omega(b)}>N^{1/(2\omega(b))}$, and let $q_R=q^*/p_*^{e_*}$, $\mathfrak q_R=\rad(q_R)$, $\tau=2$ if $4\mid q_R$ and $\tau=1$ otherwise. Let $D=(\tau\mathfrak q_R)^s$ with $s$ maximal such that $D\le N^{\varepsilon''}$. On a class $n\equiv n_0\bmod D$ with $(n_0,q_R)=1$, the lemma of Postnikov and Iwaniec (Iwaniec's lemma as stated in \cite[\S4]{BS}) [S, via \cite{BS}] gives $\chi_R(n_0+Dy)=\chi_R(n_0)\e(f(y))$ with a polynomial $f$ of effective degree $\ll_b\log q_R/\log D\le1/(c_0\varepsilon'')$, and $\chi_{p_*}(n_0+Dy)=\chi_{p_*}(D)\chi_{p_*}(y+c)$ since $(D,p_*)=1$. On pieces of length $H=\min(p_*^{0.99e_*},N^{1-\varepsilon})$ the factor $(n_0+Dy)^{-it}$ equals $\e(G_0(y))+O(N^{-1})$ with a Taylor polynomial $G_0$ of degree $\ll1/(\varepsilon c_0)$. Each piece is therefore a sum $\sum_y\chi_{p_*}(y+c)\e(G(y))$ over $\asymp H/D$ consecutive $y$ with $G$ real of bounded degree. Theorem~2.1 of Banks and Shparlinski \cite{BS} [P, read in the local TeX of the arXiv version, which may predate its v2] applies to the primitive character $\chi_{p_*}$ modulo the prime power $p_*^{e_*}$, whose valuations trivially satisfy their condition. Its remaining conditions $e_*\ge\gamma_0$ and $H/D\ge p_*^{\gamma_0}$ hold for large $x$, since $p_*\le b$ and $p_*^{e_*}$, $H/D$ are powers of $x$. It gives $\ll(H/D)^{1-\xi_0/\varrho^2}$ with $\varrho=\log p_*^{e_*}/\log(H/D)\le3\omega(b)/c_0$, since $H/D\ge N^{1/(3\omega(b))}$. Summing over the $D$ classes and the $\ll N/H$ pieces gives $\ll N(H/D)^{-\xi_0/\varrho^2}\le N^{1-\xi_0/(3\omega(b)\varrho^2)}$.
+\end{proof}
+
+\begin{remark}
+Theorem~2.1 of \cite{BS} needs the valuations of the modulus to satisfy $\min v_p\ge0.7\max v_p$. This fails for $b=12$ and for unbalanced conductors such as $2^a5^c$ with $c$ much smaller than $a$ when $b=10$. The proof uses the theorem only for the largest prime-power component and linearises the other components by short Postnikov steps, so every base is covered.
+\end{remark}
+
+\section{Transcription of Heath-Brown and Iwaniec}\label{sec:hbi}
+
+\begin{remark}\label{rem:verbatim}
+The following parts are taken over from \cite{HBI} without change. These are the four-case exponent analysis in the proof of their Lemma~2 (pp.~56--57), the proofs of their Lemmas~6 and~7, which they leave as similar to Lemma~5, and the conditions (11)--(15) and polygons of their \S6. In each of them the height enters only through the tools of Lemma~\ref{lem:tools}, which hold for $\cF$ with their $T$.
+\end{remark}
+
+\subsection{The linear sieve}
+\begin{lemma}\label{lem:sieve}
+Let $z\ge2$, $D\ge z^2$, $\varepsilon>0$ and $s=\log D/\log z$. Then $S(\cA,z)\le X_wV_b(z)\{F(s)+E\}+R^+$ and $W^-(\cA,z,D)\ge X_wV_b(z)\{f(s)-E\}-R^-$. Here $V_b(z)=\prod_{p<z,p\nmid b}(1-1/p)$, $E=c\varepsilon+O((\log D)^{-1/3})$,
+\[
+W^-(\cA,z,D)=S(\cA,z)-\sum_{(D/p)^{1/3}\le q<p<z}S(\cA_{qp},q),
+\]
+and $R^\pm$ are well-factorable sums of remainders $r(\cA,vp_1\cdots p_r)$ as in \cite[(5)]{HBI}.
+\end{lemma}
+
+\begin{proof}
+This is Iwaniec's linear sieve as stated in \cite[Lemma~1]{HBI} [P], applied to the non-negative sequence $(a_n)$. The density has $g(p)=0$ only for the finitely many $p\mid b$, and $V_b(z)=(b/\varphi(b))V(z)(1+o(1))$ [M, the sieve is combinatorial and holds for weighted sequences].
+\end{proof}
+
+\subsection{The bilinear remainder}
+\begin{lemma}\label{lem:bilinear}
+Let $11/20+2\eta<\Theta\le5/9$, $q^2X\le x^{1-\eta-2\delta}$, $0\le\phi\le(6\Theta-1)/5-3\eta$, $1\le M,N<x^\phi$, and let $|a_m|,|b_n|\le1$ be supported on integers prime to $b$. Then $\sum_{m\sim M,n\sim N}a_mb_nr(\cA,mn)\ll Xx^{-\delta'}$ with $\delta'=\delta'(\eta,b)>0$, uniformly in $q$, $a$ and $x'$.
+\end{lemma}
+
+\begin{proof}
+If $MN<Xx^{-\eta}$ the bound is trivial since $|r|\le2$. Otherwise put $L=x'/(2MN)\le x^{1+\eta}/X$ and $L_\chi(s)=\sum_{L/4<l\le3L,(l,b)=1}\chi(l)l^{-s}$. If $lmn$ lies in the support of $w$, then $(x'-qX)/(4MN)<l\le x'/(MN)$, so $l$ lies in $(L/4,3L]$ and is separated from both ends by a constant factor. By the exact Mellin formula the sum equals $\varphi(q)^{-1}\sum_\chi\bar\chi(a)(2\pi i)^{-1}\int L_\chi M_\chi N_\chi(s)\hat w(s)\,ds$ with $|t|\le T_w$.
+
+Main term. For $\chi$ principal and $|t|\le T_0=L^{1/2}$ we use $L_{\chi_0}(c+it)=(\varphi(b)/b)((3L)^{1-s}-(L/4)^{1-s})/(1-s)+O(L^{-c})$ as in \cite[p.~53]{HBI}. Termwise integration gives $X_w\sum a_mb_n/(mn)+O(XL^{-1/2})$, which cancels the main part of $r(\cA,mn)$. The hypothesis $q^2X\le x^{1-\eta-2\delta}$ gives $T_0\le T/q$.
+
+Remaining points. The other points of $\cF$ are sorted into well-spaced sets $S(U,V,W)$ as in \cite[p.~54]{HBI}, and it suffices to prove their inequality (8) with their $F$, which is formed with $T$. The seven bounds for $|S|$ come from (T1) for $M$ and $N$, from (T2) for $M$, $N$ and $L_\chi^2$, from (T3), and from Lemma~\ref{lem:I5}. For (T3) we write $L_\chi(c+it_r)$ as an integral of $L(c+it_r+z,\chi)((3L)^z-(L/4)^z)z^{-1}$ over $|\operatorname{Im}z|\le H_r=\max(2|t_r|,L^{1/2})$ with error $O(L^{1/2-c}\log x)$. All values lie at heights $\le3\max(|t_r|,L^{1/2})\le3T/q$, since $qL^{1/2}\le x/X=Tx^{-2\eta}$ follows from $q^2X\le x^{1-\eta}$. Lemma~\ref{lem:I5} with $c_0=1/15$ gives $U\ll L^{1/2}x^{-\delta_1}$ at every point, since $L\ge x^{(7-12\Theta)/5}\ge x^{1/15}$. Points with $\chi$ non-principal and small conductor-height are covered by its period case, and principal points have $|t|\ge L^{1/2}\ge x^{1/30}$. The four cases of \cite[pp.~56--57]{HBI} then go through unchanged.
+\end{proof}
+
+\subsection{The decomposition}
+Buchstab's identity, as in \cite[(4)]{HBI}, gives $S(\cA,x^{1/2})=\Sigma_1+\Sigma_2-\Sigma_3-\Sigma_4+\Sigma_5$ with
+\begin{align*}
+\Sigma_1&=W^-(\cA,z,D),&\Sigma_2&=\sum_{(D/p)^{1/3}\le q<p<z}S(\cA_{qp},q),\\
+\Sigma_3&=\sum_{z\le p<D^{1/2}}S(\cA_p,p),&\Sigma_4&=\sum_{D^{1/2}\le p<x^{1/2}}S(\cA_p,(D/p)^{1/3}),\\
+\Sigma_5&=\sum_{\substack{D^{1/2}\le p<x^{1/2}\\(D/p)^{1/3}\le q<p}}S(\cA_{qp},q).
+\end{align*}
+All primes involved exceed $z>b$.
+
+\subsection{The sum $\Sigma_1$}
+Lemma~\ref{lem:sieve} with $R^-$ handled by Lemma~\ref{lem:bilinear} for $M=N=D^{1/2}$ and $\phi=(6\Theta-1)/5+2\varepsilon-16\eta/5$, together with $f(s)=2\e^\gamma s^{-1}\log(s-1)$ for $2\le s\le4$, gives as in \cite[pp.~57--59]{HBI}
+\[
+\Sigma_1\ge\frac{b}{\varphi(b)}\frac{X_w}{\log x}(C_1-c\eta-o(1)),\qquad C_1=\frac5{6\Theta-1}\log\frac{28\Theta-13}{11-16\Theta}.
+\]
+
+\subsection{The sum $\Sigma_4$ with a smooth partition}
+Let $P$ run over $D^{1/2}2^j$, $j\ge0$, and let $\psi_P$ be smooth with $0\le\psi_P\le1$, $\psi_P^{(i)}\ll_iP^{-i}$, $\sum_P\psi_P=1$ on $[D^{1/2},x^{1/2}]$, $\operatorname{supp}\psi_P\subset[P/2,2P]$ for $j\ge1$ and $\operatorname{supp}\psi_{D^{1/2}}\subset[D^{1/2}/2,2D^{1/2}]$. Since $S(\cA_p,Z)$ is non-increasing in $Z$,
+\[
+\Sigma_4\le\sum_P\frac1{\log(P/2)}\sum_n\Lambda(n)\psi_P(n)S\bigl(\cA_n,(D/4P)^{1/3}\bigr).
+\]
+The extra terms are non-negative, which is allowed for an upper bound \cite[p.~59]{HBI}. The upper bound of Lemma~\ref{lem:sieve} with $s=3$ gives $S(\cA_n,(D/4P)^{1/3})\le(2X_w/(n\log(D/n)))(b/\varphi(b))(1+c\varepsilon+o(1))+R_n^+$. The remainders $\sum_n\Lambda(n)\psi_P(n)R_n^+$ are split by Vaughan's identity with $u=PD^{-1/2}\ge1$ into $S_1$, $S_2$ and $S_3$.
+
+For $S_1$, $S_2$ the inner polynomial is $B_\chi(s)=\sum_{k\le u^2,m}c_k\chi(km)(\log m)^{2-i}\psi_P(km)(km)^{-s}$, and
+\[
+B_\chi(s)=\frac1{2\pi i}\int_{\operatorname{Re}z=0}A_\chi(s+z)Z_\chi(s+z)\hat\psi_P(z)\,dz+(\text{pole term}),
+\]
+with $Z_\chi=L(\cdot,\chi)$ or $-L'(\cdot,\chi)$. Since $|\hat\psi_P(iy)|\ll_j(1+|y|)^{-j}$ uniformly in $P$, only $|y|\le x^\varepsilon$ matters, and every $L$-value lies at height $\le T/q+x^\varepsilon$. The main part of the remainder is cancelled by the pole of $L(s,\chi_0)$ at $s=1$, crossed in the outer shift to $\operatorname{Re}s=1/2$ as in \cite[p.~60]{HBI}. The inner pole contributes $\ll X(D/x)^{1/2}x^\varepsilon$. Hölder's inequality with (T3) and (T1) gives the bound of \cite[p.~61]{HBI} with $(T+P)^{1/4}$ replaced by $T^{1/4}x^\varepsilon$, which is $\ll Xx^{-\eta}$ under $12\eta<\Theta-1/2$. Without the smooth partition the same factor would be $(T+qP)^{1/4}$, which is too large. For $S_3$ the weight $\psi_P(km)$ is separated by its Mellin transform, and Lemma~\ref{lem:bilinear} applies uniformly in the twisted coefficients. Hence
+\[
+\Sigma_4\le\frac{b}{\varphi(b)}\frac{X_w}{\log x}(C_4+c\eta+o(1)),\qquad C_4=\frac5{6\Theta-1}\log\frac5{3(8\Theta-3)}.
+\]
+
+\subsection{Weighted zero-density estimates}
+Lemmas~4--7 of \cite{HBI} hold for the zeros of $L(s,\chi^*)$, $\chi\bmod q$, $|\gamma|\le\tau=T/q$, with their $\tau$ replaced by the conductor-height $q\tau=T$ and $X_5=x^{1-\eta}$ in place of their $X$. Their proofs combine Hölder's inequality with (T6) and the density bounds. We use (T5). On $[1/2,4/5]$ the losses $x^{o(1)}$ equal $(q\tau)^{o(1)(1-\sigma)}$ since $1-\sigma\ge1/5$. On $[4/5,1]$ the exponent $v'=2+2\varepsilon$ is below $v(7/9)=9/4$. In the expression $(a+k)v+l+(k/2-b')/(1-\sigma)$ of \cite[p.~64]{HBI}, with $a,k\ge0$ and $k/2-b'\le0$, this keeps the maxima at $\sigma=3/4$ and $\sigma=7/9$. The losses are absorbed by the slack $x^{-\eta(1-\sigma)}$ used below.
+
+\subsection{The sums $\Sigma_3$, $\Sigma_2$ and $\Sigma_5$}
+For $z\le p<D^{1/2}$ the cofactor of $p$ is a prime, so $\Sigma_3$ counts weighted primes $pm$. The smooth explicit formula for $w_p(u)=w(pu)$ gives
+\[
+\sum_{P<p\le2P}\sum_m\Lambda(m)\mathbf 1_{m\equiv a\bar p\,(q)}w(pm)=\frac1{\varphi(q)}\sum_\chi\bar\chi(a)\Bigl[\mathbf 1_{\chi=\chi_0}\hat w(1)\sum_p\frac{\chi(p)}p-\sum_{|\gamma|\le T_w}P_\chi(\rho)\hat w(\rho)\Bigr]+O(P\log x),
+\]
+with $P_\chi(s)=\sum_{P<p\le2P}\chi(p)p^{-s}$ and $|\hat w(\rho)|\ll qXx^{\beta-1}$. Slicing $\beta$ as in \cite[p.~65]{HBI}, Lemma~4 of \cite{HBI} and (T8) give $\ll X(\log x)^{-2}$ for the zero sum, and $P\log x\ll X(\log x)^{-2}$ since $P<D^{1/2}<x^{0.46}$. Together with (T9) for small $P$ this gives $\Sigma_3=(b/\varphi(b))X_w(C_3+O(\eta+\delta))/\log x$ with
+\[
+C_3=\log\frac{(6\Theta-1)(8\Theta-3)}{3(1-\Theta)(11-16\Theta)}.
+\]
+For $\Sigma_2$ and $\Sigma_5$ the same procedure with the twist $\chi(qr)$ and Lemmas~5--7 of \cite{HBI} gives the asymptotic formulae on the polygons of \cite[pp.~66--68]{HBI}. The imprimitive correction is evaluated by orthogonality as $(\varphi(q')/\varphi(q))\mathbf 1_{qrp_0^j\equiv a\,(q')}$, where $p_0\mid b$ is the prime of the correction term and $q'$ is the $p_0$-free part of $q$. With the trivial-zero terms, which are $\ll qX/x$ per pair after orthogonality, its total is $\ll Xx^{-\eta}$. Hence
+\[
+\Sigma_2\ge\frac{b}{\varphi(b)}\frac{X_w}{\log x}(C_{21}+C_{22}-c\eta),\qquad\Sigma_5\ge\frac{b}{\varphi(b)}\frac{X_w}{\log x}(C_{51}+C_{52}-c\eta),
+\]
+with $C_{ij}=\iint_{M_{ij}}d\alpha\,d\beta/(\alpha\beta(1-\alpha-\beta))$ over the polygons $M_{ij}$ of \cite{HBI}, which depend on $\Theta$ only.
+
+\section{Numerology}\label{sec:num}
+
+Collecting the bounds gives Theorem~\ref{thm:block} with $C(\Theta)=C_1+C_{21}+C_{22}-C_3-C_4+C_{51}+C_{52}$. Heath-Brown and Iwaniec \cite[p.~69]{HBI} give at $\Theta=11/20$
+\[
+C_1=0.189155,\ C_{21}=0.175089,\ C_{22}=0.020297,\ C_3=0.080819,\ C_4=0.379029,\ C_{51}=0.062568,\ C_{52}=0.017473,
+\]
+so $C(11/20)=0.004735>0$. An independent recomputation from the closed forms and the polygons reproduces these values to $10^{-6}$ except $C_{51}=0.062751$, which gives $C(11/20)=0.004918$. We use the smaller value. The same computation on a grid of $501$ equally spaced points of $[0.55,0.555]$ gives strictly increasing values from $0.004918$ to $0.214067$, and $C(0.549)<0$. With HBI's value of $C_{51}$ all values are lower by $1.8\cdot10^{-4}$. We use this grid computation, together with the continuity of $C$, for $C(\Theta)>0$ on $(11/20,0.555)$. With $\eta$, $\delta$ small this proves Theorem~\ref{thm:block}. In terms of $\kappa$ the tiling needs $\Theta_1\in(11/20,0.555)$ with $\Theta_1<1-\kappa-\eta-2\delta$, which is possible exactly when $\kappa<9/20$.
+
+\section{Limits of the method}\label{sec:limits}
+
+\subsection{The exponent $19/40$}
+The method of Baker, Harman and Pintz gives primes in $[x,x+x^{0.525}]$, and its hybrid version would give $\kappa<19/40$. It needs a mean-value theorem of Watt type for $\sum_\chi\int|L(1/2+it,\chi)|^4|M_\chi(1/2+it)|^2$ over the family $\cF$. A character analogue of Watt's theorem exists in the $q$-aspect, and Harman used it for primes in progressions to large moduli (as described in \cite[\S2]{BP}), but we do not know a version for the hybrid family with $|t|\le T/q$ and $q=b^k$.
+
+\subsection{The coupling}
+Any argument that treats the blocks separately stops at $\kappa=1/2$, even on the generalized Riemann hypothesis, since a single block is a short interval in a progression with conductor-height $x^{\kappa}$. To go further one has to use the coupling $n\equiv\rev_k(t)\bmod b^k$. In the explicit formula it appears through
+\[
+K(\chi,\gamma)=\frac1{\#\{t\}}\sum_{b^{k-1}\le t<b^k}\chi(\rev_kt)\,(t/q)^{i\gamma}.
+\]
+Off the band $\cond(\chi)\asymp|\gamma|$ one has a power saving by elementary digit arguments, but the band carries the whole zero count.
+
+\begin{remark}\label{rem:harman}
+Harman's exponent $0.472$ comes from his lower-bound sieve for primes in arithmetic progressions \cite{Har05}, combined with Gallagher's estimates for characters to prime-power moduli. Lemma~\ref{lem:I5} supplies a Gallagher-type power saving for $\sum\chi(n)n^{-it}$ to moduli $b^k$ in every base. Whether the remaining inputs of \cite{Har05} have versions for the hybrid family $\cF$ with $q=b^k$, which would give $\kappa<0.472$ in every base, is not clear to us. We leave it as an open question.
+\end{remark}
+
+\begin{conjecture}\label{conj:K}
+There is $\delta'>0$ such that $|K(\chi,\gamma)|\ll\cond(\chi)^{-\delta'}$ uniformly in non-principal $\chi\bmod b^k$ and $\gamma\in\mathbb R$.
+\end{conjecture}
+
+In a computation of the project (unpublished) the largest values of $K$ lie in the band and decay like $\cond(\chi)^{-0.2}$ to $\cond(\chi)^{-0.25}$ for $b=2,3,5$ and conductors up to $2^{14}$, far above a random model. The following implications are heuristic, obtained by inserting the conjectured saving into the zero-density bookkeeping without a written proof. Conjecture~\ref{conj:K} with any $\delta'>0$, combined with the second moment over pairs of a block and a residue class, would give $\kappa>4/9$ by a different route. With $\delta'=0.2$ it would give $\kappa<1/2$ unconditionally. On the generalized Riemann hypothesis the coupled pointwise method gives $\kappa<1/(2-\delta')$. Since the mean square of $K$ over characters is the reciprocal of the number of top blocks, $\delta'\le1/2$, and the method stops at $\kappa=2/3$ even on that hypothesis. Going beyond $2/3$ would need cancellation among the zeros themselves.
+
+\begin{thebibliography}{99}
+\bibitem{BS} W.~D.~Banks and I.~E.~Shparlinski, Bounds on short character sums and $L$-functions for characters with a smooth modulus, arXiv:1605.07553. The journal version is presumably W.~D.~Banks and I.~E.~Shparlinski, Bounds on short character sums and $L$-functions with characters to a powerful modulus, J. Anal. Math. \textbf{139} (2019), 239--263 (journal data not verified against the arXiv version).
+\bibitem{BP} S.~Baier and S.~Pujahari, A Bombieri--Vinogradov-type theorem with prime power moduli, arXiv:2107.04348.
+\bibitem{Chen} B.~Chen, Large value estimates for Dirichlet polynomials, and the density of zeros of Dirichlet's $L$-functions, arXiv:2507.08296.
+\bibitem{Gal} P.~X.~Gallagher, Primes in progressions to prime-power modulus, Invent. Math. \textbf{16} (1972), 191--201.
+\bibitem{Har05} G.~Harman, On the number of Carmichael numbers up to $x$, Bull. London Math. Soc. \textbf{37} (2005), 641--650.
+\bibitem{Har06} G.~Harman, Primes with preassigned digits, Acta Arith. \textbf{125} (2006), 179--185, doi:10.4064/aa125-2-4.
+\bibitem{HBI} D.~R.~Heath-Brown and H.~Iwaniec, On the difference between consecutive primes, Invent. Math. \textbf{55} (1979), 49--69.
+\bibitem{Hux} M.~N.~Huxley, Large values of Dirichlet polynomials. III, Acta Arith. \textbf{26} (1975), 435--444.
+\bibitem{Iw74} H.~Iwaniec, On zeros of Dirichlet's $L$ series, Invent. Math. \textbf{23} (1974), 97--104.
+\bibitem{Kum} A.~V.~Kumchev, The difference between consecutive primes in an arithmetic progression, Q. J. Math. \textbf{53} (2002), 479--501.
+\bibitem{Mon} H.~L.~Montgomery, Topics in multiplicative number theory, Lecture Notes in Math. \textbf{227}, Springer, 1971.
+\bibitem{Pin} J.~Pintz, Some new density theorems for Dirichlet $L$-functions, arXiv:1804.05552.
+\bibitem{TZ} J.~Thorner and A.~Zaman, Refinements to the prime number theorem for arithmetic progressions, arXiv:2108.10878; Math. Z. \textbf{306} (2024).
+\end{thebibliography}
+
+\end{document}

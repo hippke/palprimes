@@ -37,7 +37,7 @@ available.
 | Palindromes have level of distribution 6/25 with weights 3^ω (moduli coprime to b³ − b) | proved in Lean (`Palprimes.level_piStar_weighted`), the paper proof reaches any θ < 1/4 (`notes/PROOF_buniform.md`) |
 | Prime-square divisors of palindromes: Σ_{x^{1/20} ≤ p ≤ x^{23/100}} A_{p²} ≤ X/log³x (Proposition W) | proved in Lean (`Palprimes.squares_piStar`), the paper proof reaches any range up to x^{c}, c < 1/4 (`notes/PROP_W.md`) |
 | Level of distribution 1/4 − ε for palindromes in every base, hence Ω ≤ 5 | paper proof (`papers/omega5-every-base`) |
-| κ-palindromic primes: for every κ < 9/20 and every base there are infinitely many primes whose last ⌊κL/2⌋ digits mirror their first ⌊κL/2⌋ digits (L = number of digits) | paper proof (`papers/kappa-palindromic-9-20`) |
+| κ-palindromic primes: for every κ < 9/20 and every base there are infinitely many primes whose last ⌊κL/2⌋ digits mirror their first ⌊κL/2⌋ digits (L = number of digits). For bases that are powers of an odd prime, Harman (Acta Arith. 125, 2006) remarks without written proof that the method of preassigned digits reaches κ < 0.472, so the range 5/12 ≤ κ < 9/20 is new for b = 2 and the other bases | paper proof (`papers/kappa-palindromic-9-20`: `note.pdf`, full proof in `proof.md`) |
 | The same on GRH for every κ < 2/3, with an asymptotic count | paper proof on GRH (`papers/grh-mirrored-primes`) |
 | Function-field analogue: palindromic irreducible polynomials over F_q with coefficients in a restricted set S, asymptotic count for α_S < q^{−3/4} | paper proof (`papers/function-field`) |
 | Exact counts of palprimes in bases 2 to 16 up to 1.8·10¹⁹ | data (`data/palprime_counts.csv`) |

@@ -26,6 +26,8 @@ Theorem 1.1. Let b ≥ 2 and 0 < κ < 9/20. There are c = c(b, κ) > 0 and L₀(
 
 Remarks. For κ < 5/12 the theorem with an asymptotic follows from Thorner–Zaman 2108.10878 Cor. 3.2 [P]. The new range is 5/12 ≤ κ < 9/20, which includes κ ∈ (4/9, 9/20) beyond the second-moment rung 4/9. This is a lower bound, not an asymptotic.
 
+Prior work for odd prime-power bases. For bases b = p^c with p an odd prime, Harman, Primes with preassigned digits, Acta Arith. 125 (2006) 179–185, p. 180 [P], remarks that Gallagher's estimates (Invent. Math. 16, 1972) with the techniques of Harman, Bull. London Math. Soc. 37 (2005) 641–650, allow 0.472 times the number of digits to be preassigned in two blocks at the start and the end. Every top block of a κ-palindromic number is such a preassignment, so the remark covers κ < 0.472 for these bases, which is stronger than Theorem 1.1 there. No proof of the remark is written out in that paper, and we have not checked it. The contribution of this proof is therefore a complete proof for every base b ≥ 2 at 9/20. The range 5/12 ≤ κ < 9/20 is new, as far as we know, for b = 2 and for bases that are not powers of an odd prime. The note `note.tex` (`note.pdf`) gives the same theorem in paper form with this attribution.
+
 ## 2. Reduction to blocks and tiling [O]
 - Fix t with leading digit d, (d, b) = 1, and put q = b^k, a = rev_k(t), which is prime to b (last digit d). The block is A_t = {n ∈ [tY, (t+1)Y) | n ≡ a mod q} with Y = b^{L−k}. Its size is X_t = Y/q = b^{L−2k}.
 - Put x = b^L. Then x/b ≤ tY < (t+1)Y ≤ x, and X_t = x^{1−κ+O(1/L)}.

@@ -32,3 +32,38 @@ and which have at most four prime factors counted with multiplicity (`n ≠ 0 �
 theorem palindromes_omega_le_four : ∀ b : ℕ, 2 ≤ b →
     {n : ℕ | (Nat.digits b n).reverse = Nat.digits b n ∧ Nat.IsAtMostAlmostPrime 4 n}.Infinite :=
   sorry
+
+/-- Infinitely many palindromes `n` with `Ω(n) ≤ 4` and every prime factor above `n^{0.0326}`. -/
+theorem palindromes_omega_le_four_large_factors : ∀ b : ℕ, 2 ≤ b →
+    {n : ℕ | (Nat.digits b n).reverse = Nat.digits b n ∧ Nat.IsAtMostAlmostPrime 4 n ∧
+      ∀ p ∈ n.primeFactors, (n : ℝ) ^ ((163 : ℝ) / 5000) < (p : ℝ)}.Infinite :=
+  sorry
+
+open Classical in
+/-- Among the palindromes with `2N + 1` digits coprime to `b³ − b`, at least a proportion
+`c / log x`, `x = b^{2N+1}`, have `Ω ≤ 4` and all prime factors `> x^{0.0326}`. -/
+theorem palindromes_omega_le_four_count : ∀ b : ℕ, 2 ≤ b → ∃ c : ℝ, 0 < c ∧ ∃ N₀ : ℕ, ∀ N ≥ N₀,
+    c * ((Finset.card ((Finset.Ico (b ^ (2 * N)) (b ^ (2 * N + 1))).filter
+        (fun n => (Nat.digits b n).reverse = Nat.digits b n ∧ Nat.Coprime n (b ^ 3 - b))) : ℝ) /
+      Real.log ((b : ℝ) ^ (2 * N + 1))) ≤
+    (Finset.card (((Finset.Ico (b ^ (2 * N)) (b ^ (2 * N + 1))).filter
+        (fun n => (Nat.digits b n).reverse = Nat.digits b n ∧ Nat.Coprime n (b ^ 3 - b))).filter
+        (fun n => Nat.IsAtMostAlmostPrime 4 n ∧
+          ∀ p ∈ n.primeFactors, ((b : ℝ) ^ (2 * N + 1)) ^ ((163 : ℝ) / 5000) < (p : ℝ))) : ℝ) :=
+  sorry
+
+/-- Level of distribution `θ = 0.2608` with weights `3^ω` for the palindromes with `2N + 1` digits
+coprime to `b³ − b`, moduli `q ≤ x^θ` coprime to `b³ − b`, `x = b^{2N+1}`. -/
+theorem palindromes_level_theta : ∀ b : ℕ, 2 ≤ b → ∃ N₀ : ℕ, ∀ N ≥ N₀,
+    ∑ q ∈ (Finset.Icc 1 ⌊((b : ℝ) ^ (2 * N + 1)) ^ (2608 / 10000 : ℝ)⌋₊).filter
+        (fun q => Nat.Coprime q (b ^ 3 - b)),
+      (3 : ℝ) ^ (ArithmeticFunction.cardDistinctFactors q) *
+        |(Finset.card (((Finset.Ico (b ^ (2 * N)) (b ^ (2 * N + 1))).filter
+            (fun n => (Nat.digits b n).reverse = Nat.digits b n ∧ Nat.Coprime n (b ^ 3 - b))).filter
+            (fun n => q ∣ n)) : ℝ) -
+          (Finset.card ((Finset.Ico (b ^ (2 * N)) (b ^ (2 * N + 1))).filter
+            (fun n => (Nat.digits b n).reverse = Nat.digits b n ∧ Nat.Coprime n (b ^ 3 - b))) : ℝ) / q|
+      ≤ (Finset.card ((Finset.Ico (b ^ (2 * N)) (b ^ (2 * N + 1))).filter
+            (fun n => (Nat.digits b n).reverse = Nat.digits b n ∧ Nat.Coprime n (b ^ 3 - b))) : ℝ) /
+          (Real.log ((b : ℝ) ^ (2 * N + 1))) ^ 3 :=
+  sorry

@@ -7,3 +7,6 @@ import Palprimes
 #print axioms Palprimes.infinite_palindromes_Omega_le_five_large_factors
 #print axioms Palprimes.MT.infinite_palindromes_Omega_le_four
 #print axioms Palprimes.MT.almostPalprimesInfinite_four
+#print axioms Palprimes.MT.level_piStar_theta
+#print axioms Palprimes.MT.many_palindromes_Omega_le_four
+#print axioms Palprimes.MT.infinite_palindromes_Omega_le_four_large_factors

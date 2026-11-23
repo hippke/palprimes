@@ -25,3 +25,4 @@ import Palprimes.Sieve.WeightedCount
 import Palprimes.AlmostPrime.OmegaLeFiveCount
 import Palprimes.Statements
 import Palprimes.Omega4.Final
+import Palprimes.Omega4.Corollaries

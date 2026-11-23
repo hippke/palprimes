@@ -81,3 +81,20 @@ Greaves' Lemma 4.2) and `Omega4/Uncond4.lean` (b ≥ 4) are not in the repositor
 4. Residual trust in the kernel's GMP Nat arithmetic: 367 `decide +kernel` (130 files in Major2D), up to a
    ≈ 45-million-bit power in `B2Light.cond2_2`. Mitigation: nanoda, lean4lean and con-leche check all of them
    independently; con-ron cannot (memory, see the kernel row).
+
+## Corollaries (2026-11-23)
+New module `Palprimes/Omega4/Corollaries.lean` (100 lines, no new mathematics, only assembly of audited
+lemmas): `level_piStar_theta` (level θ = 0.2608 with weights 3^ω, moduli coprime to b³ − b),
+`many_palindromes_Omega_le_four` (at least c · #Π*_b(2N)/log x palindromes with Ω ≤ 4 and all prime factors
+> x^{0.0326}, 0.0326 = θ T₀, T₀ = 1/8) and `infinite_palindromes_Omega_le_four_large_factors`. The root module
+is now at import depth 21. `Audit/Challenge.lean` states seven theorems. Logs in `lean/audit5/`.
+- `scripts/axioms.lean`: `propext`, `Classical.choice`, `Quot.sound` only, for all nine headline theorems.
+- `leanchecker` on `Palprimes.Omega4.Corollaries`, `Audit.Challenge`, `Audit.Solution`: accepted (exit 0, no
+  output). All other modules are unchanged since the Ω ≤ 4 audit.
+- `lake comparator` (Lean default kernel, sandboxed): statements of all seven theorems match, axioms
+  whitelisted, **accepted** ("Your solution is okay!", 4793 s, 15 GB).
+- Other kernels on the comparator's export, same command lines and sandbox, each in its own memory-capped
+  scope (`kern/summary.txt`): Lean paranoid **accepts** (exit 0, 7644 s, 15.0 GB); lean4lean **accepts**
+  ("checked 65292 declarations", 16589 s, 13.3 GB, two kernels sharing two cores); nanoda **accepts**
+  (exit 0, 9550 s, 13.1 GB); con-leche **accepts** ("accepted 65295 declarations (--verified)", `--jobs=1`,
+  6711 s, 13.4 GB). con-ron not rerun (same power certificates as before, no verdict).

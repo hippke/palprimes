@@ -32,10 +32,11 @@ available.
 |---|---|
 | Infinitely many palindromic primes in every base | open (the goal; `Palprimes.PalprimesInfinite b` in `lean/Palprimes/Statements.lean`) |
 | **Infinitely many palindromes with at most 4 prime factors (with multiplicity) in every base b ≥ 2** | **proved in Lean** (`Palprimes.MT.infinite_palindromes_Omega_le_four`) |
+| Stronger form: infinitely many palindromes n with Ω(n) ≤ 4 and every prime factor > n^{0.0326}. Among the palindromes with 2N + 1 digits coprime to b³ − b, at least a proportion c/log x, x = b^{2N+1}, are of this kind (c > 0 depends on b and is not explicit) | proved in Lean (`Palprimes.MT.infinite_palindromes_Omega_le_four_large_factors`, `Palprimes.MT.many_palindromes_Omega_le_four`) |
 | Infinitely many palindromes with at most 5 prime factors (with multiplicity) in every base b ≥ 2 | proved in Lean (`Palprimes.infinite_palindromes_Omega_le_five`) |
 | Stronger form: infinitely many palindromes n with Ω(n) ≤ 5 and every prime factor ≥ n^{1/20}. Among the palindromes with 2N + 1 digits coprime to b³ − b, at least a proportion 1/(40 log x), x = b^{2N+1}, are of this kind | proved in Lean (`Palprimes.infinite_palindromes_Omega_le_five_large_factors`, `Palprimes.many_palindromes_Omega_le_five`) |
-| Palindromes have level of distribution 6/25 with weights 3^ω (moduli coprime to b³ − b) | proved in Lean (`Palprimes.level_piStar_weighted`), the paper proof reaches any θ < 1/4 (`notes/PROOF_buniform.md`) |
-| Prime-square divisors of palindromes: Σ_{x^{1/20} ≤ p ≤ x^{23/100}} A_{p²} ≤ X/log³x (Proposition W) | proved in Lean (`Palprimes.squares_piStar`), the paper proof reaches any range up to x^{c}, c < 1/4 (`notes/PROP_W.md`) |
+| Palindromes have level of distribution θ = 0.2608 with weights 3^ω (moduli coprime to b³ − b) in every base b ≥ 2 | proved in Lean (`Palprimes.MT.level_piStar_theta`, from L¹ majorants; the elementary proof of 6/25 is `Palprimes.level_piStar_weighted`) |
+| Prime-square divisors of palindromes: Σ_{x^{1/40} ≤ p ≤ x^{0.2499}} A_{p²} ≤ X/log³x (Proposition W) | proved in Lean (`Palprimes.squares_piStar2`; the range x^{1/20} to x^{23/100} is `Palprimes.squares_piStar`), the paper proof reaches any range up to x^{c}, c < 1/4 (`notes/PROP_W.md`) |
 | Level of distribution 1/4 − ε for palindromes in every base, hence Ω ≤ 5 | paper proof (`papers/omega5-every-base`) |
 | κ-palindromic primes: for every κ < 9/20 and every base there are infinitely many primes whose last ⌊κL/2⌋ digits mirror their first ⌊κL/2⌋ digits (L = number of digits). For bases that are powers of an odd prime, Harman (Acta Arith. 125, 2006) remarks without written proof that the method of preassigned digits reaches κ < 0.472, so the range 5/12 ≤ κ < 9/20 is new for b = 2 and the other bases | paper proof (`papers/kappa-palindromic-9-20`: `note.pdf`, full proof in `proof.md`) |
 | The same on GRH for every κ < 2/3, with an asymptotic count | paper proof on GRH (`papers/grh-mirrored-primes`) |
@@ -101,10 +102,11 @@ The proof uses only the standard axioms `propext`, `Classical.choice` and `Quot.
 - **Kernel replay:** `leanchecker` on every module, and `leanchecker --fresh Palprimes.Omega4.Final`
   (the whole closure, Mathlib included, replayed from an empty environment).
 - **Comparator:** `lake comparator --paranoid` against `lean/Audit/Challenge.lean`, which states the
-  four theorems with Mathlib definitions only. Five kernels accept all four: Lean, Lean paranoid,
+  seven theorems (Ω ≤ 5 and Ω ≤ 4, each with its counting and large-factor forms, and the level of
+  distribution) with Mathlib definitions only. Five kernels accept all seven: Lean, Lean paranoid,
   nanoda, lean4lean and con-leche. con-ron accepts the Ω ≤ 5 theorems but runs out of memory (over
   40 GB) on four `decide +kernel` certificates of the Ω ≤ 4 proof, comparisons of powers with up to
-  about 45 million bits, so it gives no verdict on the Ω ≤ 4 theorem.
+  about 45 million bits, so it gives no verdict on the Ω ≤ 4 theorems.
 
 To reproduce, with Lean and Mathlib v4.37.0-rc1:
 
@@ -120,7 +122,7 @@ The Ω ≤ 4 proof is large (about 39k lines in total, 244 modules). The kernel 
 base-3 majorant certificates (`Palprimes/Major2D/`) takes about 1.5 hours on one core, and the
 comparator about 3 hours for its first kernel (Lean paranoid). Build `Palprimes/Major2D/` with few
 parallel jobs, since a certificate module can need up to about 12 GB of memory. `lake build` overflows its stack for import depth
-≥ 22; the library is at depth 20.
+≥ 22; the library is at depth 21.
 
 Run `leanchecker` with explicit module names only, for example
 `lake env leanchecker Palprimes.AlmostPrime.OmegaLeFive`. Without a module name it checks all
@@ -145,7 +147,7 @@ lean/                    Lean 4 project (library Palprimes, about 39k lines)
   Palprimes/Major/           TL¹ for b ≥ 10 (Fejér family)
   Palprimes/Major1D/         TL¹ for b = 4 to 9 (kernel-checked 1D majorants, generated data)
   Palprimes/Major2D/         TL¹ for b = 2, 3 (kernel-checked 2D block majorants, generated data)
-  Palprimes/Omega4/          the Ω ≤ 4 theorem (assembly)
+  Palprimes/Omega4/          the Ω ≤ 4 theorem (assembly) and its corollaries
   Audit/                     comparator challenge and solution
   scripts/                   certificate generators (omega4/: the Ω ≤ 4 majorants), axiom check
 papers/                  paper drafts (TeX and PDF, or Markdown)

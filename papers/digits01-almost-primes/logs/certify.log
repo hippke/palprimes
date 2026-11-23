@@ -1,0 +1,58 @@
+### certify.py data/majorant_r3_l4.json
+file=data/majorant_r3_l4.json r=3 l=4 p=99/100 H=80 shift=0
+intervals=745 maxdepth=19 fails=0 min_certified_lower_bound=8.965e-10 time=0.2s
+tau0=0.211347609685 T(0)=A=1.000000056916
+psi_T = -log_r(tau0)/l in 0.353685071115 (lower bound 0.3536850711), log_r(A)/l <= 1.295e-08
+CERTIFIED=True
+### wall time 0.3 s
+
+### certify.py data/majorant_r4_l4.json
+file=data/majorant_r4_l4.json r=4 l=4 p=99/100 H=255 shift=0
+intervals=925 maxdepth=19 fails=0 min_certified_lower_bound=1.649e-11 time=0.4s
+tau0=0.236126302126 T(0)=A=1.000000083007
+psi_T = -log_r(tau0)/l in 0.260296167808 (lower bound 0.2602961678), log_r(A)/l <= 1.497e-08
+CERTIFIED=True
+### wall time 0.5 s
+
+### certify.py data/majorant_r3_l4.json -1125899907
+file=data/majorant_r3_l4.json r=3 l=4 p=99/100 H=80 shift=-1125899907
+intervals=45 maxdepth=60 fails=21 min_certified_lower_bound=7.522e-21 time=0.0s
+  FAIL (0.4872209225962011, 0.4872209225962011, -2.6714834346821576e-20)
+  FAIL (0.4872209225962011, 0.4872209225962011, -6.095127348584611e-20)
+  FAIL (0.4872209225962011, 0.4872209225962011, -9.518771262487006e-20)
+  FAIL (0.4872209225962011, 0.4872209225962011, -1.2942415176389343e-19)
+  FAIL (0.4872209225962011, 0.4872209225962011, -1.636605909029162e-19)
+tau0=0.211346609685 T(0)=A=0.999999056916
+psi_T = -log_r(tau0)/l in 0.353686147826 (lower bound 0.3536861478), log_r(A)/l <= -2.146e-07
+CERTIFIED=False
+### wall time 0.1 s
+
+### certify.py data/majorant_r4_l4.json -1125899907
+file=data/majorant_r4_l4.json r=4 l=4 p=99/100 H=255 shift=-1125899907
+intervals=113 maxdepth=57 fails=21 min_certified_lower_bound=3.229e-20 time=0.1s
+  FAIL (0.41618134579953, 0.41618134579953, -5.48834381348837e-20)
+  FAIL (0.41618134579953, 0.41618134579953, -1.4205783834718817e-19)
+  FAIL (0.41618134579953, 0.41618134579953, -2.292322385594888e-19)
+  FAIL (0.41618134579953, 0.41618134579953, -3.1640663877178567e-19)
+  FAIL (0.41618134579953, 0.41618134579953, -4.035810389840787e-19)
+tau0=0.236125302126 T(0)=A=0.999999083007
+psi_T = -log_r(tau0)/l in 0.260296931540 (lower bound 0.2602969315), log_r(A)/l <= -1.654e-07
+CERTIFIED=False
+### wall time 0.1 s
+
+### neg_control.py data/majorant_r3_l4.json
+majorant_r3_l4.json: tau0 shifted by -1125899907/2^50 (about -1e-6)
+  float minimum of T - K^p on the grid -9.9904e-07 at t = 0.4871702500
+  arb value of T - K^p at the dyadic point t = 0.487170250000: [-9.9904e-7 +/- 3.53e-12]
+  REFUTED=True
+  unshifted float minimum of T - K^p on the grid: 9.6352e-10
+### wall time 5.6 s
+
+### neg_control.py data/majorant_r4_l4.json
+majorant_r4_l4.json: tau0 shifted by -1125899907/2^50 (about -1e-6)
+  float minimum of T - K^p on the grid -9.9911e-07 at t = 0.4161615000
+  arb value of T - K^p at the dyadic point t = 0.416161500000: [-9.9911e-7 +/- 3.35e-12]
+  REFUTED=True
+  unshifted float minimum of T - K^p on the grid: 8.9335e-10
+### wall time 28.5 s
+

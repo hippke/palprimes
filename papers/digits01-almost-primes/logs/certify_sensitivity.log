@@ -1,0 +1,42 @@
+### certify.py data/majorant_r3_l4.json -2251800
+file=data/majorant_r3_l4.json r=3 l=4 p=99/100 H=80 shift=-2251800
+intervals=40 maxdepth=60 fails=21 min_certified_lower_bound=2.041e-22 time=0.0s
+  FAIL (0.48717194303157435, 0.48717194303157435, -8.998845966162824e-22)
+  FAIL (0.48717194303157435, 0.48717194303157435, -2.0038306649808752e-21)
+  FAIL (0.48717194303157435, 0.48717194303157435, -3.1077767333448813e-21)
+  FAIL (0.48717194303157435, 0.48717194303157435, -4.2117228017083e-21)
+  FAIL (0.48717194303157435, 0.48717194303157435, -5.315668870071132e-21)
+tau0=0.211347607685 T(0)=A=1.000000054916
+psi_T = -log_r(tau0)/l in 0.353685073269 (lower bound 0.3536850733), log_r(A)/l <= 1.250e-08
+CERTIFIED=False
+### wall time 0.1 s
+
+### certify.py data/majorant_r3_l4.json -225180
+file=data/majorant_r3_l4.json r=3 l=4 p=99/100 H=80 shift=-225180
+intervals=745 maxdepth=19 fails=0 min_certified_lower_bound=6.965e-10 time=0.2s
+tau0=0.211347609485 T(0)=A=1.000000056716
+psi_T = -log_r(tau0)/l in 0.353685071330 (lower bound 0.3536850713), log_r(A)/l <= 1.291e-08
+CERTIFIED=True
+### wall time 0.3 s
+
+### certify.py data/majorant_r4_l4.json -2251800
+file=data/majorant_r4_l4.json r=4 l=4 p=99/100 H=255 shift=-2251800
+intervals=116 maxdepth=60 fails=21 min_certified_lower_bound=1.006e-21 time=0.1s
+  FAIL (0.41616212269884223, 0.41616212269884223, -1.89896452418064e-21)
+  FAIL (0.41616212269884223, 0.41616212269884223, -4.804365915253315e-21)
+  FAIL (0.41616212269884223, 0.41616212269884223, -7.709767306322191e-21)
+  FAIL (0.41616212269884223, 0.41616212269884223, -1.0615168697387266e-20)
+  FAIL (0.41616212269884223, 0.41616212269884223, -1.3520570088448542e-20)
+tau0=0.236126300126 T(0)=A=1.000000081007
+psi_T = -log_r(tau0)/l in 0.260296169336 (lower bound 0.2602961693), log_r(A)/l <= 1.461e-08
+CERTIFIED=False
+### wall time 0.1 s
+
+### certify.py data/majorant_r4_l4.json -225180
+file=data/majorant_r4_l4.json r=4 l=4 p=99/100 H=255 shift=-225180
+intervals=926 maxdepth=19 fails=0 min_certified_lower_bound=3.302e-10 time=0.3s
+tau0=0.236126301926 T(0)=A=1.000000082807
+psi_T = -log_r(tau0)/l in 0.260296167961 (lower bound 0.2602961680), log_r(A)/l <= 1.493e-08
+CERTIFIED=True
+### wall time 0.4 s
+

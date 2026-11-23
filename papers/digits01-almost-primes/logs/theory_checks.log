@@ -1,0 +1,117 @@
+### theory_checks.py
+== (1) Lemma 3.1, injectivity
+r=3 l=1 B=6 H=2: 15624 vectors, zeros=0, max|W_u|=2184 < r^(lB+1)=2187: True
+r=3 l=2 B=3 H=8: 4912 vectors, zeros=0, max|W_u|=2184 < r^(lB+1)=2187: True
+r=4 l=1 B=5 H=3: 16806 vectors, zeros=0, max|W_u|=4092 < r^(lB+1)=4096: True
+r=4 l=2 B=3 H=15: 29790 vectors, zeros=0, max|W_u|=16380 < r^(lB+1)=16384: True
+r=5 l=1 B=4 H=4: 6560 vectors, zeros=0, max|W_u|=3120 < r^(lB+1)=3125: True
+r=3 l=3 B=2 H=26: 2808 vectors, zeros=0, max|W_u|=2184 < r^(lB+1)=2187: True
+r=2 l=1 B=8 H=1: 6560 vectors, zeros=0, max|W_u|=510 < r^(lB+1)=512: True
+r=2 l=3 B=2 H=7: 224 vectors, zeros=0, max|W_u|=126 < r^(lB+1)=128: True
+control H = r^l (r=3, l=1, B=3): zeros=6 (must be > 0)
+even positions r=3, E=[2, 4, 6, 8, 10, 12], H=1: zeros=0
+== (2) identity of Lemma 3.1
+identity: 50 cases (d coprime and not coprime to r), max relative error 2.94e-15
+== (3) majorant (1-p) + p cos^2 >= |cos|^(2p)
+min gap over grid and p in {0.1,...,1}: -1.110e-16 (>= 0 up to rounding)
+== (4) Proposition 4.1(a) (W(a)) and Proposition 4.3 (L)
+W(a) r=3 M=14 D=8 p=0.5: sum F^p = 7.198, 2D^2(1-p/2)^((M-1)/2) = 19.73, ratio to main + 2D: 0.201
+W(a) r=3 M=14 D=8 p=0.9: sum F^p = 5.347, 2D^2(1-p/2)^((M-1)/2) = 2.628, ratio to main + 2D: 0.287
+   L r=3 D=8 k=1 m=3: sum F^2k = 0.003127 <= 42.12: True
+   L r=3 D=8 k=2 m=3: sum F^2k = 9.303e-07 <= 17.77: True
+W(a) r=3 M=14 D=30 p=0.5: sum F^p = 41.36, 2D^2(1-p/2)^((M-1)/2) = 277.4, ratio to main + 2D: 0.123
+W(a) r=3 M=14 D=30 p=0.9: sum F^p = 22.72, 2D^2(1-p/2)^((M-1)/2) = 36.95, ratio to main + 2D: 0.234
+   L r=3 D=30 k=1 m=6: sum F^2k = 0.02222 <= 90.42: True
+   L r=3 D=30 k=2 m=6: sum F^2k = 3.866e-05 <= 16.09: True
+W(a) r=3 M=14 D=100 p=0.5: sum F^p = 334.8, 2D^2(1-p/2)^((M-1)/2) = 3083, ratio to main + 2D: 0.102
+W(a) r=3 M=14 D=100 p=0.9: sum F^p = 100.2, 2D^2(1-p/2)^((M-1)/2) = 410.6, ratio to main + 2D: 0.164
+   L r=3 D=100 k=1 m=8: sum F^2k = 0.2303 <= 233.1: True
+   L r=3 D=100 k=2 m=8: sum F^2k = 0.000733 <= 23.34: True
+W(a) r=4 M=12 D=8 p=0.5: sum F^p = 7.047, 2D^2(1-p/2)^((M-1)/2) = 26.31, ratio to main + 2D: 0.167
+W(a) r=4 M=12 D=8 p=0.9: sum F^p = 4.87, 2D^2(1-p/2)^((M-1)/2) = 4.778, ratio to main + 2D: 0.234
+   L r=4 D=8 k=1 m=3: sum F^2k = 0.02979 <= 64: True
+   L r=4 D=8 k=2 m=3: sum F^2k = 0.000157 <= 27: True
+   L r=4 D=8 k=3 m=3: sum F^2k = 9.477e-07 <= 15.62: True
+W(a) r=4 M=12 D=30 p=0.5: sum F^p = 38.57, 2D^2(1-p/2)^((M-1)/2) = 369.9, ratio to main + 2D: 0.090
+W(a) r=4 M=12 D=30 p=0.9: sum F^p = 19.22, 2D^2(1-p/2)^((M-1)/2) = 67.18, ratio to main + 2D: 0.151
+   L r=4 D=30 k=1 m=4: sum F^2k = 0.03021 <= 289: True
+   L r=4 D=30 k=2 m=4: sum F^2k = 5.859e-05 <= 91.44: True
+   L r=4 D=30 k=3 m=4: sum F^2k = 1.51e-07 <= 44.1: True
+W(a) r=4 M=12 D=100 p=0.5: sum F^p = 305.9, 2D^2(1-p/2)^((M-1)/2) = 4110, ratio to main + 2D: 0.071
+W(a) r=4 M=12 D=100 p=0.9: sum F^p = 92.27, 2D^2(1-p/2)^((M-1)/2) = 746.5, ratio to main + 2D: 0.097
+   L r=4 D=100 k=1 m=6: sum F^2k = 0.3808 <= 881: True
+   L r=4 D=100 k=2 m=6: sum F^2k = 0.001073 <= 156.8: True
+   L r=4 D=100 k=3 m=6: sum F^2k = 7.113e-06 <= 52.51: True
+W(a) r=5 M=10 D=8 p=0.5: sum F^p = 11.61, 2D^2(1-p/2)^((M-1)/2) = 35.07, ratio to main + 2D: 0.227
+W(a) r=5 M=10 D=8 p=0.9: sum F^p = 7.713, 2D^2(1-p/2)^((M-1)/2) = 8.686, ratio to main + 2D: 0.312
+   L r=5 D=8 k=1 m=2: sum F^2k = 0.07024 <= 95.25: True
+   L r=5 D=8 k=2 m=2: sum F^2k = 0.001074 <= 53.58: True
+   L r=5 D=8 k=3 m=2: sum F^2k = 1.75e-05 <= 37.21: True
+W(a) r=5 M=10 D=30 p=0.5: sum F^p = 96.94, 2D^2(1-p/2)^((M-1)/2) = 493.2, ratio to main + 2D: 0.175
+W(a) r=5 M=10 D=30 p=0.9: sum F^p = 42.53, 2D^2(1-p/2)^((M-1)/2) = 122.2, ratio to main + 2D: 0.233
+   L r=5 D=30 k=1 m=4: sum F^2k = 0.7488 <= 420.3: True
+   L r=5 D=30 k=2 m=4: sum F^2k = 0.07108 <= 133: True
+   L r=5 D=30 k=3 m=4: sum F^2k = 0.008002 <= 64.13: True
+W(a) r=5 M=10 D=100 p=0.5: sum F^p = 923.9, 2D^2(1-p/2)^((M-1)/2) = 5480, ratio to main + 2D: 0.163
+W(a) r=5 M=10 D=100 p=0.9: sum F^p = 282.2, 2D^2(1-p/2)^((M-1)/2) = 1357, ratio to main + 2D: 0.181
+   L r=5 D=100 k=1 m=5: sum F^2k = 10.71 <= 1738: True
+   L r=5 D=100 k=2 m=5: sum F^2k = 1.19 <= 412.5: True
+   L r=5 D=100 k=3 m=5: sum F^2k = 0.2424 <= 165.8: True
+W(a) r=7 M=9 D=8 p=0.5: sum F^p = 13.92, 2D^2(1-p/2)^((M-1)/2) = 40.5, ratio to main + 2D: 0.246
+W(a) r=7 M=9 D=8 p=0.9: sum F^p = 9.54, 2D^2(1-p/2)^((M-1)/2) = 11.71, ratio to main + 2D: 0.344
+   L r=7 D=8 k=1 m=2: sum F^2k = 0.5052 <= 149.8: True
+   L r=7 D=8 k=2 m=2: sum F^2k = 0.1158 <= 84.23: True
+   L r=7 D=8 k=3 m=2: sum F^2k = 0.02782 <= 58.5: True
+W(a) r=7 M=9 D=30 p=0.5: sum F^p = 138.7, 2D^2(1-p/2)^((M-1)/2) = 569.5, ratio to main + 2D: 0.220
+W(a) r=7 M=9 D=30 p=0.9: sum F^p = 65.79, 2D^2(1-p/2)^((M-1)/2) = 164.7, ratio to main + 2D: 0.293
+   L r=7 D=30 k=1 m=3: sum F^2k = 7.158 <= 750.1: True
+   L r=7 D=30 k=2 m=3: sum F^2k = 2.261 <= 316.5: True
+   L r=7 D=30 k=3 m=3: sum F^2k = 0.7995 <= 183.1: True
+W(a) r=7 M=9 D=100 p=0.5: sum F^p = 1267, 2D^2(1-p/2)^((M-1)/2) = 6328, ratio to main + 2D: 0.194
+W(a) r=7 M=9 D=100 p=0.9: sum F^p = 419.1, 2D^2(1-p/2)^((M-1)/2) = 1830, ratio to main + 2D: 0.206
+   L r=7 D=100 k=1 m=4: sum F^2k = 16.5 <= 3550: True
+   L r=7 D=100 k=2 m=4: sum F^2k = 1.425 <= 1123: True
+   L r=7 D=100 k=3 m=4: sum F^2k = 0.3115 <= 541.8: True
+== (5) Lemma 4.5, F(h/d) <= cos(pi/(2r))^floor(M/K), K = ceil(log_r d), all reduced h/d, 2 <= d <= 300
+r=3 M=30: max of F / bound = 0.0232 (must be <= 1)
+r=4 M=24: max of F / bound = 0.1741 (must be <= 1)
+r=5 M=20: max of F / bound = 0.3495 (must be <= 1)
+r=10 M=16: max of F / bound = 0.7300 (must be <= 1)
+== (6) large-sieve step of Proposition 4.4: sum over reduced h/q, q in [Q,2Q), of F <= (r^L + 4Q^2) m_2k^L, 2kL <= M
+r=3 M=24 k=1 Q=4 L=3: sum F = 0.0004889 <= 11.38: True
+r=3 M=24 k=1 Q=16 L=6: sum F = 0.0305 <= 27.39: True
+r=3 M=24 k=1 Q=64 L=8: sum F = 0.5408 <= 89.63: True
+r=3 M=24 k=2 Q=4 L=3: sum F = 0.0004889 <= 4.799: True
+r=3 M=24 k=2 Q=16 L=6: sum F = 0.0305 <= 4.875: True
+r=4 M=20 k=2 Q=4 L=3: sum F = 0.02886 <= 6.75: True
+r=4 M=20 k=2 Q=16 L=5: sum F = 0.3689 <= 15.19: True
+r=5 M=18 k=2 Q=4 L=2: sum F = 0.1541 <= 12.52: True
+r=5 M=18 k=2 Q=16 L=4: sum F = 2.197 <= 32.61: True
+r=7 M=16 k=3 Q=4 L=2: sum F = 0.2081 <= 11.04: True
+S_2k(r) = sup_u sum_c cos^2k(pi (u+c)/r) equals r m_2k for k <= r-1 (grid in u):
+   r=3 k=1: max 1.500000000000, min 1.500000000000, r m_2k = 1.500000000000
+   r=3 k=2: max 1.125000000000, min 1.125000000000, r m_2k = 1.125000000000
+   r=4 k=2: max 1.500000000000, min 1.500000000000, r m_2k = 1.500000000000
+   r=4 k=3: max 1.250000000000, min 1.250000000000, r m_2k = 1.250000000000
+   r=6 k=3: max 1.875000000000, min 1.875000000000, r m_2k = 1.875000000000
+   r=10 k=5: max 2.460937500000, min 2.460937500000, r m_2k = 2.460937500000
+== (7) sanity scan S(D)/D (small for D below |W|^(1/2), linear growth beyond)
+r=3 M=22 |W|^(1/2)=2048: D=8:0.00224 D=16:0.00325 D=32:0.00339 D=64:0.0138 D=128:0.0112 D=256:0.0141 D=512:0.0319 D=1024:0.0485 D=2048:0.102 D=4096:0.201
+r=4 M=18 |W|^(1/2)=512: D=8:0.0147 D=16:0.0323 D=32:0.0251 D=64:0.0415 D=128:0.0501 D=256:0.0685 D=512:0.0817 D=1024:0.16 D=2048:0.311 D=4096:0.597
+r=5 M=16 |W|^(1/2)=256: D=8:0.021 D=16:0.176 D=32:0.0453 D=64:0.0983 D=128:0.0836 D=256:0.167 D=512:0.375 D=1024:0.621 D=2048:1.29 D=4096:2.48
+r=8 M=14 |W|^(1/2)=128: D=8:0.139 D=16:0.0483 D=32:0.192 D=64:0.249 D=128:0.188 D=256:0.393 D=512:0.591 D=1024:1.1 D=2048:2.24
+== (8) -log_r(int_0^1 K_l^p)/l, p = 0.99 (upper limit for blocks of length l), midpoint rule
+r=3 l=1: int K^0.99 = 0.638582, rate per digit 0.40825
+r=3 l=2: int K^0.99 = 0.416088, rate per digit 0.39908
+r=3 l=3: int K^0.99 = 0.270560, rate per digit 0.39664
+r=3 l=4: int K^0.99 = 0.175967, rate per digit 0.39538
+r=3 l=5: int K^0.99 = 0.114443, rate per digit 0.39462
+r=3: log_r(pi/2) = 0.41105, lambda/2 = 0.31546
+r=4 l=1: int K^0.99 = 0.638582, rate per digit 0.32353
+r=4 l=2: int K^0.99 = 0.403630, rate per digit 0.32722
+r=4 l=3: int K^0.99 = 0.254746, rate per digit 0.32881
+r=4 l=4: int K^0.99 = 0.160745, rate per digit 0.32964
+r=4 l=5: int K^0.99 = 0.101428, rate per digit 0.33015
+r=4: log_r(pi/2) = 0.32575, lambda/2 = 0.25000
+### wall time 86.6 s
+

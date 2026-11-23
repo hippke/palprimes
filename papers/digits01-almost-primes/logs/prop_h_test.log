@@ -1,0 +1,103 @@
+### prop_h_test.py
+== Proposition 4.4: S(D) vs 8 m^{-1} D^{1-c_k}, with M = 2kL (tightest) 
+r=3 k=1 c_k=0.2619 D=   2 L= 2 M=  4 #pts=       1 S=1.4058e-65 Hoelder=1.4058e-65 LSfac=6.2500e+00 bound=2.6688e+01 S/bound=5.267e-67 perm_rel_err=0.0e+00 ok=True
+r=3 k=1 c_k=0.2619 D=   4 L= 3 M=  6 #pts=      12 S=4.0625e-01 Hoelder=4.3750e-01 LSfac=1.1375e+01 bound=4.4517e+01 S/bound=9.126e-03 perm_rel_err=0.0e+00 ok=True
+r=3 k=1 c_k=0.2619 D=   8 L= 5 M= 10 #pts=      36 S=7.3079e-01 Hoelder=8.2227e-01 LSfac=1.5594e+01 bound=7.4255e+01 S/bound=9.842e-03 perm_rel_err=0.0e+00 ok=True
+r=3 k=1 c_k=0.2619 D=  16 L= 6 M= 12 #pts=     184 S=7.2497e-01 Hoelder=1.5171e+00 LSfac=2.7391e+01 bound=1.2386e+02 S/bound=5.853e-03 perm_rel_err=1.5e-16 ok=True
+r=3 k=1 c_k=0.2619 D=  32 L= 7 M= 14 #pts=     674 S=1.2881e+00 Hoelder=2.7628e+00 LSfac=4.9086e+01 bound=2.0660e+02 S/bound=6.235e-03 perm_rel_err=1.6e-16 ok=True
+r=3 k=1 c_k=0.2619 D=  64 L= 8 M= 16 #pts=    2824 S=4.0958e+00 Hoelder=9.1412e+00 LSfac=8.9629e+01 bound=3.4462e+02 S/bound=1.189e-02 perm_rel_err=1.9e-16 ok=True
+r=3 k=1 c_k=0.2619 D= 128 L=10 M= 20 #pts=   11078 S=2.5020e+00 Hoelder=8.1313e+00 LSfac=1.2167e+02 bound=5.7483e+02 S/bound=4.353e-03 perm_rel_err=2.2e-16 ok=True
+r=3 k=1 c_k=0.2619 D= 256 L=11 M= 22 #pts=   44966 S=3.6097e+00 Hoelder=1.5400e+01 LSfac=2.1450e+02 bound=9.5883e+02 S/bound=3.765e-03 perm_rel_err=0.0e+00 ok=True
+r=3 k=1 c_k=0.2619 D= 512 L=12 M= 24 #pts=  178838 S=8.1729e+00 Hoelder=3.8470e+01 LSfac=3.8575e+02 bound=1.5993e+03 S/bound=5.110e-03 perm_rel_err=0.0e+00 ok=True
+r=3 k=2 c_k=0.7856 D=   2 L= 2 M=  8 #pts=       1 S=1.9763e-130 Hoelder=1.9763e-130 LSfac=3.5156e+00 bound=2.4752e+01 S/bound=7.984e-132 perm_rel_err=0.0e+00 ok=True
+r=3 k=2 c_k=0.7856 D=   4 L= 3 M= 12 #pts=      12 S=3.3691e-02 Hoelder=3.6133e-02 LSfac=4.7988e+00 bound=2.8718e+01 S/bound=1.173e-03 perm_rel_err=0.0e+00 ok=True
+r=3 k=2 c_k=0.7856 D=   8 L= 5 M= 20 #pts=      36 S=3.2912e-02 Hoelder=5.0901e-02 LSfac=3.7005e+00 bound=3.3320e+01 S/bound=9.878e-04 perm_rel_err=1.4e-16 ok=True
+r=3 k=2 c_k=0.7856 D=  16 L= 6 M= 24 #pts=     184 S=3.0504e-02 Hoelder=5.3992e-02 LSfac=4.8749e+00 bound=3.8659e+01 S/bound=7.891e-04 perm_rel_err=1.3e-16 ok=True
+r=3 k=2 c_k=0.7856 D=  32 L= 7 M= 28 #pts=     674 S=2.1268e-02 Hoelder=8.0233e-02 LSfac=6.5522e+00 bound=4.4853e+01 S/bound=4.742e-04 perm_rel_err=1.7e-16 ok=True
+r=3 k=2 c_k=0.7856 D=  64 L= 8 M= 32 #pts=    2824 S=1.0073e-01 Hoelder=2.9977e-01 LSfac=8.9730e+00 bound=5.2041e+01 S/bound=1.936e-03 perm_rel_err=0.0e+00 ok=True
+r=3 k=2 c_k=0.7856 D= 128 L=10 M= 40 #pts=   11078 S=4.6851e-02 Hoelder=1.2250e-01 LSfac=6.8514e+00 bound=6.0380e+01 S/bound=7.759e-04 perm_rel_err=1.1e-16 ok=True
+r=3 k=2 c_k=0.7856 D= 256 L=11 M= 44 #pts=   44966 S=2.2757e-02 Hoelder=1.4759e-01 LSfac=9.0593e+00 bound=7.0055e+01 S/bound=3.248e-04 perm_rel_err=0.0e+00 ok=True
+r=3 k=2 c_k=0.7856 D= 512 L=12 M= 48 #pts=  178838 S=7.9789e-02 Hoelder=3.8471e-01 LSfac=1.2219e+01 bound=8.1280e+01 S/bound=9.817e-04 perm_rel_err=1.4e-16 ok=True
+r=4 k=2 c_k=0.4150 D=   2 L= 2 M=  8 #pts=       2 S=7.8125e-03 Hoelder=7.8125e-03 LSfac=4.5000e+00 bound=3.2000e+01 S/bound=2.441e-04 perm_rel_err=0.0e+00 ok=True
+r=4 k=2 c_k=0.4150 D=   4 L= 3 M= 12 #pts=      10 S=1.5869e-01 Hoelder=1.5869e-01 LSfac=6.7500e+00 bound=4.8000e+01 S/bound=3.306e-03 perm_rel_err=0.0e+00 ok=True
+r=4 k=2 c_k=0.4150 D=   8 L= 4 M= 16 #pts=      36 S=1.8987e-01 Hoelder=2.1591e-01 LSfac=1.0125e+01 bound=7.2000e+01 S/bound=2.637e-03 perm_rel_err=1.3e-16 ok=True
+r=4 k=2 c_k=0.4150 D=  16 L= 5 M= 20 #pts=     164 S=3.6891e-01 Hoelder=5.4033e-01 LSfac=1.5188e+01 bound=1.0800e+02 S/bound=3.416e-03 perm_rel_err=0.0e+00 ok=True
+r=4 k=2 c_k=0.4150 D=  32 L= 6 M= 24 #pts=     612 S=3.1785e-01 Hoelder=8.4729e-01 LSfac=2.2781e+01 bound=1.6200e+02 S/bound=1.962e-03 perm_rel_err=1.3e-16 ok=True
+r=4 k=2 c_k=0.4150 D=  64 L= 7 M= 28 #pts=    2502 S=5.2512e-01 Hoelder=1.3144e+00 LSfac=3.4172e+01 bound=2.4300e+02 S/bound=2.161e-03 perm_rel_err=1.7e-16 ok=True
+r=4 k=2 c_k=0.4150 D= 128 L= 8 M= 32 #pts=    9904 S=8.3875e-01 Hoelder=2.5014e+00 LSfac=5.1258e+01 bound=3.6450e+02 S/bound=2.301e-03 perm_rel_err=1.8e-16 ok=True
+r=4 k=2 c_k=0.4150 D= 256 L= 9 M= 36 #pts=   39956 S=1.0614e+00 Hoelder=3.6261e+00 LSfac=7.6887e+01 bound=5.4675e+02 S/bound=1.941e-03 perm_rel_err=1.2e-16 ok=True
+r=4 k=2 c_k=0.4150 D= 512 L=10 M= 40 #pts=  159260 S=6.8391e-01 Hoelder=6.0905e+00 LSfac=1.1533e+02 bound=8.2013e+02 S/bound=8.339e-04 perm_rel_err=1.5e-16 ok=True
+r=4 k=3 c_k=0.6781 D=   2 L= 2 M= 12 #pts=       2 S=4.8828e-04 Hoelder=4.8828e-04 LSfac=3.1250e+00 bound=3.2000e+01 S/bound=1.526e-05 perm_rel_err=0.0e+00 ok=True
+r=4 k=3 c_k=0.6781 D=   4 L= 3 M= 18 #pts=      10 S=4.4106e-02 Hoelder=4.4106e-02 LSfac=3.9062e+00 bound=4.0000e+01 S/bound=1.103e-03 perm_rel_err=0.0e+00 ok=True
+r=4 k=3 c_k=0.6781 D=   8 L= 4 M= 24 #pts=      36 S=2.9785e-02 Hoelder=3.5323e-02 LSfac=4.8828e+00 bound=5.0000e+01 S/bound=5.957e-04 perm_rel_err=2.0e-16 ok=True
+r=4 k=3 c_k=0.6781 D=  16 L= 5 M= 30 #pts=     164 S=6.8930e-02 Hoelder=1.0346e-01 LSfac=6.1035e+00 bound=6.2500e+01 S/bound=1.103e-03 perm_rel_err=1.3e-16 ok=True
+r=4 k=3 c_k=0.6781 D=  32 L= 6 M= 36 #pts=     612 S=6.3692e-02 Hoelder=1.3731e-01 LSfac=7.6294e+00 bound=7.8125e+01 S/bound=8.153e-04 perm_rel_err=2.0e-16 ok=True
+r=4 k=3 c_k=0.6781 D=  64 L= 7 M= 42 #pts=    2502 S=7.7247e-02 Hoelder=1.8146e-01 LSfac=9.5367e+00 bound=9.7656e+01 S/bound=7.910e-04 perm_rel_err=1.5e-16 ok=True
+r=4 k=3 c_k=0.6781 D= 128 L= 8 M= 48 #pts=    9904 S=1.3572e-01 Hoelder=3.2157e-01 LSfac=1.1921e+01 bound=1.2207e+02 S/bound=1.112e-03 perm_rel_err=1.7e-16 ok=True
+r=4 k=3 c_k=0.6781 D= 256 L= 9 M= 54 #pts=   39956 S=1.4198e-01 Hoelder=3.9188e-01 LSfac=1.4901e+01 bound=1.5259e+02 S/bound=9.305e-04 perm_rel_err=2.8e-16 ok=True
+r=4 k=3 c_k=0.6781 D= 512 L=10 M= 60 #pts=  159260 S=1.2616e-01 Hoelder=5.3841e-01 LSfac=1.8626e+01 bound=1.9073e+02 S/bound=6.614e-04 perm_rel_err=0.0e+00 ok=True
+r=5 k=2 c_k=0.2188 D=   2 L= 1 M=  4 #pts=       3 S=1.2500e-01 Hoelder=1.2500e-01 LSfac=7.8750e+00 bound=3.6661e+01 S/bound=3.410e-03 perm_rel_err=0.0e+00 ok=True
+r=5 k=2 c_k=0.2188 D=   4 L= 2 M=  8 #pts=      10 S=7.8597e-01 Hoelder=9.6094e-01 LSfac=1.2516e+01 bound=6.3003e+01 S/bound=1.248e-02 perm_rel_err=1.2e-16 ok=True
+r=5 k=2 c_k=0.2188 D=   8 L= 3 M= 12 #pts=      42 S=4.3097e-01 Hoelder=5.1855e-01 LSfac=2.0092e+01 bound=1.0827e+02 S/bound=3.981e-03 perm_rel_err=0.0e+00 ok=True
+r=5 k=2 c_k=0.2188 D=  16 L= 4 M= 16 #pts=     200 S=2.8080e+00 Hoelder=3.6237e+00 LSfac=3.2610e+01 bound=1.8606e+02 S/bound=1.509e-02 perm_rel_err=0.0e+00 ok=True
+r=5 k=2 c_k=0.2188 D=  32 L= 5 M= 20 #pts=     780 S=7.3374e-01 Hoelder=2.0289e+00 LSfac=5.3549e+01 bound=3.1975e+02 S/bound=2.295e-03 perm_rel_err=2.2e-16 ok=True
+r=5 k=2 c_k=0.2188 D=  64 L= 6 M= 24 #pts=    3078 S=2.4872e+00 Hoelder=6.9584e+00 LSfac=8.9014e+01 bound=5.4949e+02 S/bound=4.526e-03 perm_rel_err=2.6e-16 ok=True
+r=5 k=2 c_k=0.2188 D= 128 L= 6 M= 24 #pts=   12346 S=1.9513e+00 Hoelder=2.4496e+01 LSfac=2.2570e+02 bound=9.4430e+02 S/bound=2.066e-03 perm_rel_err=1.5e-16 ok=True
+r=5 k=2 c_k=0.2188 D= 256 L= 7 M= 28 #pts=   49896 S=2.2971e+00 Hoelder=3.5039e+01 LSfac=3.5485e+02 bound=1.6228e+03 S/bound=1.416e-03 perm_rel_err=2.0e-16 ok=True
+r=5 k=2 c_k=0.2188 D= 512 L= 8 M= 32 #pts=  199260 S=1.0812e+01 Hoelder=7.0816e+01 LSfac=5.6282e+02 bound=2.7888e+03 S/bound=3.877e-03 perm_rel_err=0.0e+00 ok=True
+r=5 k=4 c_k=0.6113 D=   2 L= 1 M=  8 #pts=       3 S=7.8125e-03 Hoelder=7.8125e-03 LSfac=5.7422e+00 bound=3.8303e+01 S/bound=2.040e-04 perm_rel_err=0.0e+00 ok=True
+r=5 k=4 c_k=0.6113 D=   4 L= 2 M= 16 #pts=      10 S=2.0814e-01 Hoelder=2.2787e-01 LSfac=6.6544e+00 bound=5.0145e+01 S/bound=4.151e-03 perm_rel_err=1.2e-16 ok=True
+r=5 k=4 c_k=0.6113 D=   8 L= 3 M= 24 #pts=      42 S=2.9623e-02 Hoelder=3.7263e-02 LSfac=7.7893e+00 bound=6.5648e+01 S/bound=4.512e-04 perm_rel_err=1.9e-16 ok=True
+r=5 k=4 c_k=0.6113 D=  16 L= 4 M= 32 #pts=     200 S=4.3442e-01 Hoelder=5.4345e-01 LSfac=9.2183e+00 bound=8.5944e+01 S/bound=5.055e-03 perm_rel_err=2.0e-16 ok=True
+r=5 k=4 c_k=0.6113 D=  32 L= 5 M= 40 #pts=     780 S=5.1740e-02 Hoelder=1.1604e-01 LSfac=1.1038e+01 bound=1.1252e+02 S/bound=4.598e-04 perm_rel_err=1.2e-16 ok=True
+r=5 k=4 c_k=0.6113 D=  64 L= 6 M= 48 #pts=    3078 S=3.6685e-01 Hoelder=6.2018e-01 LSfac=1.3379e+01 bound=1.4730e+02 S/bound=2.490e-03 perm_rel_err=1.8e-16 ok=True
+r=5 k=4 c_k=0.6113 D= 128 L= 6 M= 48 #pts=   12346 S=1.4982e-01 Hoelder=2.0628e+00 LSfac=3.3923e+01 bound=1.9284e+02 S/bound=7.769e-04 perm_rel_err=0.0e+00 ok=True
+r=5 k=4 c_k=0.6113 D= 256 L= 7 M= 56 #pts=   49896 S=1.0135e-01 Hoelder=1.6833e+00 LSfac=3.8889e+01 bound=2.5246e+02 S/bound=4.014e-04 perm_rel_err=1.3e-16 ok=True
+r=5 k=4 c_k=0.6113 D= 512 L= 8 M= 64 #pts=  199260 S=1.0044e+00 Hoelder=3.5782e+00 LSfac=4.4977e+01 bound=3.3052e+02 S/bound=3.039e-03 perm_rel_err=1.2e-16 ok=True
+r=6 k=3 c_k=0.2983 D=   4 L= 2 M= 12 #pts=      10 S=7.3633e-01 Hoelder=7.3633e-01 LSfac=9.7656e+00 bound=6.7715e+01 S/bound=1.087e-02 perm_rel_err=0.0e+00 ok=True
+r=6 k=3 c_k=0.2983 D=   8 L= 3 M= 18 #pts=      22 S=9.5043e-05 Hoelder=3.0365e-02 LSfac=1.4404e+01 bound=1.1013e+02 S/bound=8.630e-07 perm_rel_err=1.1e-16 ok=True
+r=6 k=3 c_k=0.2983 D=  16 L= 3 M= 18 #pts=     134 S=8.0648e-01 Hoelder=1.8508e+00 LSfac=3.7842e+01 bound=1.7911e+02 S/bound=4.503e-03 perm_rel_err=2.4e-16 ok=True
+r=6 k=3 c_k=0.2983 D=  32 L= 4 M= 24 #pts=     440 S=2.4012e+00 Hoelder=3.4408e+00 LSfac=5.1422e+01 bound=2.9131e+02 S/bound=8.243e-03 perm_rel_err=1.3e-16 ok=True
+r=6 k=3 c_k=0.2983 D=  64 L= 5 M= 30 #pts=    1916 S=5.7364e-02 Hoelder=1.4353e+00 LSfac=7.2002e+01 bound=4.7378e+02 S/bound=1.211e-04 perm_rel_err=1.5e-16 ok=True
+r=6 k=3 c_k=0.2983 D= 128 L= 6 M= 36 #pts=    7346 S=2.8385e+00 Hoelder=1.0265e+01 LSfac=1.0449e+02 bound=7.7055e+02 S/bound=3.684e-03 perm_rel_err=1.7e-16 ok=True
+r=6 k=3 c_k=0.2983 D= 256 L= 6 M= 36 #pts=   30156 S=1.2055e+00 Hoelder=1.6959e+01 LSfac=2.8759e+02 bound=1.2532e+03 S/bound=9.620e-04 perm_rel_err=2.1e-16 ok=True
+r=6 k=3 c_k=0.2983 D= 512 L= 7 M= 42 #pts=  119062 S=3.0289e-01 Hoelder=1.6039e+01 LSfac=3.8665e+02 bound=2.0382e+03 S/bound=1.486e-04 perm_rel_err=2.2e-16 ok=True
+r=7 k=3 c_k=0.1955 D=   2 L= 1 M=  6 #pts=       3 S=3.1250e-02 Hoelder=3.1250e-02 LSfac=7.1875e+00 bound=4.4712e+01 S/bound=6.989e-04 perm_rel_err=0.0e+00 ok=True
+r=7 k=3 c_k=0.1955 D=   4 L= 2 M= 12 #pts=       8 S=3.8818e-01 Hoelder=3.8818e-01 LSfac=1.1035e+01 bound=7.8092e+01 S/bound=4.971e-03 perm_rel_err=0.0e+00 ok=True
+r=7 k=3 c_k=0.1955 D=   8 L= 2 M= 12 #pts=      48 S=9.0626e-01 Hoelder=3.3252e+00 LSfac=2.9785e+01 bound=1.3639e+02 S/bound=6.645e-03 perm_rel_err=1.3e-16 ok=True
+r=7 k=3 c_k=0.1955 D=  16 L= 3 M= 18 #pts=     212 S=9.4793e-01 Hoelder=2.3637e+00 LSfac=4.1718e+01 bound=2.3822e+02 S/bound=3.979e-03 perm_rel_err=1.9e-16 ok=True
+r=7 k=3 c_k=0.1955 D=  32 L= 4 M= 24 #pts=     782 S=4.7462e+00 Hoelder=8.2618e+00 LSfac=6.1960e+01 bound=4.1606e+02 S/bound=1.141e-02 perm_rel_err=2.2e-16 ok=True
+r=7 k=3 c_k=0.1955 D=  64 L= 4 M= 24 #pts=    3280 S=4.3307e-01 Hoelder=1.8054e+01 LSfac=1.7915e+02 bound=7.2668e+02 S/bound=5.960e-04 perm_rel_err=0.0e+00 ok=True
+r=7 k=3 c_k=0.1955 D= 128 L= 5 M= 30 #pts=   13050 S=2.1236e+00 Hoelder=2.4437e+01 LSfac=2.4540e+02 bound=1.2692e+03 S/bound=1.673e-03 perm_rel_err=1.5e-16 ok=True
+r=7 k=3 c_k=0.1955 D= 256 L= 6 M= 36 #pts=   52054 S=7.1072e+00 Hoelder=4.7806e+01 LSfac=3.5371e+02 bound=2.2167e+03 S/bound=3.206e-03 perm_rel_err=0.0e+00 ok=True
+r=7 k=3 c_k=0.1955 D= 512 L= 7 M= 42 #pts=  209150 S=1.7207e+00 Hoelder=3.4869e+01 LSfac=5.4486e+02 bound=3.8716e+03 S/bound=4.444e-04 perm_rel_err=2.0e-16 ok=True
+r=10 k=4 c_k=0.1263 D=   2 L= 1 M=  8 #pts=       2 S=7.8125e-03 Hoelder=7.8125e-03 LSfac=7.1094e+00 bound=5.3610e+01 S/bound=1.457e-04 perm_rel_err=0.0e+00 ok=True
+r=10 k=4 c_k=0.1263 D=   4 L= 1 M=  8 #pts=       6 S=2.8155e-02 Hoelder=9.1406e-01 LSfac=2.0234e+01 bound=9.8234e+01 S/bound=2.866e-04 perm_rel_err=1.2e-16 ok=True
+r=10 k=4 c_k=0.1263 D=   8 L= 2 M= 16 #pts=      28 S=1.9825e+00 Hoelder=2.1027e+00 LSfac=2.6617e+01 bound=1.8000e+02 S/bound=1.101e-02 perm_rel_err=2.1e-16 ok=True
+r=10 k=4 c_k=0.1263 D=  16 L= 3 M= 24 #pts=     144 S=8.7592e-05 Hoelder=5.8036e-01 LSfac=4.1379e+01 bound=3.2983e+02 S/bound=2.656e-07 perm_rel_err=1.9e-16 ok=True
+r=10 k=4 c_k=0.1263 D=  32 L= 3 M= 24 #pts=     524 S=7.4404e-01 Hoelder=5.0718e+00 LSfac=1.0418e+02 bound=6.0437e+02 S/bound=1.231e-03 perm_rel_err=1.8e-16 ok=True
+r=10 k=4 c_k=0.1263 D=  64 L= 4 M= 32 #pts=    2042 S=9.4421e+00 Hoelder=1.6220e+01 LSfac=1.4749e+02 bound=1.1074e+03 S/bound=8.526e-03 perm_rel_err=2.2e-16 ok=True
+r=10 k=4 c_k=0.1263 D= 128 L= 4 M= 32 #pts=    8232 S=6.9066e-01 Hoelder=3.3814e+01 LSfac=4.2227e+02 bound=2.0292e+03 S/bound=3.404e-04 perm_rel_err=2.1e-16 ok=True
+r=10 k=4 c_k=0.1263 D= 256 L= 5 M= 40 #pts=   33436 S=8.4550e-01 Hoelder=3.1596e+01 LSfac=5.5357e+02 bound=3.7183e+03 S/bound=2.274e-04 perm_rel_err=1.1e-16 ok=True
+r=10 k=4 c_k=0.1263 D= 512 L= 6 M= 48 #pts=  132904 S=1.3004e+01 Hoelder=7.1220e+01 LSfac=8.5625e+02 bound=6.8134e+03 S/bound=1.909e-03 perm_rel_err=2.0e-16 ok=True
+max S/bound over all cases: 1.509e-02 (must be <= 1)
+
+== Lemma 4.2 needs k <= r-1: int_0^1 G_{0,L}^{2k} (= sum |c_n|^2 by Parseval) vs m_{2k}^L
+r=3 k=1 L=3: int G^2k = 0.1250000000, m^L = 0.1250000000, equal=True  (k<=r-1: True)
+r=3 k=2 L=3: int G^2k = 0.0527343750, m^L = 0.0527343750, equal=True  (k<=r-1: True)
+r=3 k=3 L=2: int G^2k = 0.1049804687, m^L = 0.0976562500, equal=False  (k<=r-1: False)
+r=3 k=4 L=2: int G^2k = 0.0884399414, m^L = 0.0747680664, equal=False  (k<=r-1: False)
+r=4 k=3 L=2: int G^2k = 0.0976562500, m^L = 0.0976562500, equal=True  (k<=r-1: True)
+r=4 k=4 L=2: int G^2k = 0.0764770508, m^L = 0.0747680664, equal=False  (k<=r-1: False)
+r=5 k=4 L=2: int G^2k = 0.0747680664, m^L = 0.0747680664, equal=True  (k<=r-1: True)
+r=5 k=5 L=2: int G^2k = 0.0609626770, m^L = 0.0605621338, equal=False  (k<=r-1: False)
+
+== Lemma 4.5 pointwise: max over reduced h/d, 2<=d<=D0, (d,r)=1 of F(h/d)/cos(pi/(2r))^floor(M/K)
+r=3 M=30 d<=3000: max ratio 0.0837 at h/d = 729/2186 (must be <= 1)
+r=4 M=24 d<=3000: max ratio 0.3104 at h/d = 256/1025 (must be <= 1)
+r=5 M=20 d<=3000: max ratio 0.4258 at h/d = 1/624 (must be <= 1)
+r=7 M=18 d<=2000: max ratio 0.6127 at h/d = 1/342 (must be <= 1)
+r=10 M=16 d<=2000: max ratio 0.8253 at h/d = 100/999 (must be <= 1)
+r=3 M=7 d<=3000: max ratio 0.6962 at h/d = 1000/2999 (must be <= 1)
+### wall time 10.8 s
+

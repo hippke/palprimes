@@ -1,0 +1,553 @@
+\documentclass[11pt]{amsart}
+
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm,mathtools,mathrsfs}
+\usepackage[margin=1.15in]{geometry}
+\usepackage{booktabs}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+% Upright theorem bodies (no italics in running text).
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+
+% Upright proof labels.
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par\pushQED{\qed}\normalfont\topsep6\p@\@plus6\p@\relax\trivlist\item[\hskip\labelsep\upshape#1.]\ignorespaces}{\popQED\endtrivlist\@endpefalse}
+\makeatother
+
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\WW}{\mathcal{W}}
+\newcommand{\FF}{\mathscr{F}}
+\newcommand{\sumstar}{\sideset{}{^*}\sum}
+\newcommand{\tmax}{\tau_{\max}}
+\newcommand{\norm}[1]{\lVert #1\rVert}
+
+\title{Almost primes with digits 0 and 1 in every base}
+\author{[Author]}
+\date{}
+
+\begin{document}
+
+\begin{abstract}
+Let $r\ge3$ and let $\WW$ be the set of positive integers below $X=r^s$ whose digits in base $r$ are all $0$ or $1$ and whose last digit is $1$, so that $\#\WW=X^{\lambda}/2$ with $\lambda=\log2/\log r$. We prove that $\WW$ is equidistributed in residue classes on average over the moduli $q\le X^{\theta}$ coprime to $r$, uniformly in the residue class, for every $\theta<\lambda/2$. This is a level of distribution $(\#\WW)^{1/2-\varepsilon}$, which was known for $r=3$ and $r=4$ only. For $r=3$ and $r=4$ certified block majorants raise the level to $0.35368$ and $0.26029$. Greaves' weighted sieve then gives $\gg\#\WW/\log X$ elements of $\WW$ with at most $k(r)$ prime factors, counted with multiplicity, and no prime factor below $X^{c}$, where $k(r)\le2\log_2r+1.13$ for every $r\ge3$. For large $r$ this replaces the bound $k(r)\sim8r/\pi$ of Dartyge and Mauduit. For $r=4$ we obtain $k(4)=4$, against $k(4)=5$ of Dartyge and Mauduit, and for $r=3$ we recover their value $k(3)=3$. The proof combines the Cauchy--Schwarz inequality over the even and the odd digit positions, a positive-definite majorant of $\lvert\cos\pi t\rvert^{2p}$ obtained from the inequality of weighted arithmetic and geometric means, an exact identity for complete sums of products of such majorants, and the large sieve at an even moment for the large values of the Fourier transform.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}\label{sec:intro}
+
+\subsection{Background}
+
+Let $r\ge3$ be an integer. Integers whose digits in base $r$ are restricted to a fixed set have been studied from many points of view. Erd\H{o}s, Mauduit and S\'ark\"ozy \cite{EMS98,EMS99} studied their distribution in residue classes and their prime factors, Konyagin \cite{Ko01} and Col \cite{Col09} continued this work, and Maynard \cite{May19} proved that there are infinitely many primes with a missing digit in base $10$. For the sparsest nontrivial case, the digits $0$ and $1$, Dartyge and Mauduit \cite{DM00} proved that for every $r\ge3$ there are infinitely many such integers with at most $k(r)$ prime factors. They used weighted sieves for $r=3,4,5$, with $k(3)=4$, $k(4)=5$ and $k(5)=7$, and the linear sieve for $r\ge6$, with $k(r)\sim8r/\pi$ as $r\to\infty$ \cite[Thm.~5]{DM00}. In \cite[Thm.~3]{DM01} they raised the level of distribution for $r=3$ and $r=4$ and obtained $k(3)=3$. The asymptotic bound $8r/\pi\,(1+o(1))$ for the digits $0$ and $1$ is the one quoted in the recent work of Dartyge, Rivat and Swaenepoel \cite{DRS}.
+
+In this paper we prove a level of distribution of square-root type for the set of integers with digits $0$ and $1$ in every base $r\ge3$, which was known only for $r=3$ and $r=4$. We deduce that the linear growth of $k(r)$ can be replaced by a logarithmic one, and that $k(4)=4$.
+
+\subsection{Results}
+
+For $s\ge3$ put $X=r^s$, $M=s-1$ and
+\[
+\WW=\WW_s=\Bigl\{1+\sum_{j=1}^{M}\varepsilon_jr^j\ :\ \varepsilon_1,\dots,\varepsilon_M\in\{0,1\}\Bigr\}.
+\]
+The elements of $\WW$ are the integers in $[1,X)$ with digits in $\{0,1\}$ and last digit $1$. They are $\equiv1\pmod r$ and pairwise distinct, so $\#\WW=2^{M}=X^{\lambda}/2$ with
+\[
+\lambda=\frac{\log2}{\log r}.
+\]
+Integers with digits in $\{0,1\}$ and last digit $0$ are divisible by $r$, and the restriction to last digit $1$ loses nothing for almost primes.
+
+\begin{theorem}[Level of distribution]\label{thm:level}
+Let $r\ge3$ and let $\theta$ satisfy one of the following conditions.
+\begin{enumerate}
+\item[(a)] $0<\theta<\lambda/2=\log2/(2\log r)$.
+\item[(b)] $r=3$ and $0<\theta<0.35368507$, or $r=4$ and $0<\theta<0.26029616$.
+\end{enumerate}
+Then there is $c=c(r,\theta)>0$ such that, as $s\to\infty$,
+\[
+\sum_{\substack{q\le X^{\theta}\\(q,r)=1}}\ \max_{a\in\Z}\ \Bigl|\#\{n\in\WW:n\equiv a\pmod q\}-\frac{\#\WW}{q}\Bigr|\ll_{r,\theta}\#\WW\exp\bigl(-c\sqrt{\log X}\bigr).
+\]
+\end{theorem}
+
+Since $(\#\WW)^{1/2}=X^{\lambda/2}/\sqrt2$, part (a) is a level of distribution $(\#\WW)^{1/2-\varepsilon}$ for every $\varepsilon>0$. Part (a) needs no numerical input. The numbers in part (b) are lower bounds for $-\log_r(\tau_0)/4$, where $\tau_0$ is the mean of a trigonometric polynomial that majorises the power $0.99$ of the Fourier transform of a block of four digits. These polynomials are given explicitly and the majorant property is certified in interval arithmetic (Sect.~\ref{sec:blocks}).
+
+For a positive integer $n$ let $\Omega(n)$ be the number of prime factors of $n$ counted with multiplicity and $P^-(n)$ its least prime factor. Let $\delta_R$ be Greaves' constant defined in~\eqref{eq:delta}. It increases with $R$, $\delta_3=0.0999946$ and $\delta_R<\Delta_\infty=0.1248204\ldots$ for all $R$.
+
+\begin{corollary}[Almost primes]\label{cor:almost}
+Let $r\ge3$. Put $\theta^*_r=\lambda/2$ for $r\ge5$, $\theta^*_3=0.35368507$ and $\theta^*_4=0.26029616$, and let $k(r)$ be the least integer $R\ge3$ with $R-\delta_R>1/\theta^*_r$. Then for every $0<c<0.074368\,\theta^*_r$
+\[
+\#\{n\in\WW:\Omega(n)\le k(r),\ P^-(n)\ge X^{c}\}\gg_{r,c}\frac{\#\WW}{\log X}\qquad(s\to\infty).
+\]
+Moreover $k(3)=3$, $k(4)=4$, and for every $r\ge3$
+\[
+k(r)\le\bigl\lfloor2\log_2r+\Delta_\infty\bigr\rfloor+1\le2\log_2r+1.13.
+\]
+\end{corollary}
+
+In particular, for every $r\ge3$ there are infinitely many integers whose digits in base $r$ are all $0$ or $1$ and which have at most $2\log_2r+1.13$ prime factors. Table~\ref{tab:k} lists $k(r)$ for small $r$.
+
+\begin{table}[ht]
+\caption{The bound $k(r)$ of Corollary~\ref{cor:almost}. The column $\lambda/2$ gives the level of Theorem~\ref{thm:level}(a), the next column the bound that this level alone gives with Greaves' weights. For $r=3,4$ the final value uses the certified levels of Theorem~\ref{thm:level}(b). The last column is the asymptotic value $8r/\pi$ of Dartyge and Mauduit \cite{DM00}, given for orientation only.}\label{tab:k}
+\begin{tabular}{rcccccc}
+\toprule
+$r$ & $\lambda/2$ & $k$ at $\lambda/2$ & block level & $k(r)$ & $2\log_2r+1.13$ & $8r/\pi$\\
+\midrule
+3 & 0.3154649 & 4 & 0.35368507 & 3 & 4.30 & 7.6\\
+4 & 0.2500000 & 5 & 0.26029616 & 4 & 5.13 & 10.2\\
+5 & 0.2153383 & 5 & & 5 & 5.77 & 12.7\\
+6 & 0.1934264 & 6 & & 6 & 6.30 & 15.3\\
+7 & 0.1781036 & 6 & & 6 & 6.74 & 17.8\\
+8 & 0.1666667 & 7 & & 7 & 7.13 & 20.4\\
+9 & 0.1577324 & 7 & & 7 & 7.47 & 22.9\\
+10 & 0.1505150 & 7 & & 7 & 7.77 & 25.5\\
+11 & 0.1445324 & 8 & & 8 & 8.05 & 28.0\\
+12 & 0.1394715 & 8 & & 8 & 8.30 & 30.6\\
+16 & 0.1250000 & 9 & & 9 & 9.13 & 40.7\\
+20 & 0.1156891 & 9 & & 9 & 9.77 & 50.9\\
+50 & 0.0885919 & 12 & & 12 & 12.42 & 127.3\\
+100 & 0.0752575 & 14 & & 14 & 14.42 & 254.6\\
+1000 & 0.0501717 & 21 & & 21 & 21.06 & 2546.5\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Relation to known results}
+
+For the digits $0$ and $1$, Dartyge and Mauduit \cite[Thm.~3]{DM00} obtained the level $X^{\theta}$ with
+\[
+\theta=\frac{\log2-\log\binom{2m}{m}/(2m)}{\log r},
+\]
+where $m$ is the least integer with $m<r<2^{4m}\binom{2m}{m}^{-2}$. This is $\lambda/2$ for $r=3$, and for $r\ge4$ it is below $\lambda/2$, namely $0.1769$ for $r=4$, $0.1524$ for $r=5$ and $\pi/(4r)\,(1+o(1))$ as $r\to\infty$. In \cite[Thm.~3]{DM01} they raised the level to $X^{0.342}$ for $r=3$, which with Greaves' constant $\delta_3=0.07426$ from \cite{Gr89} gives $k(3)=3$, and to $X^{1/4}=(\#\WW)^{1/2}$ for $r=4$, which they note is not enough for $\Omega\le4$. Their levels are averages over moduli coprime to $r(r-1)$, with the maximum over the residue class and a saving of an arbitrary power of $\log X$. Konyagin \cite[Cor.~2]{Ko01} proved a level $X^{c}$ for general digit sets, with a small constant $c=c(r)>0$.
+
+Thus part (a) of Theorem~\ref{thm:level} is new for $r\ge5$, and for $r=3,4$ it agrees with the known levels up to $\varepsilon$. The bound $k(r)\le2\log_2r+1.13$ and the value $k(4)=4$ are new as far as we know, the latter from the certified level $0.26029616$, which exceeds both $1/4$ and the threshold $1/(4-\delta_4)=0.2574977$. The value $k(3)=3$ is known from \cite{DM01}. The certified level $0.35368507$ for $r=3$ exceeds the level $0.342$ of \cite{DM01}. With the constants of \cite{Gr82} used in this paper the level $0.342$ would not suffice for $\Omega\le3$, whereas $0.35368507$ exceeds the threshold $1/(3-\delta_3)=0.3448269$.
+
+\subsection{Method}
+
+The Fourier transform of $\WW$ is a product $F(\alpha)=\prod_{j=1}^M\lvert\cos(\pi r^j\alpha)\rvert$ of one factor per digit, and the level of distribution follows from a bound for $\sum_{d\sim D}\sum^*_hF(h/d)$ with a power saving over the trivial bound $D^2$. We split the Farey fractions according to the size of $F$. The large values are rare by the large sieve applied to $F^{2k}$ on the lowest $\log_rD^2$ digits, with $2k\le2r-2$ so that the frequencies remain distinct. For the small values we bound $F^p$ with $p<1$ close to $1$. The Cauchy--Schwarz inequality over the even and the odd digit positions reduces this to $F_E^{2p}$ and $F_O^{2p}$, and the inequality of weighted arithmetic and geometric means gives the positive-definite majorant
+\[
+\lvert\cos\pi t\rvert^{2p}\le(1-p)+p\cos^2\pi t
+\]
+with mean $1-p/2$ and value $1$ at $t=0$. For a product of such majorants, the complete sum over all residues modulo $d$ equals its mean times $d$, plus a relation term that only counts the divisors $d$ of finitely many nonzero integers below $X$ (Lemma~\ref{lem:identity}). The mean gives the saving $(1-p/2)^{M/2}\approx X^{-\lambda/2}$ as $p\to1$, and the relation term is absorbed by the level split. For moduli below a small power of $X$ the divisor bound in the relation term is too weak, and there we use H\"older's inequality over $2k$ blocks of digits together with the large sieve, and an elementary pointwise bound for the smallest moduli. Blocks of $l$ consecutive digits with a positive-definite majorant of degree below $r^l$ improve the mean per digit. A curvature argument (Lemma~\ref{lem:cap}) shows that majorants of a single digit cannot do this.
+
+\subsection{Organisation}
+
+Section~\ref{sec:notation} fixes notation and states the Fourier lemma. Section~\ref{sec:identity} proves the identity for complete sums. Section~\ref{sec:moments} bounds moments of $F$ over Farey fractions, and Section~\ref{sec:level} proves Theorem~\ref{thm:level}. Section~\ref{sec:blocks} describes the certified block majorants. Section~\ref{sec:squares} bounds the contribution of squares of primes, and Section~\ref{sec:sieve} proves Corollary~\ref{cor:almost}. Section~\ref{sec:limits} discusses the limits of the method, and Section~\ref{sec:outlook} gives an outlook.
+
+\section{Notation and the Fourier lemma}\label{sec:notation}
+
+Throughout, $r\ge3$ is fixed and $X$, $M$, $\WW$ and $\lambda$ are as in Sect.~\ref{sec:intro}. Implied constants may depend on $r$ and on the parameters $\theta,p,k,\delta_1$ fixed in the statements, but never on $s$. We write $\e(\alpha)=\exp(2\pi i\alpha)$ and $\norm{\alpha}$ for the distance from $\alpha$ to the nearest integer. For $\alpha\in\R$ and a set $C\subseteq\{1,\dots,M\}$ of digit positions put
+\[
+F(\alpha)=\prod_{j=1}^{M}\lvert\cos(\pi r^j\alpha)\rvert,\qquad F_C(\alpha)=\prod_{j\in C}\lvert\cos(\pi r^j\alpha)\rvert.
+\]
+Then $\sum_{n\in\WW}\e(n\alpha)=\e(\alpha)\prod_{j=1}^M(1+\e(r^j\alpha))$, and $\lvert1+\e(\beta)\rvert=2\lvert\cos\pi\beta\rvert$ gives
+\begin{equation}\label{eq:FT}
+\Bigl|\sum_{n\in\WW}\e(n\alpha)\Bigr|=\#\WW\,F(\alpha).
+\end{equation}
+Let $\tau(n)$ be the number of divisors of $n$ and $\tmax(y)=\max_{1\le n\le y}\tau(n)$, so that $\tmax(y)=\exp(O(\log y/\log\log y))$. For $q>0$ put
+\[
+m_q=\int_0^1\lvert\cos\pi t\rvert^q\,dt,\qquad\psi_q=-\log_rm_q,
+\]
+so that $m_{2k}=\binom{2k}{k}4^{-k}$ for integers $k\ge1$, and for $1\le k\le r-1$ put $c_k=2\psi_{2k}-1$. Then $c_k>0$ if and only if $r\,m_{2k}^2<1$.
+
+\begin{lemma}\label{lem:k}
+For every $r\ge3$ the choice $k=r-1$ satisfies $r\,m_{2k}^2<1$.
+\end{lemma}
+
+\begin{proof}
+We have $m_2=1/2$ and $m_{2k+2}/m_{2k}=(2k+1)/(2k+2)$. The inequality $(2k+1)^2(3k+4)\le(2k+2)^2(3k+1)$, which is equivalent to $0\le k$, and induction give $m_{2k}^2\le1/(3k+1)$. Hence $r\,m_{2(r-1)}^2\le r/(3r-2)<1$.
+\end{proof}
+
+For $D\ge1$ let $\FF(D)$ be the set of reduced fractions $h/d$ with $D\le d<2D$, $d\ge2$, $(d,r)=1$, $1\le h<d$ and $(h,d)=1$, viewed as points of $\R/\Z$, and put
+\[
+S(D)=\sum_{x\in\FF(D)}F(x).
+\]
+Two distinct points $h/d$ and $h'/d'$ of $\FF(D)$ satisfy $\norm{h/d-h'/d'}\ge1/(dd')>1/(4D^2)$, since $hd'-h'd$ is not divisible by $dd'$.
+
+We use the large sieve inequality of Montgomery and Vaughan \cite{MV}. If $x_1,\dots,x_R\in\R/\Z$ satisfy $\norm{x_i-x_j}\ge\delta$ for $i\ne j$, then for all complex $c_n$
+\begin{equation}\label{eq:LS}
+\sum_{i=1}^R\Bigl|\sum_{N_0<n\le N_0+N}c_n\e(nx_i)\Bigr|^2\le(N-1+\delta^{-1})\sum_n\lvert c_n\rvert^2.
+\end{equation}
+
+\begin{lemma}[Fourier lemma]\label{lem:fourier}
+For every $q\ge1$ and $a\in\Z$
+\[
+\Bigl|\#\{n\in\WW:n\equiv a\pmod q\}-\frac{\#\WW}{q}\Bigr|\le\frac{\#\WW}{q}\sum_{h=1}^{q-1}F\Bigl(\frac hq\Bigr).
+\]
+Consequently, for $Q\ge2$,
+\[
+\sum_{\substack{q\le Q\\(q,r)=1}}\ \max_{a\in\Z}\ \Bigl|\#\{n\in\WW:n\equiv a\pmod q\}-\frac{\#\WW}{q}\Bigr|\le\#\WW\,(1+\log Q)\sum_{\substack{2\le d\le Q\\(d,r)=1}}\frac1d\sumstar_{h\bmod d}F\Bigl(\frac hd\Bigr),
+\]
+where $\sum^*$ runs over the residues $h$ coprime to $d$.
+\end{lemma}
+
+\begin{proof}
+By orthogonality
+\[
+\#\{n\in\WW:n\equiv a\pmod q\}=\frac1q\sum_{h\bmod q}\e\Bigl(-\frac{ah}q\Bigr)\sum_{n\in\WW}\e\Bigl(\frac{nh}q\Bigr).
+\]
+The term $h=0$ is $\#\WW/q$, and~\eqref{eq:FT} bounds the others. For the second claim write each $h/q$ with $1\le h<q$ as $h'/d$ with $d=q/(h,q)\ge2$ and $(h',d)=1$. Each pair $(d,h')$ with $d\mid q$ occurs exactly once, $(q,r)=1$ implies $(d,r)=1$, and $\sum_{q\le Q,\,d\mid q}1/q\le d^{-1}\sum_{m\le Q/d}1/m\le(1+\log Q)/d$.
+\end{proof}
+
+\section{The spacing-one identity}\label{sec:identity}
+
+\begin{lemma}[Spacing-one identity]\label{lem:identity}
+Let $H\ge1$ and $T(t)=\sum_{\lvert u\rvert\le H}\tau_u\e(ut)$ with $\tau_u=\tau_{-u}\ge0$. Let $B\ge1$ and let $e_0<e_1<\dots<e_{B-1}$ be nonnegative integers with
+\begin{equation}\label{eq:gap}
+H<r^{e_{\beta+1}-e_\beta}\quad(0\le\beta<B-1)\qquad\text{and}\qquad H\sum_{\beta<B}r^{e_\beta}<X.
+\end{equation}
+For $u=(u_0,\dots,u_{B-1})\in[-H,H]^B$ put $W_u=\sum_{\beta<B}u_\beta r^{e_\beta}$. Then for every $d\ge1$
+\begin{equation}\label{eq:identity}
+\sum_{h\bmod d}\ \prod_{\beta<B}T\Bigl(\frac{r^{e_\beta}h}{d}\Bigr)=d\,\tau_0^B+d\,R(d),\qquad R(d)=\sum_{\substack{u\ne0\\d\mid W_u}}\ \prod_{\beta<B}\tau_{u_\beta},
+\end{equation}
+and $0<\lvert W_u\rvert<X$ for every $u\ne0$.
+\end{lemma}
+
+\begin{proof}
+Expanding the product gives $\sum_u\prod_\beta\tau_{u_\beta}\sum_{h\bmod d}\e(hW_u/d)$, and the inner sum is $d$ if $d\mid W_u$ and $0$ otherwise. The vector $u=0$ gives $d\tau_0^B$. For $u\ne0$ let $\beta_0$ be the least index with $u_{\beta_0}\ne0$ and $g=e_{\beta_0+1}-e_{\beta_0}$ (if $\beta_0<B-1$). Then $W_u=r^{e_{\beta_0}}(u_{\beta_0}+r^gN)$ with an integer $N$, and $0<\lvert u_{\beta_0}\rvert\le H<r^g$ shows that the bracket is nonzero. If $\beta_0=B-1$ then $W_u=u_{B-1}r^{e_{B-1}}\ne0$ directly. Finally $\lvert W_u\rvert\le H\sum_\beta r^{e_\beta}<X$.
+\end{proof}
+
+\begin{corollary}\label{cor:identity}
+Under the hypotheses of Lemma~\ref{lem:identity}, for $D,Q\ge2$
+\begin{align*}
+\sum_{\substack{D\le d<2D\\(d,r)=1}}\ \sum_{h\bmod d}\ \prod_{\beta<B}T\Bigl(\frac{r^{e_\beta}h}{d}\Bigr)&\le2D^2\tau_0^B+2D\,\tmax(X)\,T(0)^B,\\
+\sum_{\substack{Q\le q<2Q\\q\text{ prime},\ q\nmid r}}\ \sum_{h\bmod q^2}\ \prod_{\beta<B}T\Bigl(\frac{r^{e_\beta}h}{q^2}\Bigr)&\le4Q^3\tau_0^B+4Q^2\,\frac{\log X}{\log Q}\,T(0)^B.
+\end{align*}
+\end{corollary}
+
+\begin{proof}
+All terms are nonnegative, so the restrictions on $d$ and $q$ can be dropped where convenient. In the first sum the terms $u=0$ of~\eqref{eq:identity} contribute at most $D\cdot2D\tau_0^B$. For $u\ne0$ the number of $d\in[D,2D)$ with $d\mid W_u$ is at most $\tau(\lvert W_u\rvert)\le\tmax(X)$, so the remaining terms contribute at most $2D\,\tmax(X)\sum_u\prod_\beta\tau_{u_\beta}=2D\,\tmax(X)\,T(0)^B$. In the second sum there are at most $Q$ primes in $[Q,2Q)$, and a nonzero integer of absolute value below $X$ has fewer than $\log X/\log Q$ prime factors $q\ge Q$, counted without multiplicity. With $q^2<4Q^2$ the same argument gives the second bound.
+\end{proof}
+
+The condition~\eqref{eq:gap} holds in the two cases used below. For a set $C$ of positions of one parity in $\{1,\dots,M\}$ and $H=1$ the gaps are at least $2$, so $H=1<r^2$, and $\sum_{j\in C}r^j<r^{M+1}=X$. For blocks, $e_\beta=l\beta+1$ with $\beta<B=\lfloor M/l\rfloor$ and $H\le r^l-1$, the gaps are $l$ and $H\sum_\beta r^{l\beta+1}\le r(r^{lB}-1)<r^{lB+1}\le X$.
+
+\section{Moment bounds over Farey fractions}\label{sec:moments}
+
+\begin{proposition}[Small values]\label{prop:W}
+Let $0<p\le1$ and $D,Q\ge2$.
+\begin{enumerate}
+\item[(a)] With $T_p(t)=(1-p)+p\cos^2\pi t$,
+\begin{align*}
+\sum_{\substack{D\le d<2D\\(d,r)=1}}\ \sum_{h\bmod d}F\Bigl(\frac hd\Bigr)^p&\le2D^2\Bigl(1-\frac p2\Bigr)^{(M-1)/2}+2D\,\tmax(X),\\
+\sum_{\substack{Q\le q<2Q\\q\text{ prime},\ q\nmid r}}\ \sum_{h\bmod q^2}F\Bigl(\frac h{q^2}\Bigr)^p&\le4Q^3\Bigl(1-\frac p2\Bigr)^{(M-1)/2}+4Q^2\,\frac{\log X}{\log Q}.
+\end{align*}
+\item[(b)] Let $l\ge1$, $K_l(t)=\prod_{0\le i<l}\lvert\cos(\pi r^it)\rvert$, and let $T(t)=\sum_{\lvert u\rvert\le r^l-1}\tau_u\e(ut)$ with $\tau_u=\tau_{-u}\ge0$ satisfy $T(t)\ge K_l(t)^p$ for all $t\in\R$. Then the left-hand sides in (a) are at most $2D^2\tau_0^B+2D\,\tmax(X)\,T(0)^B$ and $4Q^3\tau_0^B+4Q^2(\log X/\log Q)\,T(0)^B$, where $B=\lfloor M/l\rfloor$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(a) For $y\in[0,1]$ the inequality of weighted arithmetic and geometric means gives $y^{2p}=(y^2)^p\,1^{1-p}\le py^2+(1-p)$. With $y=\lvert\cos\pi t\rvert$ this is $\lvert\cos\pi t\rvert^{2p}\le T_p(t)$, and
+\[
+T_p(t)=1-\frac p2+\frac p4\bigl(\e(t)+\e(-t)\bigr)
+\]
+has $H=1$, $\tau_0=1-p/2$, $\tau_{\pm1}=p/4\ge0$ and $T_p(0)=1$. Let $E$ and $O$ be the even and the odd positions in $\{1,\dots,M\}$. Both have at least $(M-1)/2$ elements. Then $F^p=F_E^pF_O^p$, and the Cauchy--Schwarz inequality over all pairs $(d,h)$ gives
+\[
+\sum F^p\le\Bigl(\sum F_E^{2p}\Bigr)^{1/2}\Bigl(\sum F_O^{2p}\Bigr)^{1/2}\le\max\Bigl(\sum F_E^{2p},\sum F_O^{2p}\Bigr).
+\]
+For $C\in\{E,O\}$ we have $F_C(\alpha)^{2p}\le\prod_{j\in C}T_p(r^j\alpha)$, and Corollary~\ref{cor:identity} with the exponents $e_\beta$ running through $C$ bounds $\sum F_C^{2p}$ by $2D^2(1-p/2)^{\#C}+2D\,\tmax(X)$, and by the analogous expression for prime squares. Since $1-p/2<1$ and $\#C\ge(M-1)/2$, part (a) follows.
+
+(b) The positions $l\beta+1+i$ with $\beta<B$ and $0\le i<l$ are distinct and lie in $\{1,\dots,M\}$, and the remaining factors of $F$ are at most $1$. Hence
+\[
+F(\alpha)^p\le\prod_{\beta<B}K_l(r^{l\beta+1}\alpha)^p\le\prod_{\beta<B}T(r^{l\beta+1}\alpha),
+\]
+and Corollary~\ref{cor:identity} with $e_\beta=l\beta+1$ and $H=r^l-1$ gives the claim.
+\end{proof}
+
+\begin{lemma}\label{lem:LSblock}
+Let $1\le k\le r-1$, $a,L\ge0$ and $G_{a,L}(x)=\prod_{a\le j<a+L}\lvert\cos(\pi r^jx)\rvert$. If $x_1,\dots,x_R\in\R/\Z$ are $\delta$-spaced, then
+\[
+\sum_{i=1}^RG_{a,L}(x_i)^{2k}\le\bigl(r^{a+L}+\delta^{-1}\bigr)\,m_{2k}^L.
+\]
+\end{lemma}
+
+\begin{proof}
+We have $G_{a,L}(x)^{2k}=\lvert P(x)\rvert^2$ with
+\[
+P(x)=\prod_{a\le j<a+L}\Bigl(\frac{1+\e(r^jx)}2\Bigr)^k=\sum_{0\le e_a,\dots,e_{a+L-1}\le k}\ \prod_{j}\binom k{e_j}2^{-k}\ \e\Bigl(x\sum_je_jr^j\Bigr).
+\]
+Since $k\le r-1$, the exponents $\sum_je_jr^j$ are distinct by the uniqueness of base-$r$ expansions, and they lie in $[0,r^{a+L})$. The sum of the squares of the coefficients is $\prod_j\sum_{e=0}^k\binom ke^24^{-k}=(\binom{2k}k4^{-k})^L=m_{2k}^L$, and~\eqref{eq:LS} gives the claim.
+\end{proof}
+
+\begin{proposition}[Large values]\label{prop:L}
+Let $1\le k\le r-1$ and $0\le m\le M$. Then for $D\ge2$
+\[
+\sum_{x\in\FF(D)}F(x)^{2k}\le\bigl(r^{m+1}+4D^2\bigr)m_{2k}^m,
+\]
+and for $Q\ge2$ the same sum over the reduced fractions $h/q^2$, $q\in[Q,2Q)$ prime, $q\nmid r$, $(h,q)=1$, is at most $(r^{m+1}+16Q^4)m_{2k}^m$.
+\end{proposition}
+
+\begin{proof}
+We have $F\le G_{1,m}$. The points of $\FF(D)$ are $1/(4D^2)$-spaced. Two distinct fractions $h/q^2$ and $h'/q'^2$ of the second kind are reduced, so $\norm{h/q^2-h'/q'^2}\ge1/(q^2q'^2)>1/(16Q^4)$. Lemma~\ref{lem:LSblock} with $a=1$ and $L=m$ gives both bounds.
+\end{proof}
+
+The next proposition replaces the divisor bound of Corollary~\ref{cor:identity} for small moduli. It is the special case of equal blocks of a H\"older argument over blocks of digits, here combined with the large sieve.
+
+\begin{proposition}[H\"older over blocks]\label{prop:H}
+Let $1\le k\le r-1$ with $r\,m_{2k}^2<1$, and let $D\ge2$ satisfy $2k\lfloor\log_r(4D^2)\rfloor\le M$. Then
+\[
+S(D)\le8\,m_{2k}^{-1}\,D^{1-c_k}.
+\]
+\end{proposition}
+
+\begin{proof}
+Put $L=\lfloor\log_r(4D^2)\rfloor$ and $g_i(x)=G_{1+iL,L}(x)=G_{0,L}(r^{1+iL}x)$ for $0\le i<2k$. The $2kL$ positions $1+iL+j$, $0\le j<L$, are distinct and lie in $\{1,\dots,M\}$, so $F\le\prod_{i<2k}g_i$. H\"older's inequality with $2k$ factors and equal exponents $2k$ gives
+\[
+S(D)\le\prod_{i<2k}\Bigl(\sum_{x\in\FF(D)}G_{0,L}(r^{1+iL}x)^{2k}\Bigr)^{1/(2k)}.
+\]
+For each $d$ coprime to $r$ the map $h\mapsto r^{1+iL}h$ permutes the residues coprime to $d$, so the map $x\mapsto r^{1+iL}x$ permutes $\FF(D)$ and every inner sum equals $\sum_{x\in\FF(D)}G_{0,L}(x)^{2k}$. Lemma~\ref{lem:LSblock} with $a=0$ and $\delta=1/(4D^2)$ bounds it by $(r^L+4D^2)m_{2k}^L\le8D^2m_{2k}^L$. Since $L\ge\log_r(4D^2)-1$ and $m_{2k}<1$,
+\[
+m_{2k}^L\le m_{2k}^{-1}(4D^2)^{\log_rm_{2k}}=m_{2k}^{-1}(4D^2)^{-\psi_{2k}}\le m_{2k}^{-1}D^{-2\psi_{2k}},
+\]
+and $2-2\psi_{2k}=1-c_k$.
+\end{proof}
+
+\begin{lemma}[Pointwise bound]\label{lem:pointwise}
+Let $d\ge2$ with $(d,r)=1$, $(h,d)=1$ and $K=\lceil\log d/\log r\rceil$. Then
+\[
+F\Bigl(\frac hd\Bigr)\le\cos\Bigl(\frac\pi{2r}\Bigr)^{\lfloor M/K\rfloor}.
+\]
+\end{lemma}
+
+\begin{proof}
+Put $x_j=\norm{hr^j/d}$. Since $(hr^j,d)=1$ and $d\ge2$, we have $x_j\ge1/d$. If $x_j\le1/(2r)$, write $hr^j/d=N+\xi$ with $N\in\Z$ and $\lvert\xi\rvert=x_j$. Then $hr^{j+1}/d=rN+r\xi$ with $\lvert r\xi\rvert\le1/2$, so $x_{j+1}=rx_j$. If $x_j,\dots,x_{j+K-1}$ were all at most $1/(2r)$, it would follow that $x_{j+K}=r^Kx_j\ge r^K/d\ge1$, which is impossible. So every $K$ consecutive indices contain one with $x_j>1/(2r)$, and then $\lvert\cos(\pi r^jh/d)\rvert=\cos(\pi x_j)<\cos(\pi/(2r))$. The positions $1,\dots,M$ contain $\lfloor M/K\rfloor$ disjoint runs of $K$ consecutive indices.
+\end{proof}
+
+\section{Level of distribution}\label{sec:level}
+
+We call $\theta$ admissible if it satisfies (a) or (b) of Theorem~\ref{thm:level}. In case (b) we use the majorants $T$ of Sect.~\ref{sec:blocks}, with $l=4$, $p_b=0.99$, $T(0)=A$ and
+\[
+\psi_T=-\frac{\log_r\tau_0}{l},
+\]
+and the certified properties $T\ge K_4^{p_b}$ on $\R$, $\psi_T>0.35368507$ for $r=3$, $\psi_T>0.26029616$ for $r=4$, and $\log_r(A)/l<1.5\cdot10^{-8}$. Fix $k$ with $1\le k\le r-1$ and $r\,m_{2k}^2<1$ (Lemma~\ref{lem:k}). In case (b) we take $k=2$, for which $c_2=0.7856$ ($r=3$) and $c_2=0.4150$ ($r=4$).
+
+\begin{proposition}\label{prop:dyadic}
+Let $\theta$ be admissible and $0<\delta_1\le\theta$. There is $\eta=\eta(r,\theta,\delta_1)>0$ such that $S(D)\ll DX^{-\eta}$ uniformly for $X^{\delta_1}\le D\le X^{\theta}$.
+\end{proposition}
+
+\begin{proof}
+Write $D=X^{\delta}$ with $\delta_1\le\delta\le\theta$ and put $a_0=\delta c_k/(4k)$ and $V=X^{-a_0}$. We split $\FF(D)$ into the points with $F\le V$ and those with $F>V$.
+
+\textbf{Large values.} Let $m=\lfloor\log_rD^2\rfloor$. Since $2\theta<1$, we have $m\le M$ for large $s$. Proposition~\ref{prop:L}, together with $r^{m+1}\le rD^2$ and $m_{2k}^m\le m_{2k}^{-1}D^{-2\psi_{2k}}$, gives
+\[
+\#\{x\in\FF(D):F(x)>V\}\le V^{-2k}\sum_{x\in\FF(D)}F(x)^{2k}\le(r+4)\,m_{2k}^{-1}\,X^{2ka_0}D^{2-2\psi_{2k}}.
+\]
+With $X^{2ka_0}=D^{c_k/2}$ and $2-2\psi_{2k}=1-c_k$ the right-hand side is $(r+4)m_{2k}^{-1}DX^{-\delta c_k/2}$. Since $F\le1$, this bounds the contribution of the large values to $S(D)$ by $\ll DX^{-\delta_1c_k/2}$.
+
+\textbf{Small values in case (a).} Choose $p<1$ with
+\[
+\psi^{\mathrm{CS}}_p=\frac{\log(1/(1-p/2))}{2\log r}>\theta,
+\]
+which is possible since $\psi^{\mathrm{CS}}_p\to\lambda/2$ as $p\to1$. With $M-1=\log_rX-2$ we have $(1-p/2)^{(M-1)/2}=(1-p/2)^{-1}X^{-\psi^{\mathrm{CS}}_p}\le2X^{-\psi^{\mathrm{CS}}_p}$. For $F(x)\le V$ we have $F(x)\le V^{1-p}F(x)^p$, so Proposition~\ref{prop:W}(a) gives
+\[
+\sum_{\substack{x\in\FF(D)\\F(x)\le V}}F(x)\le V^{1-p}\bigl(4D^2X^{-\psi^{\mathrm{CS}}_p}+2D\,\tmax(X)\bigr)\le4DX^{\theta-\psi^{\mathrm{CS}}_p}+2D\,\tmax(X)X^{-\delta_1c_k(1-p)/(4k)}.
+\]
+Since $\tmax(X)=X^{o(1)}$, both terms are $\ll DX^{-\eta}$, and together with the large values this proves the claim with $\eta=\min(\psi^{\mathrm{CS}}_p-\theta,\delta_1c_k(1-p)/(8k),\delta_1c_k/2)$.
+
+\textbf{Small values in case (b).} Fix $\theta_0=0.95\cdot\lambda/2$. For $\delta\le\theta_0$ the claim follows from case (a) with $\theta_0$ in place of $\theta$. Let $\delta\ge\theta_0$. With $B=\lfloor M/4\rfloor\ge(s-4)/4$ we have $\tau_0^B\le\tau_0^{-1}X^{-\psi_T}$ and $A^B\le X^{\log_r(A)/4}$, and Proposition~\ref{prop:W}(b) gives
+\[
+\sum_{\substack{x\in\FF(D)\\F(x)\le V}}F(x)\le V^{1-p_b}\bigl(2\tau_0^{-1}D^2X^{-\psi_T}+2D\,\tmax(X)X^{\log_r(A)/4}\bigr).
+\]
+The first term is at most $2\tau_0^{-1}DX^{\theta-\psi_T}$. In the second, $a_0(1-p_b)\ge\theta_0c_2(1-p_b)/8$, which is $2.9\cdot10^{-4}$ for $r=3$ and $1.2\cdot10^{-4}$ for $r=4$, against $\log_r(A)/4<1.5\cdot10^{-8}$. So both terms are $\ll DX^{-\eta}$ for some $\eta>0$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:level}]
+Let $\theta$ be admissible, fix $k$ as above and put $\delta_1=\min(\theta,1/(8k))$. By Lemma~\ref{lem:fourier} it suffices to show
+\begin{equation}\label{eq:goal}
+\Sigma:=\sum_{\substack{2\le d\le X^{\theta}\\(d,r)=1}}\frac1d\sumstar_{h\bmod d}F\Bigl(\frac hd\Bigr)\ll\exp\bigl(-c'\sqrt{\log X}\bigr)
+\end{equation}
+for some $c'>0$. Let $\kappa=-\log\cos(\pi/(2r))>0$, $c_0=\sqrt{\kappa/6}$ and $Q_0=\exp(c_0\sqrt{\log X})$. We split $\Sigma$ into two ranges.
+
+\textbf{Moduli $d\le Q_0$.} For large $s$ we have $K=\lceil\log d/\log r\rceil\le2c_0\sqrt{\log X}/\log r$ and $M\ge\log X/\log r-1$, so $\lfloor M/K\rfloor\ge\sqrt{\log X}/(3c_0)$ for large $s$. Lemma~\ref{lem:pointwise} bounds every term by
+\[
+\exp\Bigl(-\frac{\kappa\sqrt{\log X}}{3c_0}\Bigr)=\exp\bigl(-2c_0\sqrt{\log X}\bigr),
+\]
+and there are at most $Q_0$ values of $d$, each with weight $1/d$ times at most $d$ terms. This range contributes at most $\exp(-c_0\sqrt{\log X})$.
+
+\textbf{Moduli $Q_0<d\le X^{\theta}$.} We cover them by the $O(\log X)$ dyadic intervals $[D,2D)$, $D=2^i$, with $Q_0/2<D\le X^{\theta}$. If $D\le X^{\delta_1}$, then $2k\lfloor\log_r(4D^2)\rfloor\le2k(\log_r4+2\delta_1\log_rX)\le M$ for large $s$, since $4k\delta_1\le1/2$, and Proposition~\ref{prop:H} gives $D^{-1}S(D)\le8m_{2k}^{-1}D^{-c_k}$. The sum of these bounds is $\ll Q_0^{-c_k}=\exp(-c_kc_0\sqrt{\log X})$, and no divisor bound enters here. If $D>X^{\delta_1}$, Proposition~\ref{prop:dyadic} gives $D^{-1}S(D)\ll X^{-\eta}$.
+
+Hence $\Sigma\ll\exp(-c_0\sqrt{\log X})+\exp(-c_kc_0\sqrt{\log X})+X^{-\eta}\log X$, which gives~\eqref{eq:goal}, and Lemma~\ref{lem:fourier} with the factor $1+\log X$ completes the proof with any $c<c_0\min(1,c_k)$. The bound uses absolute values only, so it is uniform in $a$.
+\end{proof}
+
+\begin{remark}\label{rem:range}
+The split at $X^{\delta_1}$ is needed for the following reason. The relation term of Corollary~\ref{cor:identity} carries the factor $\tmax(X)=\exp(O(\log X/\log\log X))$, while the level split saves only $V^{1-p}=D^{-c_k(1-p)/(4k)}$. This beats the divisor bound only when $D$ is at least a fixed power of $X$. Proposition~\ref{prop:H} covers the moduli from $Q_0$ up to $X^{\delta_1}$ without any divisor bound. Its own level is $1/(4k)$, which is of order $\pi/(4r)$ for the least admissible $k$ and large $r$. Lemma~\ref{lem:pointwise} covers the moduli below $Q_0$.
+\end{remark}
+
+\section{Certified block majorants}\label{sec:blocks}
+
+For $r=3$ and $r=4$ let $l=4$, $p_b=99/100$, $H=r^4-1$ and
+\[
+T(t)=\tau_0+2\sum_{u=1}^{H}\tau_u\cos(2\pi ut),\qquad\tau_u=n_u2^{-50},
+\]
+with nonnegative integers $n_u$. They are listed in one data file for each base in the folder \path{papers/digits01-almost-primes} of the repository\\ \url{https://github.com/hippke/palprimes}. Table~\ref{tab:maj} summarises them.
+
+\begin{table}[ht]
+\caption{The block majorants of Theorem~\ref{thm:level}(b). The level is $\psi_T=-\log_r(\tau_0)/4$. The third column counts the nonzero $\tau_u$ with $0\le u\le H$. The last two columns give the number of intervals of the certificate on $[0,1/2]$ and the smallest certified lower bound of $T-K_4^{p_b}$ on them.}\label{tab:maj}
+\begin{tabular}{rrrcccrc}
+\toprule
+$r$ & $H$ & $\#\{u:\tau_u\ne0\}$ & $\tau_0$ & $T(0)-1$ & $\psi_T$ & intervals & min.\ margin\\
+\midrule
+3 & 80 & 24 & 0.211347609685 & $5.69\cdot10^{-8}$ & 0.35368507 & 745 & $9.0\cdot10^{-10}$\\
+4 & 255 & 34 & 0.236126302126 & $8.30\cdot10^{-8}$ & 0.26029616 & 925 & $1.6\cdot10^{-11}$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Construction}
+The coefficients come from a linear programme. It minimises $\tau_0$ over $\tau_u\ge0$ with $\tau_0+2\sum_{u\ge1}\tau_u=1$ subject to $T(t_i)\ge K_4(t_i)^{p_b}$ on a finite set of points $t_i\in[0,1/2]$. The set was refined by a cutting-plane loop that adds the local minima of $T-K_4^{p_b}$ on a dense grid. The solution was rounded to multiples of $2^{-50}$, and $\tau_0$ was raised by the largest deficit found on a dense grid plus $10^{-9}$. The construction plays no role in the proof, and the coefficients only have to pass the certificate below. The degree $H=r^l-1$ is the largest one allowed by~\eqref{eq:gap} for blocks of $l$ digits.
+
+\subsection{Certificate}
+Both sides of $T\ge K_4^{p_b}$ are even and $1$-periodic, so it suffices to prove the inequality on $[0,1/2]$. The interval is cut into dyadic intervals $I=[m-h,m+h]$. On each, a lower bound for $T$ follows from Taylor's formula at $m$ with the exact remainder bound $\sup\lvert T'''\rvert\le2\sum_u\tau_u(2\pi u)^3$. An interval is accepted if this lower bound exceeds $\prod_i\cos(\pi\,\mathrm{dist}(r^iI,\Z))^{p_b}$, which is an upper bound for $K_4^{p_b}$ on $I$. Otherwise, if no factor of $K_4$ vanishes on $I$, the interval is accepted if the second-order Taylor bound for $T-K_4^{p_b}$ at $m$ is positive, where the infimum of $(T-K_4^{p_b})''$ over $I$ is enclosed by a ball evaluation. All other intervals are bisected. All evaluations use ball arithmetic in the Arb library at $192$ bits with the exact dyadic coefficients. Both certificates terminate (Table~\ref{tab:maj}), and the rigorous enclosures of $\psi_T$ are $0.353685071115$ and $0.260296167808$, which give the levels of Theorem~\ref{thm:level}(b). They also give $\log_r(A)/4\le1.30\cdot10^{-8}$ and $1.50\cdot10^{-8}$.
+
+As a negative control we lowered $\tau_0$ by about $10^{-6}$. The certificate then fails, and an interval evaluation at a single dyadic point shows $T-K_4^{p_b}<-9.99\cdot10^{-7}$ in both cases. Without the shift the minimum of $T-K_4^{p_b}$ on a grid of $2\cdot10^6$ points is $9.6\cdot10^{-10}$ ($r=3$) and $8.9\cdot10^{-10}$ ($r=4$), so the majorants are tight to about $10^{-9}$. Accordingly, the certificate still succeeds after lowering $\tau_0$ by $2\cdot10^{-10}$ and fails after lowering it by $2\cdot10^{-9}$.
+
+\subsection{Reproduction}
+The repository folder contains the two coefficient files, the certifier, the negative control, the script for Table~\ref{tab:k} and numerical controls of the lemmas, including a direct test of Proposition~\ref{prop:H}. A single driver script runs all of them in one to four minutes on one core of a desktop computer, depending on the load. The certificates themselves take less than one second each.
+
+\section{Squares of primes}\label{sec:squares}
+
+\begin{lemma}\label{lem:squares}
+Let $\theta$ be admissible and $k$ as in Sect.~\ref{sec:level}. If $4\theta>1$, assume in addition
+\begin{equation}\label{eq:sqcond}
+\psi_{2k}>2\theta+\theta c_k/2.
+\end{equation}
+Then for every $\delta_1\in(0,\theta)$ there is $\eta>0$ with
+\[
+\sum_{\substack{X^{\delta_1}\le q\le X^{\theta}\\q\text{ prime}}}\#\{n\in\WW:q^2\mid n\}\ll\#\WW\bigl(X^{-\delta_1}+X^{-\eta}\bigr).
+\]
+\end{lemma}
+
+\begin{proof}
+A prime $q\mid r$ divides no element of $\WW$, so let $q\nmid r$. By Lemma~\ref{lem:fourier} with $a=0$, $\#\{n\in\WW:q^2\mid n\}=\#\WW/q^2+E(q)$ with
+\[
+\lvert E(q)\rvert\le\frac{\#\WW}{q^2}\sum_{\substack{h\bmod q^2\\h\not\equiv0}}F\Bigl(\frac h{q^2}\Bigr)=\frac{\#\WW}{q^2}\Bigl(\sumstar_{h'\bmod q}F\Bigl(\frac{h'}q\Bigr)+\sumstar_{h\bmod q^2}F\Bigl(\frac h{q^2}\Bigr)\Bigr),
+\]
+where we split $h=qh'$ with $q\nmid h'$ and $q\nmid h$. The main terms give $\sum_{q\ge X^{\delta_1}}\#\WW/q^2\ll\#\WW X^{-\delta_1}$. Consider a dyadic range $Q\le q<2Q$ with $Q=X^{\theta_q}$ and $\delta_1/2\le\theta_q\le\theta$.
+
+The fractions $h'/q$ belong to $\FF(Q)$, and Proposition~\ref{prop:dyadic} (with $\delta_1/2$ in place of $\delta_1$) gives a contribution $\ll\#\WW Q^{-2}S(Q)\ll\#\WW Q^{-1}X^{-\eta}$.
+
+For the fractions $h/q^2$ we repeat the level split of Proposition~\ref{prop:dyadic} with $a_0=\theta_qc_k/(4k)$, $V=X^{-a_0}$ and the second parts of Propositions~\ref{prop:W} and~\ref{prop:L}. In case (a), with $p$ as in the proof of Proposition~\ref{prop:dyadic}, the small values contribute after the factor $Q^{-2}$
+\[
+\ll Q^{-2}V^{1-p}\Bigl(Q^3X^{-\psi^{\mathrm{CS}}_p}+Q^2\log X\Bigr)\ll X^{\theta-\psi^{\mathrm{CS}}_p}+X^{-\delta_1c_k(1-p)/(8k)}\log X.
+\]
+In case (b) the same holds with $\psi_T$ and the factor $X^{\log_r(A)/4}$, as in the proof of Proposition~\ref{prop:dyadic}, and the ranges $\theta_q<\theta_0$ are treated by case (a). For the large values let $m=\min(\lfloor\log_rQ^4\rfloor,M)$. Then $r^{m+1}+16Q^4\le(r+16)Q^4$ and $m_{2k}^m\le m_{2k}^{-1}\min(Q^4,X)^{-\psi_{2k}}$, so their number times $Q^{-2}$ is
+\[
+\ll Q^{-2}X^{2ka_0}Q^4\min(Q^4,X)^{-\psi_{2k}}=X^{\theta_qc_k/2+2\theta_q-\psi_{2k}\min(4\theta_q,1)}.
+\]
+If $4\theta_q\le1$, the exponent is $\theta_qc_k/2+2\theta_q-4\theta_q\psi_{2k}=-\tfrac32\theta_qc_k$. If $4\theta_q>1$, which requires $4\theta>1$, it is $2\theta_q+\theta_qc_k/2-\psi_{2k}<0$ by~\eqref{eq:sqcond}. Summing over the $O(\log X)$ dyadic ranges proves the lemma.
+\end{proof}
+
+Condition~\eqref{eq:sqcond} is needed only for $r\in\{3,4\}$, since $\lambda/2<1/4$ for $r\ge5$. For $r=4$ and $\theta<\lambda/2=1/4$ it is not needed. It holds with $k=2$ in the three remaining cases, since $\psi_4=\log_3(8/3)=0.8928$ exceeds $0.7548$ ($r=3$, $\theta=\lambda/2$) and $0.8463$ ($r=3$, $\theta=0.35368507$), and $\psi_4=\log_4(8/3)=0.7075$ exceeds $0.5746$ ($r=4$, $\theta=0.26029616$). The choice $k=1$ would fail for $r=3$, since $\psi_2=\log_32=0.6309$ is below $2\theta+\theta c_1/2$, which is $0.672$ at $\theta=\lambda/2$.
+
+\section{Almost primes}\label{sec:sieve}
+
+\subsection{Greaves' weighted sieve}
+We use Theorem~1 and Corollary~1 of Greaves \cite{Gr82}, with the numerical constants of the note added in proof of \cite{Gr82},
+\[
+\alpha=0.1505528\ldots,\qquad\beta=0.87695\ldots,\qquad T_0=0.074368\ldots.
+\]
+For an integer $R\ge3$ put
+\begin{equation}\label{eq:delta}
+\begin{gathered}
+U_R=\bigl(1+3^{-R}\e^{-\beta/3}\bigr)^{-1},\qquad\Delta_R=\frac{\log\bigl(4U_R/(3\e^{\alpha})\bigr)}{\log3},\\
+N_R=(1-U_R)\Bigl(R-\frac12\Bigr)-\Delta_R,\qquad\delta_R=\max(\Delta_R,\Delta_R+N_R).
+\end{gathered}
+\end{equation}
+Let $\mathcal A$ be a finite sequence of positive integers, $X_{\mathcal A}>0$, and $\gamma$ a multiplicative function on squarefree integers with $0\le\gamma(p)<p$. For squarefree $l$ put $R(l)=\#\{a\in\mathcal A:l\mid a\}-X_{\mathcal A}\gamma(l)/l$. Suppose that
+\begin{enumerate}
+\item[(A1)] $-L<\sum_{w\le p<z}\gamma(p)\log p/(p-\gamma(p))-\log(z/w)\le A_1$ for $2\le w<z$, with an absolute constant $A_1$,
+\item[(A2)] $a<y^g$ for all $a\in\mathcal A$, and $L\le\log y$.
+\end{enumerate}
+Let $\eta>0$ with $\eta\ge N_R$ and $g\le R-\Delta_R-\eta$, put $U=U_R$ and $V=g-RU$, and assume $V<1/4$, $1/2<U<1$, $3V+U\le1$ and $(1-U)/3<T_0$. Then \cite[Thm.~1, Cor.~1]{Gr82} give weights $w(p)$ with $0\le w(p)\le U-V$ and $w(p)=0$ for $p<y^{T_0}$, such that
+\begin{equation}\label{eq:greaves}
+\sum_{\substack{a\in\mathcal A\\\nu_{y,U}(a)\le R}}w(q_a)\ge2\e^{\gamma}X_{\mathcal A}\prod_{p<y}\Bigl(1-\frac{\gamma(p)}p\Bigr)\Bigl(\eta\log3+O\bigl((L/\log y)^{1/5}\bigr)\Bigr)-\sum_{\substack{l\le y\\\mu^2(l)=1}}\lvert R(l)\rvert.
+\end{equation}
+Here $\gamma$ in $\e^{\gamma}$ is Euler's constant, $q_a$ is the least prime factor of $a$, $\nu_{y,U}(a)$ counts the prime factors $p<y^U$ of $a$ once and the prime factors $p\ge y^U$ with multiplicity, and the $O$-constant depends on $R$. We use from \cite{Gr82} exactly~\eqref{eq:greaves}, the stated properties of the weights and the numerical constants.
+
+For $R\ge3$ the parameter conditions hold. We have $1-U_R\le3^{-R}\e^{-\beta/3}$, and $(R-\frac12)3^{-R}$ decreases in $R$, so $(1-U_R)(R-\frac12)\le\frac52\cdot3^{-3}\e^{-\beta/3}=0.0691<\Delta_3=0.0999946\le\Delta_R$. Hence $N_R<0$ and $\delta_R=\Delta_R$. Moreover $V=g-RU_R<R(1-U_R)-\Delta_R\le3^{-2}\e^{-\beta/3}-\Delta_3<0$, so $V<1/4$ and $3V+U_R<1$, and $U_R>1/2$, $(1-U_R)/3\le3^{-4}<T_0$. Since $U_R$ increases to $1$, $\delta_R=\Delta_R$ increases to
+\[
+\Delta_\infty=\frac{\log\bigl(4/(3\e^{\alpha})\bigr)}{\log3}=0.1248204\ldots.
+\]
+The thresholds $1/(R-\delta_R)$ are $0.3448269$, $0.2574977$, $0.2050032$, $0.1701806$ and $0.1454442$ for $R=3,\dots,7$. The constants $\alpha$ and $\beta$ are known to the digits shown. Raising $\alpha$ by $10^{-7}$ or $\beta$ by $10^{-5}$ changes $\delta_R$ by less than $10^{-7}$ for every $R<60$. The distance of $1/\theta^*_r$ to the nearest threshold $R-\delta_R$ is at least $0.04$ for the rows of Table~\ref{tab:k} and at least $3\cdot10^{-4}$ for all $5\le r\le5000$, so the truncation affects none of the values of $k(r)$.
+
+\subsection{Proof of the corollary}
+
+\begin{proof}[Proof of Corollary~\ref{cor:almost}]
+Let $R=k(r)$, so that $R-\delta_R>1/\theta^*_r$, and let $0<c<T_0\theta^*_r$. Choose $\eta>0$ and $\theta'<\theta^*_r$ with $T_0\theta'>c$ and $1/\theta'<g:=R-\delta_R-\eta$. Then $\theta'$ is admissible, and $\delta_R=\Delta_R$ and $N_R<0$ show that $g$ and $\eta$ satisfy the conditions above. Put $y=X^{\theta'}$, $\mathcal A=\WW$, $X_{\mathcal A}=\#\WW$, $\gamma(p)=1$ for $p\nmid r$ and $\gamma(p)=0$ for $p\mid r$.
+
+Every element of $\WW$ is $\equiv1\pmod r$, so for squarefree $l$ with $(l,r)>1$ no element is divisible by $l$, and $R(l)=0$. For $(l,r)=1$, Theorem~\ref{thm:level} with $a=0$ gives $\sum_{l\le y}\lvert R(l)\rvert\ll\#\WW\exp(-c''\sqrt{\log X})$. Mertens' theorem gives (A1) with an absolute constant $A_1$ and with $L=\sum_{p\mid r}\log p/(p-1)+O(1)$. This $L$ depends on $r$ only, so $L\le\log y$ for large $s$. Every $n\in\WW$ satisfies $n<X=y^{1/\theta'}<y^g$, which is (A2). Since $\prod_{p<y,\,p\nmid r}(1-1/p)\asymp_r1/\log X$, inequality~\eqref{eq:greaves} and $w\le U-V$ give
+\[
+\#\{n\in\WW:\nu_{y,U}(n)\le R,\ P^-(n)\ge y^{T_0}\}\ge\frac1{U-V}\sum_{\substack{n\in\WW\\\nu_{y,U}(n)\le R}}w(q_n)\gg_r\frac{\#\WW}{\log X},
+\]
+where we used that $w(q_n)=0$ unless $P^-(n)\ge y^{T_0}$. If such an $n$ has $\Omega(n)>\nu_{y,U}(n)$, then $p^2\mid n$ for some prime $p$ with $y^{T_0}\le p<y^U<X^{\theta'}$. By Lemma~\ref{lem:squares} with $\theta'$ in place of $\theta$ and $\delta_1=T_0\theta'$, the number of such $n$ is $\ll\#\WW(X^{-T_0\theta'}+X^{-\eta'})=o(\#\WW/\log X)$. The hypothesis~\eqref{eq:sqcond} of Lemma~\ref{lem:squares} was checked at the end of Sect.~\ref{sec:squares}, and it is monotone in $\theta$. The remaining $n$ satisfy $\Omega(n)\le R$ and $P^-(n)\ge y^{T_0}=X^{T_0\theta'}\ge X^c$.
+
+For $r\ge5$ the condition $R-\delta_R>1/\theta^*_r=2\log_2r$ holds for $R=\lfloor2\log_2r+\Delta_\infty\rfloor+1$, since then $R>2\log_2r+\Delta_\infty>2\log_2r+\delta_R$. This also holds for $r=3,4$ at the level $\lambda/2$, and the block levels only lower $k(r)$. Hence $k(r)\le\lfloor2\log_2r+\Delta_\infty\rfloor+1\le2\log_2r+1.1249$ for every $r\ge3$. Finally $1/0.35368507=2.8274<3-\delta_3=2.9000$ gives $k(3)=3$, and $1/0.26029616=3.8418<4-\delta_4=3.8835$ and $1/0.26029616>3-\delta_3$ give $k(4)=4$. The values in Table~\ref{tab:k} were computed in the same way at the levels times $1-10^{-4}$, which changes none of them. A computation for all $3\le r\le5000$ confirms the floor formula, and the largest value of $k(r)-2\log_2r$ in this range is $1.1245$.
+\end{proof}
+
+\section{Limits of the method}\label{sec:limits}
+
+The exact level $\lambda/2$ of Theorem~\ref{thm:level}(a) comes from single-digit majorants and the Cauchy--Schwarz inequality over two classes of positions. The following lemma shows that single-digit majorants cannot do better.
+
+\begin{lemma}[Curvature cap]\label{lem:cap}
+Let $f\ge0$ be even and $1$-periodic with $f(0)=1$ and $f(t)=1-\frac\gamma2t^2+o(t^2)$ as $t\to0$. Let $T(t)=\tau_0+2\sum_{u\ge1}\tau_u\cos2\pi ut$ with $\tau_u\ge0$ and $T(0)=1$, of finite or infinite degree, and suppose $T\ge f$ near $0$. Then $\tau_0\ge1-\gamma/(4\pi^2)$.
+\end{lemma}
+
+\begin{proof}
+From $T(0)=1$ we get $1-T(t)=2\sum_{u\ge1}\tau_u(1-\cos2\pi ut)$, and $T\ge f$ gives
+\[
+2\sum_{u\ge1}\tau_u\frac{1-\cos2\pi ut}{t^2}\le\frac{1-f(t)}{t^2}=\frac\gamma2+o(1)\qquad(t\to0).
+\]
+Each term tends to $4\pi^2u^2\tau_u$, and Fatou's lemma for the counting measure gives the bound $4\pi^2\sum_{u\ge1}u^2\tau_u\le\gamma/2$. Hence $1-\tau_0=2\sum_{u\ge1}\tau_u\le2\sum_{u\ge1}u^2\tau_u\le\gamma/(4\pi^2)$.
+\end{proof}
+
+For $f=\lvert\cos\pi t\rvert^{2p}$ we have $\gamma=2p\pi^2$, so every positive-definite majorant with value $1$ at $0$ has mean at least $1-p/2$, the mean of $T_p$. Hence Proposition~\ref{prop:W}(a) is optimal among two-class arguments with single-digit majorants. For $f=\lvert\cos\pi t\rvert^p$, with $\gamma=p\pi^2$, the bound $\tau_0\ge1-p/4$ is attained by $(1-p/2)+(p/2)\cos^2\pi t$, and a one-class argument over all positions is capped at the rate $\log_r(4/3)<\lambda/2$ per digit. For a block kernel $K_l^p$ the curvature at $0$ is $\gamma=p\pi^2\sum_{i<l}r^{2i}$, the bound of Lemma~\ref{lem:cap} is negative for $l\ge2$, and block majorants can exceed $\lambda/2$, as they do for $r=3,4$. The majorants of Sect.~\ref{sec:blocks} have $T(0)=1+O(10^{-7})$ and are not subject to the lemma in any case.
+
+\begin{remark}[Upper limits]\label{rem:limits}
+Every majorant $T\ge K_l^p$ has $\tau_0=\int_0^1T\ge\int_0^1K_l^p$, so blocks of length $l$ give at most the rate $-\log_r(\int_0^1K_l^p)/l$ per digit. For $p=0.99$ and $l=4$ a numerical quadrature gives $0.3954$ for $r=3$ and $0.3296$ for $r=4$, against the certified $0.3537$ and $0.2603$. For $l=1$ and $p\to1$ the bound is $\log_r(\pi/2)$. Heuristically the Farey fractions are equidistributed for $F$ on average, so that $S(D)\approx cD^2\int_0^1F$, and no method that bounds $S(D)$ through absolute values can pass the Lebesgue $L^1$ rate of $F$. This is not a theorem, but it suggests that methods of this kind cannot give levels much above $0.39$ for $r=3$ and $0.33$ for $r=4$.
+\end{remark}
+
+\section{Outlook}\label{sec:outlook}
+
+The values $k(5)=4$ and $k(8)=6$ would follow from levels above $0.2575$ and $0.1702$. For $r=5$ the required level $0.2575$ is above $\lambda/2=0.2153$, and an uncertified linear programme with blocks of four digits gave only $0.2176$. For $r=6,7,8$ and $10$ the block majorants that we computed, with $l\le3$, stayed below $\lambda/2$, and larger blocks have degree $r^l-1$, which grows quickly. The same two-class argument should apply to other sparse digit sets $\mathcal D\subset\{0,\dots,r-1\}$ through the majorant $(1-p)+p\lvert\sum_{c\in\mathcal D}\e(ct)\rvert^2/(\#\mathcal D)^2$ and should give the level $\log(\#\mathcal D)/(2\log r)$ whenever the large values can be controlled as in Proposition~\ref{prop:L}, but we have not written this out. A level beyond the $L^1$ rate of Remark~\ref{rem:limits} would need cancellation in the sum over $h$, which the present method does not use, and the problem of finding primes with digits $0$ and $1$ in a fixed base remains open.
+
+\begin{thebibliography}{99}
+
+\bibitem{Col09}
+S.~Col, Diviseurs des nombres ellips\'ephiques, Period. Math. Hungar. 58 (2009), 1--23.
+
+\bibitem{DM00}
+C.~Dartyge and C.~Mauduit, Nombres presque premiers dont l'\'ecriture en base $r$ ne comporte pas certains chiffres, J. Number Theory 81 (2000), 270--291.
+
+\bibitem{DM01}
+C.~Dartyge and C.~Mauduit, Ensembles de densit\'e nulle contenant des entiers poss\'edant au plus deux facteurs premiers, J. Number Theory 91 (2001), 230--255.
+
+\bibitem{DRS}
+C.~Dartyge, J.~Rivat and C.~Swaenepoel, Prime numbers with an almost prime reverse, preprint, arXiv:2506.21642 (2025).
+
+\bibitem{EMS98}
+P.~Erd\H{o}s, C.~Mauduit and A.~S\'ark\"ozy, On arithmetic properties of integers with missing digits I. Distribution in residue classes, J. Number Theory 70 (1998), 99--120.
+
+\bibitem{EMS99}
+P.~Erd\H{o}s, C.~Mauduit and A.~S\'ark\"ozy, On arithmetic properties of integers with missing digits II. Prime factors, Discrete Math. 200 (1999), 149--164.
+
+\bibitem{Gr82}
+G.~Greaves, A weighted sieve of Brun's type, Acta Arith. 40 (1982), 297--332.
+
+\bibitem{Gr89}
+G.~Greaves, Some remarks on the sieve method, in Number Theory, Trace Formulas and Discrete Groups (Oslo, 1987), Academic Press, Boston, 1989, 289--308.
+
+\bibitem{Ko01}
+S.~Konyagin, Arithmetic properties of integers with missing digits. Distribution in residue classes, Period. Math. Hungar. 42 (2001), 145--162.
+
+\bibitem{May19}
+J.~Maynard, Primes with restricted digits, Invent. Math. 217 (2019), 127--218.
+
+\bibitem{MV}
+H.~L. Montgomery and R.~C. Vaughan, The large sieve, Mathematika 20 (1973), 119--134.
+
+\end{thebibliography}
+
+\end{document}

@@ -40,6 +40,7 @@ available.
 | κ-palindromic primes: for every κ < 9/20 and every base there are infinitely many primes whose last ⌊κL/2⌋ digits mirror their first ⌊κL/2⌋ digits (L = number of digits). For bases that are powers of an odd prime, Harman (Acta Arith. 125, 2006) remarks without written proof that the method of preassigned digits reaches κ < 0.472, so the range 5/12 ≤ κ < 9/20 is new for b = 2 and the other bases | paper proof (`papers/kappa-palindromic-9-20`: `note.pdf`, full proof in `proof.md`) |
 | The same on GRH for every κ < 2/3, with an asymptotic count | paper proof on GRH (`papers/grh-mirrored-primes`) |
 | Function-field analogue: palindromic irreducible polynomials over F_q with coefficients in a restricted set S, asymptotic count for α_S < q^{−3/4} | paper proof (`papers/function-field`) |
+| Almost primes with digits 0 and 1 in base r ≥ 3: level of distribution (#W)^{1/2−ε} (new for r ≥ 5), hence ≫ #W/log X such integers with at most k(r) ≤ 2 log₂ r + 1.13 prime factors (Dartyge–Mauduit 2000: k(r) ~ 8r/π), and k(4) = 4 (Dartyge–Mauduit: 5) | paper proof with interval-arithmetic certificates (`papers/digits01-almost-primes`) |
 | Exact counts of palprimes in bases 2 to 16 up to 1.8·10¹⁹ | data (`data/palprime_counts.csv`) |
 
 "Proved in Lean" means machine-checked as described under Verification. "Paper proof" means a written
@@ -152,6 +153,7 @@ papers/                  paper drafts (TeX and PDF, or Markdown)
   kappa-palindromic-9-20/    κ-palindromic primes for κ < 9/20 (Heath-Brown–Iwaniec method)
   grh-mirrored-primes/       Primes with mirrored digits on GRH (κ < 2/3)
   function-field/            Palindromic irreducible polynomials with restricted coefficients
+  digits01-almost-primes/    Almost primes with digits 0 and 1 in every base (Dartyge–Mauduit problem)
 notes/                   the mathematics behind the Lean proof: proofs, sieve route, plan, audit
 data/                    exact palprime counts (base, digits, palindromes, palprimes)
 numerics/                Python checks used to design the sieve and audit Proposition W,

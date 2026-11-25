@@ -27,3 +27,10 @@ roots = ["Audit.Challenge", "Audit.Solution"]
 name = "Omega3"
 # no root module Omega3.lean: a module importing Omega3.Final would be at import depth 22, where lake overflows its stack
 roots = ["Omega3.Final", "Omega3.Audit.Challenge", "Omega3.Audit.Solution"]
+globs = ["Omega3.+"]
+
+[[lean_lib]]
+name = "KappaOmega2"
+# no root module KappaOmega2.lean: FinalK is at import depth 21, a module importing it would be at depth 22 (lake stack overflow)
+roots = ["KappaOmega2.FinalK", "KappaOmega2.Audit.Challenge", "KappaOmega2.Audit.Solution"]
+globs = ["KappaOmega2.+"]

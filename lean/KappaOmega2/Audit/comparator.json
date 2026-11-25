@@ -1,0 +1,6 @@
+{
+  "challenge_module": "KappaOmega2.Audit.Challenge",
+  "solution_module": "KappaOmega2.Audit.Solution",
+  "theorem_names": ["kappa_palindromes_omega_le_two", "kappa_palindromes_omega_le_two_count"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}

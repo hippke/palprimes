@@ -32,13 +32,16 @@ available.
 
 Status of the statement "infinitely many palindromes in base b with at most k prime factors (Ω ≤ k)". Green: known before
 this project (Tuxanidy and Panario, Ω ≤ 6). Blue: proved here in Lean and kernel-audited (Ω ≤ 3 holds in every base b ≥ 5,
-shown at b = 5). Orange: open; "conditional" marks results that rest on unproved hypotheses.
+shown at b = 5). Orange: open; "conditional" marks results that rest on unproved hypotheses. The figure is about true
+palindromes; the Ω ≤ 2 result for κ-palindromes (7/10 of the digits mirrored) is not shown.
 
 | Result | Status |
 |---|---|
 | Infinitely many palindromic primes in every base | open (the goal; `Palprimes.PalprimesInfinite b` in `lean/Palprimes/Statements.lean`) |
 | **Infinitely many palindromes with at most 3 prime factors (with multiplicity) in every base b ≥ 5** | **proved in Lean** (`Omega3.infinite_palindromes_Omega_le_three`) |
 | Stronger form: infinitely many palindromes n with Ω(n) ≤ 3 and every prime factor > n^{1/250} in every base b ≥ 5. Among the palindromes with 2N + 1 digits coprime to b³ − b, at least c·3^N/log x, x = b^{2N+1}, are of this kind | proved in Lean (`Omega3.infinite_palindromes_Omega_le_three_large_factors`, `Omega3.many_palindromes_Omega_le_three`) |
+| **Infinitely many κ-palindromes with at most 2 prime factors (with multiplicity) in every base b ≥ 3, for κ = 7/10: integers whose last ⌊7L/20⌋ digits mirror their first ⌊7L/20⌋ digits (L = number of digits)** | **proved in Lean** (`kappa_palindromes_omega_le_two`, `KappaOmega2.infinite_kappaPal_Omega_le_two`) |
+| Counting form: among the integers with 2N + 1 digits coprime to b³ − b whose first m = ⌊7(2N + 1)/20⌋ digits mirror the last ones, at least c·2^m·W/log x, W = b^{2N+1−2m}, x = b^{2N+1}, have Ω ≤ 2 and every prime factor > x^{1/100} | proved in Lean (`kappa_palindromes_omega_le_two_count`, `KappaOmega2.many_kappaPal_Omega_le_two`) |
 | **Infinitely many palindromes with at most 4 prime factors (with multiplicity) in every base b ≥ 2** | **proved in Lean** (`Palprimes.MT.infinite_palindromes_Omega_le_four`) |
 | Stronger form: infinitely many palindromes n with Ω(n) ≤ 4 and every prime factor > n^{0.0326}. Among the palindromes with 2N + 1 digits coprime to b³ − b, at least a proportion c/log x, x = b^{2N+1}, are of this kind (c > 0 depends on b and is not explicit) | proved in Lean (`Palprimes.MT.infinite_palindromes_Omega_le_four_large_factors`, `Palprimes.MT.many_palindromes_Omega_le_four`) |
 | Infinitely many palindromes with at most 5 prime factors (with multiplicity) in every base b ≥ 2 | proved in Lean (`Palprimes.infinite_palindromes_Omega_le_five`) |
@@ -117,6 +120,26 @@ fixed in `lean/Omega3/Statements.lean` and composed in `lean/Omega3/Skeleton.lea
 found on the way (among them three misprinted lemmas of Greaves 1986, Lemmas 2, 9 and 10, in cases the proof does not
 use) are in `notes/omega3/`. GRH is not used.
 
+The Ω ≤ 2 theorem for κ-palindromes, in `lean/KappaOmega2/FinalK.lean`:
+
+```lean
+theorem kappa_palindromes_omega_le_two (b : ℕ) (hb : 3 ≤ b) :
+    {n : ℕ | (∀ i < 7 * (Nat.digits b n).length / 20,
+        (Nat.digits b n).getD i 0 = (Nat.digits b n).getD ((Nat.digits b n).length - 1 - i) 0) ∧
+      n ≠ 0 ∧ ArithmeticFunction.cardFactors n ≤ 2}.Infinite
+```
+
+The condition says that the outer 7/10 of the digits are mirrored, as in a palindrome, while the middle 3/10 are free.
+For primes the known range is κ < 9/20 (κ < 2/3 on GRH, see the table), so this theorem goes beyond the prime range in
+the number of mirrored digits, at the cost of a second prime factor. Its proof is a port of the Ω ≤ 3 proof:
+Greaves' weighted sieve of 1986 with two prime factors (R = 2) at level θ = 103/200, above the threshold 0.5114 that
+this sieve needs, the Fejér digit weight on the mirrored block in odd bases and a product weight in even bases, two
+lemmas showing that the mirrored block and the free middle block do not resonate (`lean/KappaOmega2/LemmaR.lean`,
+including an exact fourth moment), and the Parseval identity modulo p² for the prime squares. The κ items
+(`Items/LK*`, `Items/QK*`) are new, while the sieve and main-term items are copies of the Ω ≤ 3 items, most of them
+unchanged apart from the namespace, so the libraries `Omega3` and `KappaOmega2` overlap. Plan, status and the sieve port are in `notes/kappa2/`. GRH is not used, and base 2 is not
+covered.
+
 ## Verification
 
 The proof uses only the standard axioms `propext`, `Classical.choice` and `Quot.sound`. It has no
@@ -134,6 +157,9 @@ The proof uses only the standard axioms `propext`, `Classical.choice` and `Quot.
   `leanchecker --fresh Omega3.Final`; `lake comparator` against `lean/Omega3/Audit/Challenge.lean` (main theorem,
   counting form and large-factor form with Mathlib definitions only), and all six kernels accept the export: Lean,
   Lean paranoid, nanoda, lean4lean, con-leche and con-ron.
+- **Ω ≤ 2 for κ-palindromes (`lean/KappaOmega2/`, `notes/LEAN_AUDIT_KAPPA2.md`):** `leanchecker` on all 125 modules and
+  `leanchecker --fresh KappaOmega2.FinalK`; `lake comparator` against `lean/KappaOmega2/Audit/Challenge.lean` (main
+  theorem and counting form with Mathlib definitions only), and all six kernels accept the export.
 
 To reproduce, with Lean and Mathlib v4.37.0-rc1:
 
@@ -144,6 +170,7 @@ lake build
 lake env lean scripts/axioms.lean
 lake build Audit && lake comparator --config Audit/comparator.json --paranoid
 lake build Omega3 Omega3.Audit.Challenge Omega3.Audit.Solution && lake comparator --config Omega3/Audit/comparator.json --paranoid
+lake build KappaOmega2 && lake comparator --config KappaOmega2/Audit/comparator.json --paranoid
 ```
 
 The Ω ≤ 4 proof is large (about 39k lines in total, 244 modules). The kernel check of the base-2 and
@@ -159,7 +186,8 @@ modules in parallel, each loading Mathlib, and needs a lot of memory.
 ## Layout
 
 ```
-lean/                    Lean 4 project (libraries Palprimes, about 39k lines, and Omega3, about 36k lines)
+lean/                    Lean 4 project (libraries Palprimes, about 39k lines, Omega3, about 36k lines, and KappaOmega2,
+                         about 35k lines)
   Palprimes/Defs.lean        palindromes, Π*_b, exponential-sum notation
   Palprimes/Statements.lean  target statements (definitions only)
   Palprimes/Digits/          digit API, Lemma 3 (injectivity), counting Π*_b
@@ -179,8 +207,12 @@ lean/                    Lean 4 project (libraries Palprimes, about 39k lines, a
   Audit/                     comparator challenge and solution
   Omega3/                    the Ω ≤ 3 theorem for b ≥ 5: definitions, frozen item statements, skeleton, 49 item proofs
                              (Items/, with a proof plan per hard item), final theorems, comparator challenge (Audit/)
+  KappaOmega2/               the Ω ≤ 2 theorem for κ-palindromes (κ = 7/10, b ≥ 3): port of Omega3 to R = 2, κ items
+                             (Items/LK*, Items/QK*), Lemmas R and E (LemmaR.lean), final theorems (FinalK.lean),
+                             comparator challenge (Audit/)
   scripts/                   certificate generators (omega4/: the Ω ≤ 4 majorants; omega3/: band and h-table data,
-                             statement sanity checks), axiom check
+                             statement sanity checks; kappa2/: sanity checks of the κ items and the
+                             M12 restriction of the sieve port), axiom check
 papers/                  paper drafts (TeX and PDF, or Markdown)
   omega5-every-base/         Palindromes with at most five prime factors in every base
   kappa-palindromic-9-20/    κ-palindromic primes for κ < 9/20 (Heath-Brown–Iwaniec method)
@@ -188,7 +220,8 @@ papers/                  paper drafts (TeX and PDF, or Markdown)
   function-field/            Palindromic irreducible polynomials with restricted coefficients
   digits01-almost-primes/    Almost primes with digits 0 and 1 in every base (Dartyge–Mauduit problem)
 notes/                   the mathematics behind the Lean proof: proofs, sieve route, plan, audit (omega3/: blueprint,
-                         notes and statement corrections of the Ω ≤ 3 proof)
+                         notes and statement corrections of the Ω ≤ 3 proof; kappa2/: plan, status and sieve port of the
+                         κ-palindrome proof)
 figures/                 status figure (Ω ≤ k against the base)
 data/                    exact palprime counts (base, digits, palindromes, palprimes)
 numerics/                Python checks used to design the sieve and audit Proposition W,

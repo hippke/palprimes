@@ -22,3 +22,8 @@ name = "Palprimes"
 [[lean_lib]]
 name = "Audit"
 roots = ["Audit.Challenge", "Audit.Solution"]
+
+[[lean_lib]]
+name = "Omega3"
+# no root module Omega3.lean: a module importing Omega3.Final would be at import depth 22, where lake overflows its stack
+roots = ["Omega3.Final", "Omega3.Audit.Challenge", "Omega3.Audit.Solution"]

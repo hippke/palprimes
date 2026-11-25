@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="728" height="452" viewBox="0 0 728 452" font-family="Helvetica, Arial, sans-serif">
+<title>Infinitely many palindromes with Ω ≤ k in base b: known, proved here, open</title>
+<rect width="728" height="452" fill="#ffffff"/>
+<rect x="90" y="20" width="14" height="14" rx="3" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1"/>
+<text x="110" y="32" font-size="13" fill="#444441">known before this project</text>
+<rect x="309" y="20" width="14" height="14" rx="3" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+<text x="329" y="32" font-size="13" fill="#444441">proved here (Lean, kernel-audited)</text>
+<rect x="591" y="20" width="14" height="14" rx="3" fill="#FAEEDA" stroke="#BA7517" stroke-width="1"/>
+<text x="611" y="32" font-size="13" fill="#444441">open</text>
+<text x="165.0" y="80" font-size="14" text-anchor="middle" fill="#444441">b = 2</text>
+<text x="321.0" y="80" font-size="14" text-anchor="middle" fill="#444441">b = 3</text>
+<text x="477.0" y="80" font-size="14" text-anchor="middle" fill="#444441">b = 4</text>
+<text x="633.0" y="80" font-size="14" text-anchor="middle" fill="#444441">b = 5</text>
+<text x="78" y="121.0" font-size="14" text-anchor="end" fill="#444441">Ω ≤ 6</text>
+<rect x="90" y="90" width="150" height="52" rx="6" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.8"/>
+<text x="165.0" y="112" font-size="14" text-anchor="middle" fill="#27500A">known</text>
+<text x="165.0" y="130" font-size="11" text-anchor="middle" fill="#3B6D11">Tuxanidy–Panario 2024</text>
+<rect x="246" y="90" width="150" height="52" rx="6" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.8"/>
+<text x="321.0" y="112" font-size="14" text-anchor="middle" fill="#27500A">known</text>
+<text x="321.0" y="130" font-size="11" text-anchor="middle" fill="#3B6D11">Tuxanidy–Panario 2024</text>
+<rect x="402" y="90" width="150" height="52" rx="6" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.8"/>
+<text x="477.0" y="112" font-size="14" text-anchor="middle" fill="#27500A">known</text>
+<text x="477.0" y="130" font-size="11" text-anchor="middle" fill="#3B6D11">Tuxanidy–Panario 2024</text>
+<rect x="558" y="90" width="150" height="52" rx="6" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.8"/>
+<text x="633.0" y="112" font-size="14" text-anchor="middle" fill="#27500A">known</text>
+<text x="633.0" y="130" font-size="11" text-anchor="middle" fill="#3B6D11">Tuxanidy–Panario 2024</text>
+<text x="78" y="179.0" font-size="14" text-anchor="end" fill="#444441">Ω ≤ 5</text>
+<rect x="90" y="148" width="150" height="52" rx="6" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.8"/>
+<text x="165.0" y="170" font-size="14" text-anchor="middle" fill="#0C447C">proved</text>
+<text x="165.0" y="188" font-size="11" text-anchor="middle" fill="#185FA5">Lean</text>
+<rect x="246" y="148" width="150" height="52" rx="6" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.8"/>
+<text x="321.0" y="170" font-size="14" text-anchor="middle" fill="#0C447C">proved</text>
+<text x="321.0" y="188" font-size="11" text-anchor="middle" fill="#185FA5">Lean</text>
+<rect x="402" y="148" width="150" height="52" rx="6" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.8"/>
+<text x="477.0" y="170" font-size="14" text-anchor="middle" fill="#0C447C">proved</text>
+<text x="477.0" y="188" font-size="11" text-anchor="middle" fill="#185FA5">Lean</text>
+<rect x="558" y="148" width="150" height="52" rx="6" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.8"/>
+<text x="633.0" y="170" font-size="14" text-anchor="middle" fill="#0C447C">proved</text>
+<text x="633.0" y="188" font-size="11" text-anchor="middle" fill="#185FA5">Lean</text>
+<text x="78" y="237.0" font-size="14" text-anchor="end" fill="#444441">Ω ≤ 4</text>
+<rect x="90" y="206" width="150" height="52" rx="6" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.8"/>
+<text x="165.0" y="228" font-size="14" text-anchor="middle" fill="#0C447C">proved</text>
+<text x="165.0" y="246" font-size="11" text-anchor="middle" fill="#185FA5">Lean</text>
+<rect x="246" y="206" width="150" height="52" rx="6" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.8"/>
+<text x="321.0" y="228" font-size="14" text-anchor="middle" fill="#0C447C">proved</text>
+<text x="321.0" y="246" font-size="11" text-anchor="middle" fill="#185FA5">Lean</text>
+<rect x="402" y="206" width="150" height="52" rx="6" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.8"/>
+<text x="477.0" y="228" font-size="14" text-anchor="middle" fill="#0C447C">proved</text>
+<text x="477.0" y="246" font-size="11" text-anchor="middle" fill="#185FA5">Lean</text>
+<rect x="558" y="206" width="150" height="52" rx="6" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.8"/>
+<text x="633.0" y="228" font-size="14" text-anchor="middle" fill="#0C447C">proved</text>
+<text x="633.0" y="246" font-size="11" text-anchor="middle" fill="#185FA5">Lean</text>
+<text x="78" y="295.0" font-size="14" text-anchor="end" fill="#444441">Ω ≤ 3</text>
+<rect x="90" y="264" width="150" height="52" rx="6" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.8"/>
+<text x="165.0" y="295.0" font-size="14" text-anchor="middle" fill="#633806">open</text>
+<rect x="246" y="264" width="150" height="52" rx="6" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.8"/>
+<text x="321.0" y="286" font-size="14" text-anchor="middle" fill="#633806">open</text>
+<text x="321.0" y="304" font-size="11" text-anchor="middle" fill="#BA7517">conditional result only</text>
+<rect x="402" y="264" width="150" height="52" rx="6" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.8"/>
+<text x="477.0" y="286" font-size="14" text-anchor="middle" fill="#633806">open</text>
+<text x="477.0" y="304" font-size="11" text-anchor="middle" fill="#BA7517">conditional result only</text>
+<rect x="558" y="264" width="150" height="52" rx="6" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.8"/>
+<text x="633.0" y="286" font-size="14" text-anchor="middle" fill="#0C447C">proved</text>
+<text x="633.0" y="304" font-size="11" text-anchor="middle" fill="#185FA5">Lean, every b ≥ 5</text>
+<text x="78" y="353.0" font-size="14" text-anchor="end" fill="#444441">Ω ≤ 2</text>
+<rect x="90" y="322" width="150" height="52" rx="6" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.8"/>
+<text x="165.0" y="353.0" font-size="14" text-anchor="middle" fill="#633806">open</text>
+<rect x="246" y="322" width="150" height="52" rx="6" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.8"/>
+<text x="321.0" y="353.0" font-size="14" text-anchor="middle" fill="#633806">open</text>
+<rect x="402" y="322" width="150" height="52" rx="6" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.8"/>
+<text x="477.0" y="353.0" font-size="14" text-anchor="middle" fill="#633806">open</text>
+<rect x="558" y="322" width="150" height="52" rx="6" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.8"/>
+<text x="633.0" y="344" font-size="14" text-anchor="middle" fill="#633806">open</text>
+<text x="633.0" y="362" font-size="11" text-anchor="middle" fill="#BA7517">conditional result only</text>
+<text x="78" y="411.0" font-size="14" text-anchor="end" fill="#444441">Ω ≤ 1</text>
+<rect x="90" y="380" width="150" height="52" rx="6" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.8"/>
+<text x="165.0" y="402" font-size="14" text-anchor="middle" fill="#633806">open</text>
+<text x="165.0" y="420" font-size="11" text-anchor="middle" fill="#BA7517">palindromic primes</text>
+<rect x="246" y="380" width="150" height="52" rx="6" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.8"/>
+<text x="321.0" y="402" font-size="14" text-anchor="middle" fill="#633806">open</text>
+<text x="321.0" y="420" font-size="11" text-anchor="middle" fill="#BA7517">palindromic primes</text>
+<rect x="402" y="380" width="150" height="52" rx="6" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.8"/>
+<text x="477.0" y="402" font-size="14" text-anchor="middle" fill="#633806">open</text>
+<text x="477.0" y="420" font-size="11" text-anchor="middle" fill="#BA7517">palindromic primes</text>
+<rect x="558" y="380" width="150" height="52" rx="6" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.8"/>
+<text x="633.0" y="402" font-size="14" text-anchor="middle" fill="#633806">open</text>
+<text x="633.0" y="420" font-size="11" text-anchor="middle" fill="#BA7517">palindromic primes</text>
+</svg>

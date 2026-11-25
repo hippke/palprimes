@@ -1,0 +1,6 @@
+{
+  "challenge_module": "Omega3.Audit.Challenge",
+  "solution_module": "Omega3.Audit.Solution",
+  "theorem_names": ["palindromes_omega_le_three", "palindromes_omega_le_three_large_factors", "palindromes_omega_le_three_count"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}

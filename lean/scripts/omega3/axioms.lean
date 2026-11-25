@@ -1,0 +1,5 @@
+import Omega3.Final
+#print axioms Omega3.infinite_palindromes_Omega_le_three
+#print axioms Omega3.many_palindromes_Omega_le_three
+#print axioms Omega3.infinite_palindromes_Omega_le_three_large_factors
+#check @Omega3.infinite_palindromes_Omega_le_three

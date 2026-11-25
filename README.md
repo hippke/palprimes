@@ -28,9 +28,17 @@ available.
 
 ## Results
 
+![Status of "infinitely many base-b palindromes with Ω ≤ k" for b = 2 to 5 and k = 1 to 6](figures/omega_vs_base.svg)
+
+Status of the statement "infinitely many palindromes in base b with at most k prime factors (Ω ≤ k)". Green: known before
+this project (Tuxanidy and Panario, Ω ≤ 6). Blue: proved here in Lean and kernel-audited (Ω ≤ 3 holds in every base b ≥ 5,
+shown at b = 5). Orange: open; "conditional" marks results that rest on unproved hypotheses.
+
 | Result | Status |
 |---|---|
 | Infinitely many palindromic primes in every base | open (the goal; `Palprimes.PalprimesInfinite b` in `lean/Palprimes/Statements.lean`) |
+| **Infinitely many palindromes with at most 3 prime factors (with multiplicity) in every base b ≥ 5** | **proved in Lean** (`Omega3.infinite_palindromes_Omega_le_three`) |
+| Stronger form: infinitely many palindromes n with Ω(n) ≤ 3 and every prime factor > n^{1/250} in every base b ≥ 5. Among the palindromes with 2N + 1 digits coprime to b³ − b, at least c·3^N/log x, x = b^{2N+1}, are of this kind | proved in Lean (`Omega3.infinite_palindromes_Omega_le_three_large_factors`, `Omega3.many_palindromes_Omega_le_three`) |
 | **Infinitely many palindromes with at most 4 prime factors (with multiplicity) in every base b ≥ 2** | **proved in Lean** (`Palprimes.MT.infinite_palindromes_Omega_le_four`) |
 | Stronger form: infinitely many palindromes n with Ω(n) ≤ 4 and every prime factor > n^{0.0326}. Among the palindromes with 2N + 1 digits coprime to b³ − b, at least a proportion c/log x, x = b^{2N+1}, are of this kind (c > 0 depends on b and is not explicit) | proved in Lean (`Palprimes.MT.infinite_palindromes_Omega_le_four_large_factors`, `Palprimes.MT.many_palindromes_Omega_le_four`) |
 | Infinitely many palindromes with at most 5 prime factors (with multiplicity) in every base b ≥ 2 | proved in Lean (`Palprimes.infinite_palindromes_Omega_le_five`) |
@@ -94,6 +102,21 @@ theorem many_palindromes_Omega_le_five (b : ℕ) (hb : 2 ≤ b) :
 
 `piStar b N` is the set of base-b palindromes with exactly 2N + 1 digits that are coprime to b³ − b.
 
+The Ω ≤ 3 theorem for b ≥ 5, in `lean/Omega3/Final.lean`:
+
+```lean
+theorem infinite_palindromes_Omega_le_three (b : ℕ) (hb : 5 ≤ b) :
+    {n : ℕ | Palprimes.IsPalindrome b n ∧ Nat.IsAtMostAlmostPrime 3 n}.Infinite
+```
+
+It uses a digit-weighted palindrome sequence with the Fejér digit weight (1, 2, …, m, …, 2, 1)/m², whose majorant
+(1 − p) + pF_m needs no computer certificate except in bases 6 and 8, a level of distribution θ = 0.340, Greaves' weighted
+sieve of 1986 (Acta Arith. 47) with additive Selberg weights on five bands, and an exact Parseval identity modulo p² for
+the prime squares. The proof is split into 49 independently checked items (`lean/Omega3/Items/`), whose statements are
+fixed in `lean/Omega3/Statements.lean` and composed in `lean/Omega3/Skeleton.lean`; the blueprint and the corrections
+found on the way (among them three misprinted lemmas of Greaves 1986, Lemmas 2, 9 and 10, in cases the proof does not
+use) are in `notes/omega3/`. GRH is not used.
+
 ## Verification
 
 The proof uses only the standard axioms `propext`, `Classical.choice` and `Quot.sound`. It has no
@@ -107,6 +130,10 @@ The proof uses only the standard axioms `propext`, `Classical.choice` and `Quot.
   nanoda, lean4lean and con-leche. con-ron accepts the Ω ≤ 5 theorems but runs out of memory (over
   40 GB) on four `decide +kernel` certificates of the Ω ≤ 4 proof, comparisons of powers with up to
   about 45 million bits, so it gives no verdict on the Ω ≤ 4 theorems.
+- **Ω ≤ 3 (`lean/Omega3/`, `notes/LEAN_AUDIT_OMEGA3.md`):** `leanchecker` on all 131 modules and
+  `leanchecker --fresh Omega3.Final`; `lake comparator` against `lean/Omega3/Audit/Challenge.lean` (main theorem,
+  counting form and large-factor form with Mathlib definitions only), and all six kernels accept the export: Lean,
+  Lean paranoid, nanoda, lean4lean, con-leche and con-ron.
 
 To reproduce, with Lean and Mathlib v4.37.0-rc1:
 
@@ -116,6 +143,7 @@ lake exe cache get
 lake build
 lake env lean scripts/axioms.lean
 lake build Audit && lake comparator --config Audit/comparator.json --paranoid
+lake build Omega3 Omega3.Audit.Challenge Omega3.Audit.Solution && lake comparator --config Omega3/Audit/comparator.json --paranoid
 ```
 
 The Ω ≤ 4 proof is large (about 39k lines in total, 244 modules). The kernel check of the base-2 and
@@ -131,7 +159,7 @@ modules in parallel, each loading Mathlib, and needs a lot of memory.
 ## Layout
 
 ```
-lean/                    Lean 4 project (library Palprimes, about 39k lines)
+lean/                    Lean 4 project (libraries Palprimes, about 39k lines, and Omega3, about 36k lines)
   Palprimes/Defs.lean        palindromes, Π*_b, exponential-sum notation
   Palprimes/Statements.lean  target statements (definitions only)
   Palprimes/Digits/          digit API, Lemma 3 (injectivity), counting Π*_b
@@ -149,14 +177,19 @@ lean/                    Lean 4 project (library Palprimes, about 39k lines)
   Palprimes/Major2D/         TL¹ for b = 2, 3 (kernel-checked 2D block majorants, generated data)
   Palprimes/Omega4/          the Ω ≤ 4 theorem (assembly) and its corollaries
   Audit/                     comparator challenge and solution
-  scripts/                   certificate generators (omega4/: the Ω ≤ 4 majorants), axiom check
+  Omega3/                    the Ω ≤ 3 theorem for b ≥ 5: definitions, frozen item statements, skeleton, 49 item proofs
+                             (Items/, with a proof plan per hard item), final theorems, comparator challenge (Audit/)
+  scripts/                   certificate generators (omega4/: the Ω ≤ 4 majorants; omega3/: band and h-table data,
+                             statement sanity checks), axiom check
 papers/                  paper drafts (TeX and PDF, or Markdown)
   omega5-every-base/         Palindromes with at most five prime factors in every base
   kappa-palindromic-9-20/    κ-palindromic primes for κ < 9/20 (Heath-Brown–Iwaniec method)
   grh-mirrored-primes/       Primes with mirrored digits on GRH (κ < 2/3)
   function-field/            Palindromic irreducible polynomials with restricted coefficients
   digits01-almost-primes/    Almost primes with digits 0 and 1 in every base (Dartyge–Mauduit problem)
-notes/                   the mathematics behind the Lean proof: proofs, sieve route, plan, audit
+notes/                   the mathematics behind the Lean proof: proofs, sieve route, plan, audit (omega3/: blueprint,
+                         notes and statement corrections of the Ω ≤ 3 proof)
+figures/                 status figure (Ω ≤ k against the base)
 data/                    exact palprime counts (base, digits, palindromes, palprimes)
 numerics/                Python checks used to design the sieve and audit Proposition W,
                          and the C programs that produced the counts
